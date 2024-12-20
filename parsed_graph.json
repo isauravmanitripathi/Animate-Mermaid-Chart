@@ -1,129 +1,155 @@
 {
-  "direction": "TD",
+  "direction": "LR",
   "nodes": {
-    "Client": {
-      "id": "Client",
-      "label": "Web Client",
+    "Lead": {
+      "id": "Lead",
+      "label": "New Lead",
       "type": "square",
       "next_nodes": [
-        "API"
+        "Qualify"
       ],
       "prev_nodes": []
     },
-    "API": {
-      "id": "API",
-      "label": "API Gateway",
+    "Qualify": {
+      "id": "Qualify",
+      "label": "Qualification",
       "type": "diamond",
       "next_nodes": [
-        "Auth",
-        "Cache",
-        "DB",
-        "Queue"
+        "Meeting",
+        "Nurture"
       ],
       "prev_nodes": [
-        "Client"
+        "Lead",
+        "Nurture"
       ]
     },
-    "Auth": {
-      "id": "Auth",
-      "label": "Authentication",
+    "Meeting": {
+      "id": "Meeting",
+      "label": "Schedule Meeting",
       "type": "square",
       "next_nodes": [
-        "DB"
+        "Demo"
       ],
       "prev_nodes": [
-        "API"
+        "Qualify"
       ]
     },
-    "Cache": {
-      "id": "Cache",
-      "label": "(Redis Cache)",
+    "Nurture": {
+      "id": "Nurture",
+      "label": "Nurture Campaign",
+      "type": "square",
+      "next_nodes": [
+        "Qualify"
+      ],
+      "prev_nodes": [
+        "Qualify"
+      ]
+    },
+    "Demo": {
+      "id": "Demo",
+      "label": "Product Demo",
+      "type": "square",
+      "next_nodes": [
+        "Proposal"
+      ],
+      "prev_nodes": [
+        "Meeting"
+      ]
+    },
+    "Proposal": {
+      "id": "Proposal",
+      "label": "Send Proposal",
+      "type": "square",
+      "next_nodes": [
+        "Close"
+      ],
+      "prev_nodes": [
+        "Demo"
+      ]
+    },
+    "Close": {
+      "id": "Close",
+      "label": "Decision",
+      "type": "diamond",
+      "next_nodes": [
+        "Onboard",
+        "Feedback"
+      ],
+      "prev_nodes": [
+        "Proposal"
+      ]
+    },
+    "Onboard": {
+      "id": "Onboard",
+      "label": "Customer Onboarding",
       "type": "square",
       "next_nodes": [],
       "prev_nodes": [
-        "API"
+        "Close"
       ]
     },
-    "DB": {
-      "id": "DB",
-      "label": "(Database)",
+    "Feedback": {
+      "id": "Feedback",
+      "label": "Get Feedback",
       "type": "square",
       "next_nodes": [],
       "prev_nodes": [
-        "API",
-        "Auth",
-        "Workers"
-      ]
-    },
-    "Queue": {
-      "id": "Queue",
-      "label": "Message Queue",
-      "type": "square",
-      "next_nodes": [
-        "Workers"
-      ],
-      "prev_nodes": [
-        "API"
-      ]
-    },
-    "Workers": {
-      "id": "Workers",
-      "label": "Background Workers",
-      "type": "square",
-      "next_nodes": [
-        "DB"
-      ],
-      "prev_nodes": [
-        "Queue"
+        "Close"
       ]
     }
   },
   "edges": [
     {
-      "from_id": "Client",
-      "to_id": "API",
+      "from_id": "Lead",
+      "to_id": "Qualify",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "API",
-      "to_id": "Auth",
+      "from_id": "Qualify",
+      "to_id": "Meeting",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "API",
-      "to_id": "Cache",
+      "from_id": "Qualify",
+      "to_id": "Nurture",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "API",
-      "to_id": "DB",
+      "from_id": "Meeting",
+      "to_id": "Demo",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "Auth",
-      "to_id": "DB",
+      "from_id": "Demo",
+      "to_id": "Proposal",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "API",
-      "to_id": "Queue",
+      "from_id": "Proposal",
+      "to_id": "Close",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "Queue",
-      "to_id": "Workers",
+      "from_id": "Close",
+      "to_id": "Onboard",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "Workers",
-      "to_id": "DB",
+      "from_id": "Close",
+      "to_id": "Feedback",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "Nurture",
+      "to_id": "Qualify",
       "label": "",
       "style": "solid"
     }

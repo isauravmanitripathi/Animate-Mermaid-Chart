@@ -1,223 +1,247 @@
 {
   "nodes": {
-    "Client": {
-      "id": "Client",
-      "label": "Web Client",
+    "Lead": {
+      "id": "Lead",
+      "label": "New Lead",
       "type": "square",
-      "x": 530.0,
+      "x": 345.7142857142857,
       "y": 540.0,
-      "width": 140,
+      "width": 120,
       "height": 80,
       "rank": 0,
       "order": 0,
       "dummy": false
     },
-    "API": {
-      "id": "API",
-      "label": "API Gateway",
+    "Qualify": {
+      "id": "Qualify",
+      "label": "Qualification",
       "type": "diamond",
-      "x": 960.0,
+      "x": 591.4285714285714,
       "y": 540.0,
-      "width": 150,
+      "width": 170,
       "height": 80,
       "rank": 1,
       "order": 0,
       "dummy": false
     },
-    "Auth": {
-      "id": "Auth",
-      "label": "Authentication",
+    "Meeting": {
+      "id": "Meeting",
+      "label": "Schedule Meeting",
       "type": "square",
-      "x": 1390.0,
-      "y": 315.0,
-      "width": 180,
+      "x": 837.1428571428571,
+      "y": 465.0,
+      "width": 200,
       "height": 80,
       "rank": 2,
       "order": 0,
       "dummy": false
     },
-    "Cache": {
-      "id": "Cache",
-      "label": "(Redis Cache)",
+    "Nurture": {
+      "id": "Nurture",
+      "label": "Nurture Campaign",
       "type": "square",
-      "x": 1390.0,
-      "y": 465.0,
-      "width": 170,
+      "x": 837.1428571428571,
+      "y": 615.0,
+      "width": 200,
       "height": 80,
       "rank": 2,
       "order": 1,
       "dummy": false
     },
-    "DB": {
-      "id": "DB",
-      "label": "(Database)",
+    "Demo": {
+      "id": "Demo",
+      "label": "Product Demo",
       "type": "square",
-      "x": 1750.0,
-      "y": 465.0,
-      "width": 140,
+      "x": 1082.857142857143,
+      "y": 540.0,
+      "width": 160,
       "height": 80,
       "rank": 3,
       "order": 0,
       "dummy": false
     },
-    "Queue": {
-      "id": "Queue",
-      "label": "Message Queue",
+    "Proposal": {
+      "id": "Proposal",
+      "label": "Send Proposal",
       "type": "square",
-      "x": 1390.0,
-      "y": 615.0,
+      "x": 1328.5714285714287,
+      "y": 540.0,
       "width": 170,
       "height": 80,
-      "rank": 2,
-      "order": 2,
+      "rank": 4,
+      "order": 0,
       "dummy": false
     },
-    "Workers": {
-      "id": "Workers",
-      "label": "Background Workers",
-      "type": "square",
-      "x": 1710.0,
-      "y": 615.0,
-      "width": 220,
+    "Close": {
+      "id": "Close",
+      "label": "Decision",
+      "type": "diamond",
+      "x": 1574.2857142857142,
+      "y": 540.0,
+      "width": 120,
       "height": 80,
-      "rank": 3,
+      "rank": 5,
+      "order": 0,
+      "dummy": false
+    },
+    "Onboard": {
+      "id": "Onboard",
+      "label": "Customer Onboarding",
+      "type": "square",
+      "x": 1705.0,
+      "y": 465.0,
+      "width": 230,
+      "height": 80,
+      "rank": 6,
+      "order": 0,
+      "dummy": false
+    },
+    "Feedback": {
+      "id": "Feedback",
+      "label": "Get Feedback",
+      "type": "square",
+      "x": 1740.0,
+      "y": 615.0,
+      "width": 160,
+      "height": 80,
+      "rank": 6,
       "order": 1,
       "dummy": false
     }
   },
   "edges": [
     {
-      "from_id": "Client",
-      "to_id": "API",
+      "from_id": "Lead",
+      "to_id": "Qualify",
       "label": "",
       "points": [
         [
-          530.0,
+          345.7142857142857,
           540.0
         ],
         [
-          960.0,
+          591.4285714285714,
           540.0
         ]
       ]
     },
     {
-      "from_id": "API",
-      "to_id": "Auth",
+      "from_id": "Qualify",
+      "to_id": "Meeting",
       "label": "",
       "points": [
         [
-          960.0,
+          591.4285714285714,
           540.0
         ],
         [
-          1390.0,
-          315.0
-        ]
-      ]
-    },
-    {
-      "from_id": "API",
-      "to_id": "Cache",
-      "label": "",
-      "points": [
-        [
-          960.0,
-          540.0
-        ],
-        [
-          1390.0,
+          837.1428571428571,
           465.0
         ]
       ]
     },
     {
-      "from_id": "API",
-      "to_id": "dummy_0",
+      "from_id": "Qualify",
+      "to_id": "Nurture",
       "label": "",
       "points": [
         [
-          960.0,
+          591.4285714285714,
           540.0
         ],
         [
-          1390.0,
-          765.0
+          837.1428571428571,
+          615.0
         ]
       ]
     },
     {
-      "from_id": "dummy_0",
-      "to_id": "DB",
+      "from_id": "Meeting",
+      "to_id": "Demo",
       "label": "",
       "points": [
         [
-          1390.0,
-          765.0
+          837.1428571428571,
+          465.0
         ],
         [
-          1750.0,
-          465.0
+          1082.857142857143,
+          540.0
         ]
       ]
     },
     {
-      "from_id": "Auth",
-      "to_id": "DB",
+      "from_id": "Demo",
+      "to_id": "Proposal",
       "label": "",
       "points": [
         [
-          1390.0,
-          315.0
-        ],
-        [
-          1750.0,
-          465.0
-        ]
-      ]
-    },
-    {
-      "from_id": "API",
-      "to_id": "Queue",
-      "label": "",
-      "points": [
-        [
-          960.0,
+          1082.857142857143,
           540.0
         ],
         [
-          1390.0,
-          615.0
+          1328.5714285714287,
+          540.0
         ]
       ]
     },
     {
-      "from_id": "Queue",
-      "to_id": "Workers",
+      "from_id": "Proposal",
+      "to_id": "Close",
       "label": "",
       "points": [
         [
-          1390.0,
-          615.0
+          1328.5714285714287,
+          540.0
         ],
         [
-          1710.0,
-          615.0
+          1574.2857142857142,
+          540.0
         ]
       ]
     },
     {
-      "from_id": "Workers",
-      "to_id": "DB",
+      "from_id": "Close",
+      "to_id": "Onboard",
       "label": "",
       "points": [
         [
-          1710.0,
-          615.0
+          1574.2857142857142,
+          540.0
         ],
         [
-          1750.0,
+          1705.0,
           465.0
+        ]
+      ]
+    },
+    {
+      "from_id": "Close",
+      "to_id": "Feedback",
+      "label": "",
+      "points": [
+        [
+          1574.2857142857142,
+          540.0
+        ],
+        [
+          1740.0,
+          615.0
+        ]
+      ]
+    },
+    {
+      "from_id": "Nurture",
+      "to_id": "Qualify",
+      "label": "",
+      "points": [
+        [
+          837.1428571428571,
+          615.0
+        ],
+        [
+          591.4285714285714,
+          540.0
         ]
       ]
     }

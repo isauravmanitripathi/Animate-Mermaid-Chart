@@ -80,12 +80,12 @@ if __name__ == "__main__":
     # Choose which example to run by uncommenting it
     
     # 1. Software Architecture
-    mermaid_code = MermaidExamples.get_software_architecture()
-    create_animated_diagram(mermaid_code, "software_architecture.mp4")
+    #mermaid_code = MermaidExamples.get_software_architecture()
+    #create_animated_diagram(mermaid_code, "software_architecture.mp4")
     
     # 2. Business Process
-    # mermaid_code = MermaidExamples.get_business_process()
-    # create_animated_diagram(mermaid_code, "business_process.mp4")
+     mermaid_code = MermaidExamples.get_business_process()
+     create_animated_diagram(mermaid_code, "business_process.mp4")
     
     # 3. System State
     # mermaid_code = MermaidExamples.get_system_state()
