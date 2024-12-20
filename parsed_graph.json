@@ -1,0 +1,131 @@
+{
+  "direction": "TD",
+  "nodes": {
+    "Client": {
+      "id": "Client",
+      "label": "Web Client",
+      "type": "square",
+      "next_nodes": [
+        "API"
+      ],
+      "prev_nodes": []
+    },
+    "API": {
+      "id": "API",
+      "label": "API Gateway",
+      "type": "diamond",
+      "next_nodes": [
+        "Auth",
+        "Cache",
+        "DB",
+        "Queue"
+      ],
+      "prev_nodes": [
+        "Client"
+      ]
+    },
+    "Auth": {
+      "id": "Auth",
+      "label": "Authentication",
+      "type": "square",
+      "next_nodes": [
+        "DB"
+      ],
+      "prev_nodes": [
+        "API"
+      ]
+    },
+    "Cache": {
+      "id": "Cache",
+      "label": "(Redis Cache)",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "API"
+      ]
+    },
+    "DB": {
+      "id": "DB",
+      "label": "(Database)",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "API",
+        "Auth",
+        "Workers"
+      ]
+    },
+    "Queue": {
+      "id": "Queue",
+      "label": "Message Queue",
+      "type": "square",
+      "next_nodes": [
+        "Workers"
+      ],
+      "prev_nodes": [
+        "API"
+      ]
+    },
+    "Workers": {
+      "id": "Workers",
+      "label": "Background Workers",
+      "type": "square",
+      "next_nodes": [
+        "DB"
+      ],
+      "prev_nodes": [
+        "Queue"
+      ]
+    }
+  },
+  "edges": [
+    {
+      "from_id": "Client",
+      "to_id": "API",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "API",
+      "to_id": "Auth",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "API",
+      "to_id": "Cache",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "API",
+      "to_id": "DB",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "Auth",
+      "to_id": "DB",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "API",
+      "to_id": "Queue",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "Queue",
+      "to_id": "Workers",
+      "label": "",
+      "style": "solid"
+    },
+    {
+      "from_id": "Workers",
+      "to_id": "DB",
+      "label": "",
+      "style": "solid"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "nodes": {
+    "Client": {
+      "id": "Client",
+      "label": "Web Client",
+      "type": "square",
+      "x": 530.0,
+      "y": 540.0,
+      "width": 140,
+      "height": 80,
+      "rank": 0,
+      "order": 0,
+      "dummy": false
+    },
+    "API": {
+      "id": "API",
+      "label": "API Gateway",
+      "type": "diamond",
+      "x": 960.0,
+      "y": 540.0,
+      "width": 150,
+      "height": 80,
+      "rank": 1,
+      "order": 0,
+      "dummy": false
+    },
+    "Auth": {
+      "id": "Auth",
+      "label": "Authentication",
+      "type": "square",
+      "x": 1390.0,
+      "y": 315.0,
+      "width": 180,
+      "height": 80,
+      "rank": 2,
+      "order": 0,
+      "dummy": false
+    },
+    "Cache": {
+      "id": "Cache",
+      "label": "(Redis Cache)",
+      "type": "square",
+      "x": 1390.0,
+      "y": 465.0,
+      "width": 170,
+      "height": 80,
+      "rank": 2,
+      "order": 1,
+      "dummy": false
+    },
+    "DB": {
+      "id": "DB",
+      "label": "(Database)",
+      "type": "square",
+      "x": 1750.0,
+      "y": 465.0,
+      "width": 140,
+      "height": 80,
+      "rank": 3,
+      "order": 0,
+      "dummy": false
+    },
+    "Queue": {
+      "id": "Queue",
+      "label": "Message Queue",
+      "type": "square",
+      "x": 1390.0,
+      "y": 615.0,
+      "width": 170,
+      "height": 80,
+      "rank": 2,
+      "order": 2,
+      "dummy": false
+    },
+    "Workers": {
+      "id": "Workers",
+      "label": "Background Workers",
+      "type": "square",
+      "x": 1710.0,
+      "y": 615.0,
+      "width": 220,
+      "height": 80,
+      "rank": 3,
+      "order": 1,
+      "dummy": false
+    }
+  },
+  "edges": [
+    {
+      "from_id": "Client",
+      "to_id": "API",
+      "label": "",
+      "points": [
+        [
+          530.0,
+          540.0
+        ],
+        [
+          960.0,
+          540.0
+        ]
+      ]
+    },
+    {
+      "from_id": "API",
+      "to_id": "Auth",
+      "label": "",
+      "points": [
+        [
+          960.0,
+          540.0
+        ],
+        [
+          1390.0,
+          315.0
+        ]
+      ]
+    },
+    {
+      "from_id": "API",
+      "to_id": "Cache",
+      "label": "",
+      "points": [
+        [
+          960.0,
+          540.0
+        ],
+        [
+          1390.0,
+          465.0
+        ]
+      ]
+    },
+    {
+      "from_id": "API",
+      "to_id": "dummy_0",
+      "label": "",
+      "points": [
+        [
+          960.0,
+          540.0
+        ],
+        [
+          1390.0,
+          765.0
+        ]
+      ]
+    },
+    {
+      "from_id": "dummy_0",
+      "to_id": "DB",
+      "label": "",
+      "points": [
+        [
+          1390.0,
+          765.0
+        ],
+        [
+          1750.0,
+          465.0
+        ]
+      ]
+    },
+    {
+      "from_id": "Auth",
+      "to_id": "DB",
+      "label": "",
+      "points": [
+        [
+          1390.0,
+          315.0
+        ],
+        [
+          1750.0,
+          465.0
+        ]
+      ]
+    },
+    {
+      "from_id": "API",
+      "to_id": "Queue",
+      "label": "",
+      "points": [
+        [
+          960.0,
+          540.0
+        ],
+        [
+          1390.0,
+          615.0
+        ]
+      ]
+    },
+    {
+      "from_id": "Queue",
+      "to_id": "Workers",
+      "label": "",
+      "points": [
+        [
+          1390.0,
+          615.0
+        ],
+        [
+          1710.0,
+          615.0
+        ]
+      ]
+    },
+    {
+      "from_id": "Workers",
+      "to_id": "DB",
+      "label": "",
+      "points": [
+        [
+          1710.0,
+          615.0
+        ],
+        [
+          1750.0,
+          465.0
+        ]
+      ]
+    }
+  ],
+  "width": 1920,
+  "height": 1080
+}

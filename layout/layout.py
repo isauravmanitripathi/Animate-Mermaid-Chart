@@ -1,7 +1,7 @@
-# graph_generator.py
+# layout/layout.py
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Tuple
 import math
 import json
 from collections import defaultdict
@@ -48,7 +48,7 @@ class SugiyamaLayoutGenerator:
         self.node_spacing = node_spacing
         self.rank_spacing = rank_spacing
         self.dummy_counter = 0
-        
+
     def generate_layout(self, parsed_graph) -> GraphLayout:
         """Main method to generate layout"""
         # Initialize layout
@@ -80,7 +80,7 @@ class SugiyamaLayoutGenerator:
         self._assign_coordinates(layout)
         
         return layout
-    
+
     def _assign_ranks(self, layout: GraphLayout) -> None:
         """Step 1: Assign ranks to nodes using longest path layering"""
         # Find nodes with no incoming edges
@@ -115,7 +115,7 @@ class SugiyamaLayoutGenerator:
             assign_rank(root, 0)
         
         layout.ranks = ranks
-    
+
     def _normalize_edges(self, layout: GraphLayout) -> None:
         """Step 2: Add dummy nodes for edges spanning multiple ranks"""
         new_edges = []
@@ -165,7 +165,7 @@ class SugiyamaLayoutGenerator:
                 new_edges.append(edge)
         
         layout.edges = new_edges
-    
+
     def _optimize_crossings(self, layout: GraphLayout) -> None:
         """Step 3: Minimize edge crossings between adjacent ranks"""
         MAX_ITERATIONS = 24
@@ -217,7 +217,7 @@ class SugiyamaLayoutGenerator:
                         current_rank[i], current_rank[j] = current_rank[j], current_rank[i]
             
             layout.ranks[rank_idx] = best_order
-    
+
     def _assign_coordinates(self, layout: GraphLayout) -> None:
         """Step 4: Assign final x,y coordinates to nodes with boundary constraints"""
         max_rank = max(layout.ranks.keys())
@@ -269,7 +269,7 @@ class SugiyamaLayoutGenerator:
         
         # Calculate edge routing points
         self._route_edges(layout)
-        
+    
     def _route_edges(self, layout: GraphLayout) -> None:
         """Route edges avoiding node overlaps"""
         for edge in layout.edges:
@@ -291,7 +291,7 @@ class SugiyamaLayoutGenerator:
             
             # Store points in edge
             edge.points = points
-    
+
     def save_json(self, layout: GraphLayout, filename: str) -> None:
         """Save layout to JSON file"""
         data = {
