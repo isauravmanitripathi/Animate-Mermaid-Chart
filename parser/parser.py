@@ -40,25 +40,39 @@ class MermaidParser:
     """Parses Mermaid flowchart syntax into structured data"""
     
     def __init__(self):
-        self.direction = "TD"
+        self.direction = "TD"  # Default direction
         self.nodes: Dict[str, ParsedNode] = {}
         self.edges: List[ParsedEdge] = []
         
     def parse(self, mermaid_code: str) -> ParsedGraph:
+        """Parse Mermaid code into structured graph data"""
         lines = mermaid_code.strip().split('\n')
         self._parse_direction(lines)
         self._parse_nodes_and_edges(lines)
         return ParsedGraph(self.direction, self.nodes, self.edges)
     
     def _parse_direction(self, lines: List[str]) -> None:
+        """Parse graph direction from Mermaid syntax"""
         for line in lines:
             if line.strip().startswith('graph'):
                 parts = line.strip().split()
                 if len(parts) > 1:
-                    self.direction = parts[1]
+                    direction = parts[1].upper()
+                    # Validate and normalize direction
+                    if direction in ["TB", "TD"]:  # Top to Bottom
+                        self.direction = "TD"
+                    elif direction == "BT":  # Bottom to Top
+                        self.direction = "BT"
+                    elif direction == "LR":  # Left to Right
+                        self.direction = "LR"
+                    elif direction == "RL":  # Right to Left
+                        self.direction = "RL"
+                    else:
+                        self.direction = "TD"  # Default to Top-Down
                 break
     
     def _parse_node_type(self, node_text: str) -> tuple[str, str, NodeType]:
+        """Parse node text to determine its type and extract id/label"""
         node_text = node_text.strip()
         node_id = node_text
         label = node_text
@@ -99,9 +113,11 @@ class MermaidParser:
                 label = parts[1].strip('}')
                 
         node_id = node_id.strip().strip('"').strip("'")
+        label = label.strip().strip('"').strip("'")
         return node_id, label, node_type
     
     def _parse_nodes_and_edges(self, lines: List[str]) -> None:
+        """Parse nodes and edges from Mermaid code lines"""
         for line in lines:
             if not line.strip() or line.strip().startswith('graph'):
                 continue
@@ -118,7 +134,7 @@ class MermaidParser:
                 edge_parts = parts[1].split('|')
                 edge_label = ''
                 if len(edge_parts) > 1:
-                    edge_label = edge_parts[0].strip()
+                    edge_label = edge_parts[0].strip().strip('"').strip("'")
                     to_id, to_label, to_type = self._parse_node_type(edge_parts[-1])
                 else:
                     to_id, to_label, to_type = self._parse_node_type(parts[1])
@@ -133,17 +149,13 @@ class MermaidParser:
                 # Create edge
                 self.edges.append(ParsedEdge(from_id, to_id, edge_label))
     
-    def to_json(self) -> str:
-        """Convert parsed graph to JSON string"""
+    def save_json(self, filename: str) -> None:
+        """Save parsed graph to JSON file"""
         def convert_enum(obj):
             if isinstance(obj, NodeType):
                 return obj.value
             return obj.__dict__
             
         graph = ParsedGraph(self.direction, self.nodes, self.edges)
-        return json.dumps(graph, default=convert_enum, indent=2)
-    
-    def save_json(self, filename: str) -> None:
-        """Save parsed graph to JSON file"""
         with open(filename, 'w') as f:
-            f.write(self.to_json())
+            json.dump(graph, default=convert_enum, indent=2, fp=f)

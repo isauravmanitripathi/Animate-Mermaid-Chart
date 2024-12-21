@@ -1,568 +1,292 @@
 {
-  "direction": "TD",
+  "direction": "LR",
   "nodes": {
-    "Start": {
-      "id": "Start",
-      "label": "",
-      "type": "round",
+    "India": {
+      "id": "India",
+      "label": "Indian Economy",
+      "type": "square",
       "next_nodes": [
-        "Split"
+        "Pre91",
+        "Post91"
       ],
       "prev_nodes": []
     },
-    "Split": {
-      "id": "Split",
-      "label": "Data Partitioning",
-      "type": "diamond",
-      "next_nodes": [
-        "P1",
-        "P2",
-        "P3"
-      ],
-      "prev_nodes": [
-        "Start",
-        "Retry"
-      ]
-    },
-    "P1": {
-      "id": "P1",
-      "label": "Partition 1",
+    "Pre91": {
+      "id": "Pre91",
+      "label": "Pre-1991",
       "type": "square",
       "next_nodes": [
-        "V1"
+        "Soviet"
       ],
       "prev_nodes": [
-        "Split"
+        "India"
       ]
     },
-    "P2": {
-      "id": "P2",
-      "label": "Partition 2",
+    "Post91": {
+      "id": "Post91",
+      "label": "Post-1991",
       "type": "square",
       "next_nodes": [
-        "V2"
+        "Crisis",
+        "Liberal"
       ],
       "prev_nodes": [
-        "Split"
+        "India"
       ]
     },
-    "P3": {
-      "id": "P3",
-      "label": "Partition 3",
+    "Soviet": {
+      "id": "Soviet",
+      "label": "Soviet Model",
       "type": "square",
       "next_nodes": [
-        "V3"
+        "License",
+        "StateControl"
       ],
       "prev_nodes": [
-        "Split"
+        "Pre91"
       ]
     },
-    "V1": {
-      "id": "V1",
-      "label": "Validation 1",
-      "type": "diamond",
-      "next_nodes": [
-        "S1",
-        "C1"
-      ],
-      "prev_nodes": [
-        "P1"
-      ]
-    },
-    "V2": {
-      "id": "V2",
-      "label": "Validation 2",
-      "type": "diamond",
-      "next_nodes": [
-        "S2",
-        "C2"
-      ],
-      "prev_nodes": [
-        "P2"
-      ]
-    },
-    "V3": {
-      "id": "V3",
-      "label": "Validation 3",
-      "type": "diamond",
-      "next_nodes": [
-        "S3",
-        "C3"
-      ],
-      "prev_nodes": [
-        "P3"
-      ]
-    },
-    "S1": {
-      "id": "S1",
-      "label": "QuickSort 1",
-      "type": "square",
-      "next_nodes": [
-        "M1"
-      ],
-      "prev_nodes": [
-        "V1",
-        "C1"
-      ]
-    },
-    "C1": {
-      "id": "C1",
-      "label": "Clean Data 1",
-      "type": "square",
-      "next_nodes": [
-        "S1"
-      ],
-      "prev_nodes": [
-        "V1"
-      ]
-    },
-    "S2": {
-      "id": "S2",
-      "label": "QuickSort 2",
-      "type": "square",
-      "next_nodes": [
-        "M1"
-      ],
-      "prev_nodes": [
-        "V2",
-        "C2"
-      ]
-    },
-    "C2": {
-      "id": "C2",
-      "label": "Clean Data 2",
-      "type": "square",
-      "next_nodes": [
-        "S2"
-      ],
-      "prev_nodes": [
-        "V2"
-      ]
-    },
-    "S3": {
-      "id": "S3",
-      "label": "QuickSort 3",
-      "type": "square",
-      "next_nodes": [
-        "M2"
-      ],
-      "prev_nodes": [
-        "V3",
-        "C3"
-      ]
-    },
-    "C3": {
-      "id": "C3",
-      "label": "Clean Data 3",
-      "type": "square",
-      "next_nodes": [
-        "S3"
-      ],
-      "prev_nodes": [
-        "V3"
-      ]
-    },
-    "M1": {
-      "id": "M1",
-      "label": "Merge Phase 1",
-      "type": "diamond",
-      "next_nodes": [
-        "SR1"
-      ],
-      "prev_nodes": [
-        "S1",
-        "S2"
-      ]
-    },
-    "SR1": {
-      "id": "SR1",
-      "label": "Sorted Result 1",
-      "type": "square",
-      "next_nodes": [
-        "M2"
-      ],
-      "prev_nodes": [
-        "M1"
-      ]
-    },
-    "M2": {
-      "id": "M2",
-      "label": "Merge Phase 2",
-      "type": "diamond",
-      "next_nodes": [
-        "Final"
-      ],
-      "prev_nodes": [
-        "S3",
-        "SR1"
-      ]
-    },
-    "Final": {
-      "id": "Final",
-      "label": "Final Sorted Array",
-      "type": "square",
-      "next_nodes": [
-        "Analysis"
-      ],
-      "prev_nodes": [
-        "M2"
-      ]
-    },
-    "Analysis": {
-      "id": "Analysis",
-      "label": "Statistical Analysis",
-      "type": "square",
-      "next_nodes": [
-        "Mean",
-        "Median",
-        "Mode",
-        "StdDev"
-      ],
-      "prev_nodes": [
-        "Final"
-      ]
-    },
-    "Mean": {
-      "id": "Mean",
-      "label": "Calculate Mean",
-      "type": "square",
-      "next_nodes": [
-        "Results"
-      ],
-      "prev_nodes": [
-        "Analysis"
-      ]
-    },
-    "Median": {
-      "id": "Median",
-      "label": "Find Median",
-      "type": "square",
-      "next_nodes": [
-        "Results"
-      ],
-      "prev_nodes": [
-        "Analysis"
-      ]
-    },
-    "Mode": {
-      "id": "Mode",
-      "label": "Compute Mode",
-      "type": "square",
-      "next_nodes": [
-        "Results"
-      ],
-      "prev_nodes": [
-        "Analysis"
-      ]
-    },
-    "StdDev": {
-      "id": "StdDev",
-      "label": "Standard Deviation",
-      "type": "square",
-      "next_nodes": [
-        "Results"
-      ],
-      "prev_nodes": [
-        "Analysis"
-      ]
-    },
-    "Results": {
-      "id": "Results",
-      "label": "",
-      "type": "round",
-      "next_nodes": [
-        "Cache",
-        "DB"
-      ],
-      "prev_nodes": [
-        "Mean",
-        "Median",
-        "Mode",
-        "StdDev"
-      ]
-    },
-    "Cache": {
-      "id": "Cache",
-      "label": "(Cache Results)",
-      "type": "square",
-      "next_nodes": [
-        "API"
-      ],
-      "prev_nodes": [
-        "Results"
-      ]
-    },
-    "DB": {
-      "id": "DB",
-      "label": "(Store in Database)",
-      "type": "square",
-      "next_nodes": [
-        "API"
-      ],
-      "prev_nodes": [
-        "Results"
-      ]
-    },
-    "API": {
-      "id": "API",
-      "label": "API Endpoint",
-      "type": "diamond",
-      "next_nodes": [
-        "Complete",
-        "Retry"
-      ],
-      "prev_nodes": [
-        "Cache",
-        "DB"
-      ]
-    },
-    "Complete": {
-      "id": "Complete",
-      "label": "Process Complete",
+    "License": {
+      "id": "License",
+      "label": "License Raj",
       "type": "square",
       "next_nodes": [],
       "prev_nodes": [
-        "API"
+        "Soviet"
       ]
     },
-    "Retry": {
-      "id": "Retry",
-      "label": "Retry Logic",
+    "StateControl": {
+      "id": "StateControl",
+      "label": "State Control",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Soviet"
+      ]
+    },
+    "Crisis": {
+      "id": "Crisis",
+      "label": "BOP Crisis",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Post91"
+      ]
+    },
+    "Liberal": {
+      "id": "Liberal",
+      "label": "Liberalization",
       "type": "square",
       "next_nodes": [
-        "Split"
+        "Mixed"
       ],
       "prev_nodes": [
-        "API"
+        "Post91"
+      ]
+    },
+    "Mixed": {
+      "id": "Mixed",
+      "label": "Mixed Economy",
+      "type": "square",
+      "next_nodes": [
+        "Public",
+        "Private"
+      ],
+      "prev_nodes": [
+        "Liberal"
+      ]
+    },
+    "Public": {
+      "id": "Public",
+      "label": "Public Sector",
+      "type": "square",
+      "next_nodes": [
+        "Core"
+      ],
+      "prev_nodes": [
+        "Mixed"
+      ]
+    },
+    "Private": {
+      "id": "Private",
+      "label": "Private Sector",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Mixed"
+      ]
+    },
+    "Core": {
+      "id": "Core",
+      "label": "Strategic Sectors",
+      "type": "square",
+      "next_nodes": [
+        "Rail",
+        "Highway",
+        "Bank",
+        "Defense",
+        "Digital",
+        "Energy"
+      ],
+      "prev_nodes": [
+        "Public"
+      ]
+    },
+    "Rail": {
+      "id": "Rail",
+      "label": "Railways",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Core"
+      ]
+    },
+    "Highway": {
+      "id": "Highway",
+      "label": "Highways",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Core"
+      ]
+    },
+    "Bank": {
+      "id": "Bank",
+      "label": "Banking",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Core"
+      ]
+    },
+    "Defense": {
+      "id": "Defense",
+      "label": "Defense",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Core"
+      ]
+    },
+    "Digital": {
+      "id": "Digital",
+      "label": "Digital Infrastructure",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Core"
+      ]
+    },
+    "Energy": {
+      "id": "Energy",
+      "label": "Energy",
+      "type": "square",
+      "next_nodes": [],
+      "prev_nodes": [
+        "Core"
       ]
     }
   },
   "edges": [
     {
-      "from_id": "Start",
-      "to_id": "Split",
+      "from_id": "India",
+      "to_id": "Pre91",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "Split",
-      "to_id": "P1",
+      "from_id": "India",
+      "to_id": "Post91",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "Split",
-      "to_id": "P2",
+      "from_id": "Pre91",
+      "to_id": "Soviet",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "Split",
-      "to_id": "P3",
+      "from_id": "Soviet",
+      "to_id": "License",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "P1",
-      "to_id": "V1",
+      "from_id": "Soviet",
+      "to_id": "StateControl",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "P2",
-      "to_id": "V2",
+      "from_id": "Post91",
+      "to_id": "Crisis",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "P3",
-      "to_id": "V3",
+      "from_id": "Post91",
+      "to_id": "Liberal",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "V1",
-      "to_id": "S1",
+      "from_id": "Liberal",
+      "to_id": "Mixed",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "V1",
-      "to_id": "C1",
+      "from_id": "Mixed",
+      "to_id": "Public",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "V2",
-      "to_id": "S2",
+      "from_id": "Mixed",
+      "to_id": "Private",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "V2",
-      "to_id": "C2",
+      "from_id": "Public",
+      "to_id": "Core",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "V3",
-      "to_id": "S3",
+      "from_id": "Core",
+      "to_id": "Rail",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "V3",
-      "to_id": "C3",
+      "from_id": "Core",
+      "to_id": "Highway",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "C1",
-      "to_id": "S1",
+      "from_id": "Core",
+      "to_id": "Bank",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "C2",
-      "to_id": "S2",
+      "from_id": "Core",
+      "to_id": "Defense",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "C3",
-      "to_id": "S3",
+      "from_id": "Core",
+      "to_id": "Digital",
       "label": "",
       "style": "solid"
     },
     {
-      "from_id": "S1",
-      "to_id": "M1",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "S2",
-      "to_id": "M1",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "M1",
-      "to_id": "SR1",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "S3",
-      "to_id": "M2",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "SR1",
-      "to_id": "M2",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "M2",
-      "to_id": "Final",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Final",
-      "to_id": "Analysis",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Analysis",
-      "to_id": "Mean",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Analysis",
-      "to_id": "Median",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Analysis",
-      "to_id": "Mode",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Analysis",
-      "to_id": "StdDev",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Mean",
-      "to_id": "Results",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Median",
-      "to_id": "Results",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Mode",
-      "to_id": "Results",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "StdDev",
-      "to_id": "Results",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Results",
-      "to_id": "Cache",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Results",
-      "to_id": "DB",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Cache",
-      "to_id": "API",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "DB",
-      "to_id": "API",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "API",
-      "to_id": "Complete",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "API",
-      "to_id": "Retry",
-      "label": "",
-      "style": "solid"
-    },
-    {
-      "from_id": "Retry",
-      "to_id": "Split",
+      "from_id": "Core",
+      "to_id": "Energy",
       "label": "",
       "style": "solid"
     }

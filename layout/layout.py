@@ -1,11 +1,10 @@
 # layout/layout.py
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Tuple
-import math
-import json
+from typing import Dict, List, Tuple, Literal
 from collections import defaultdict
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -36,10 +35,11 @@ class GraphLayout:
     edges: List[LayoutEdge]
     width: float
     height: float
+    direction: str = "TD"  # Added direction field
     ranks: Dict[int, List[str]] = field(default_factory=lambda: defaultdict(list))
 
 class SugiyamaLayoutGenerator:
-    """Implements Sugiyama's algorithm for layered graph drawing"""
+    """Implements Sugiyama's algorithm for layered graph drawing with direction support"""
     
     def __init__(self, width: float = 1920, height: float = 1080,
                  node_spacing: float = 150, rank_spacing: float = 250):
@@ -48,9 +48,13 @@ class SugiyamaLayoutGenerator:
         self.node_spacing = node_spacing
         self.rank_spacing = rank_spacing
         self.dummy_counter = 0
+        self.direction = "TD"  # Default direction
 
     def generate_layout(self, parsed_graph) -> GraphLayout:
         """Main method to generate layout"""
+        # Get direction from parsed graph
+        self.direction = parsed_graph.direction
+        
         # Initialize layout
         nodes = {
             node_id: LayoutNode(
@@ -71,7 +75,7 @@ class SugiyamaLayoutGenerator:
         ]
         
         # Create graph layout
-        layout = GraphLayout(nodes, edges, self.width, self.height)
+        layout = GraphLayout(nodes, edges, self.width, self.height, self.direction)
         
         # Apply Sugiyama algorithm steps
         self._assign_ranks(layout)
@@ -89,6 +93,7 @@ class SugiyamaLayoutGenerator:
         
         if not roots:
             roots = [next(iter(layout.nodes.keys()))]
+            logger.warning(f"No root nodes found, using {roots[0]} as root")
         
         # Initialize ranks
         ranks = defaultdict(list)
@@ -187,12 +192,12 @@ class SugiyamaLayoutGenerator:
                         crossings += 1
             
             return crossings
-        
+
         def optimize_rank_order(rank_idx: int) -> None:
             """Optimize ordering of nodes in one rank"""
             if rank_idx not in layout.ranks:
                 return
-            
+                
             current_rank = layout.ranks[rank_idx]
             best_order = current_rank.copy()
             best_crossings = float('inf')
@@ -217,79 +222,102 @@ class SugiyamaLayoutGenerator:
                         current_rank[i], current_rank[j] = current_rank[j], current_rank[i]
             
             layout.ranks[rank_idx] = best_order
+        
+        # Iterate multiple times to improve layout
+        for _ in range(MAX_ITERATIONS):
+            for rank_idx in layout.ranks.keys():
+                optimize_rank_order(rank_idx)
 
     def _assign_coordinates(self, layout: GraphLayout) -> None:
-        """Step 4: Assign final x,y coordinates to nodes with boundary constraints"""
+        """Step 4: Assign final x,y coordinates based on graph direction"""
         max_rank = max(layout.ranks.keys())
         
-        # Calculate node dimensions including text padding
-        TEXT_PADDING = 20  # Padding for text inside nodes
-        
         # Calculate usable area (with margins)
-        MARGIN = 100  # Margin from canvas edges
+        MARGIN = 100
         usable_width = self.width - (2 * MARGIN)
         usable_height = self.height - (2 * MARGIN)
         
-        # Calculate rank spacing based on usable width
-        rank_spacing = usable_width / (max_rank + 1)
-        
-        # For each rank, calculate max nodes and adjust spacing
-        max_nodes_in_rank = max(len(nodes) for nodes in layout.ranks.values())
-        node_spacing = min(
-            self.node_spacing,
-            (usable_height) / (max_nodes_in_rank + 1)
-        )
-        
-        # Assign x coordinates based on rank with margin
-        for rank, nodes in layout.ranks.items():
-            x = MARGIN + (rank + 1) * rank_spacing
+        # Calculate spacing based on direction
+        if layout.direction in ["TD", "BT"]:  # Top-down or Bottom-up
+            rank_spacing = usable_height / (max_rank + 1)
+            max_nodes_in_rank = max(len(nodes) for nodes in layout.ranks.values())
+            node_spacing = min(self.node_spacing, usable_width / (max_nodes_in_rank + 1))
             
-            # Calculate total height needed for this rank
-            total_height = (len(nodes) - 1) * node_spacing
-            # Center the rank vertically
-            start_y = MARGIN + (usable_height - total_height) / 2
+            for rank, nodes in layout.ranks.items():
+                # For TD: y increases with rank
+                y = MARGIN + (rank + 1) * rank_spacing if layout.direction == "TD" else \
+                    self.height - (MARGIN + (rank + 1) * rank_spacing)
+                
+                # Center nodes horizontally
+                total_width = (len(nodes) - 1) * node_spacing
+                start_x = MARGIN + (usable_width - total_width) / 2
+                
+                for i, node_id in enumerate(nodes):
+                    node = layout.nodes[node_id]
+                    node.x = start_x + i * node_spacing
+                    node.y = y
+                    node.order = i
+                    
+        else:  # LR or RL (Left-to-right or Right-to-left)
+            rank_spacing = usable_width / (max_rank + 1)
+            max_nodes_in_rank = max(len(nodes) for nodes in layout.ranks.values())
+            node_spacing = min(self.node_spacing, usable_height / (max_nodes_in_rank + 1))
             
-            for i, node_id in enumerate(nodes):
-                node = layout.nodes[node_id]
-                # Set coordinates
-                node.x = min(max(x, MARGIN), self.width - MARGIN)
-                node.y = min(max(start_y + i * node_spacing, MARGIN), 
-                           self.height - MARGIN)
-                node.order = i
+            for rank, nodes in layout.ranks.items():
+                # For LR: x increases with rank
+                x = MARGIN + (rank + 1) * rank_spacing if layout.direction == "LR" else \
+                    self.width - (MARGIN + (rank + 1) * rank_spacing)
                 
-                # Adjust node size based on label length
-                label_length = len(node.label) * 10  # Approximate width per character
-                node.width = max(80, label_length + TEXT_PADDING * 2)
+                # Center nodes vertically
+                total_height = (len(nodes) - 1) * node_spacing
+                start_y = MARGIN + (usable_height - total_height) / 2
                 
-                # Ensure node doesn't exceed canvas
-                if node.x - node.width/2 < MARGIN:
-                    node.x = MARGIN + node.width/2
-                if node.x + node.width/2 > self.width - MARGIN:
-                    node.x = self.width - MARGIN - node.width/2
+                for i, node_id in enumerate(nodes):
+                    node = layout.nodes[node_id]
+                    node.x = x
+                    node.y = start_y + i * node_spacing
+                    node.order = i
         
-        # Calculate edge routing points
+        # Adjust node positions to ensure they're within bounds
+        self._adjust_node_positions(layout)
+        # Route edges based on new coordinates
         self._route_edges(layout)
-    
+
+    def _adjust_node_positions(self, layout: GraphLayout) -> None:
+        """Adjust node positions to ensure they stay within canvas bounds"""
+        MARGIN = 100
+        
+        for node in layout.nodes.values():
+            # Ensure x coordinate is within bounds
+            node.x = max(MARGIN + node.width/2, 
+                        min(self.width - MARGIN - node.width/2, node.x))
+            # Ensure y coordinate is within bounds
+            node.y = max(MARGIN + node.height/2, 
+                        min(self.height - MARGIN - node.height/2, node.y))
+
     def _route_edges(self, layout: GraphLayout) -> None:
-        """Route edges avoiding node overlaps"""
+        """Route edges with proper curvature based on graph direction"""
         for edge in layout.edges:
             source = layout.nodes[edge.from_id]
             target = layout.nodes[edge.to_id]
             
-            # Start and end points
+            # Start with direct points
             points = [(source.x, source.y)]
             
             # If edge spans multiple ranks, add intermediate points
             if source.rank < target.rank - 1:
-                for rank in range(source.rank + 1, target.rank):
-                    x = source.x + (target.x - source.x) * (rank - source.rank) / (target.rank - source.rank)
-                    y = source.y + (target.y - source.y) * (rank - source.rank) / (target.rank - source.rank)
+                steps = target.rank - source.rank
+                for i in range(1, steps):
+                    progress = i / steps
+                    if layout.direction in ["TD", "BT"]:
+                        x = source.x + (target.x - source.x) * progress
+                        y = source.y + (target.y - source.y) * progress
+                    else:  # LR, RL
+                        x = source.x + (target.x - source.x) * progress
+                        y = source.y + (target.y - source.y) * progress
                     points.append((x, y))
             
-            # Add target point
             points.append((target.x, target.y))
-            
-            # Store points in edge
             edge.points = points
 
     def save_json(self, layout: GraphLayout, filename: str) -> None:
@@ -309,7 +337,6 @@ class SugiyamaLayoutGenerator:
                     'dummy': node.dummy
                 }
                 for node_id, node in layout.nodes.items()
-                if not node.dummy  # Skip dummy nodes in output
             },
             'edges': [
                 {
@@ -321,7 +348,8 @@ class SugiyamaLayoutGenerator:
                 for edge in layout.edges
             ],
             'width': layout.width,
-            'height': layout.height
+            'height': layout.height,
+            'direction': layout.direction
         }
         
         with open(filename, 'w') as f:

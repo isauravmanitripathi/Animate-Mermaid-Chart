@@ -80,5 +80,5 @@ def create_animated_diagram(mermaid_code: str, output_file: str = "animation.mp4
     logger.info(f"Animation saved to {output_file}")
 
 if __name__ == "__main__":
-    mermaid_code = MermaidExamples.get_distributed_algorithm()  # Changed this line
-    create_animated_diagram(mermaid_code, "distributed_algorithm.mp4")
+    mermaid_code = MermaidExamples.get_economy_lr()  # Changed this line
+    create_animated_diagram(mermaid_code, "test-2.mp4")
