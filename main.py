@@ -61,7 +61,10 @@ def create_animated_diagram(mermaid_code: str, output_file: str = "animation.mp4
         fps=30,
         node_spacing=150,
         layer_spacing=250,
-        animation_duration=1.5,
+        node_animation_duration=0.5,  # Duration for each node animation
+        edge_animation_duration=0.5,  # Duration for each edge animation
+        node_delay=0.2,             # Delay before next node starts
+        edge_delay=0.2,             # Delay before connected edge starts
         background_color="white",
         node_color="white",
         edge_color="black",
@@ -77,20 +80,5 @@ def create_animated_diagram(mermaid_code: str, output_file: str = "animation.mp4
     logger.info(f"Animation saved to {output_file}")
 
 if __name__ == "__main__":
-    # Choose which example to run by uncommenting it
-    
-    # 1. Software Architecture
-    #mermaid_code = MermaidExamples.get_software_architecture()
-    #create_animated_diagram(mermaid_code, "software_architecture.mp4")
-    
-    # 2. Business Process
-     mermaid_code = MermaidExamples.get_business_process()
-     create_animated_diagram(mermaid_code, "business_process.mp4")
-    
-    # 3. System State
-    # mermaid_code = MermaidExamples.get_system_state()
-    # create_animated_diagram(mermaid_code, "system_state.mp4")
-    
-    # 4. Indian Economy
-    # mermaid_code = MermaidExamples.get_indian_economy()
-    # create_animated_diagram(mermaid_code, "indian_economy.mp4")
+    mermaid_code = MermaidExamples.get_distributed_algorithm()  # Changed this line
+    create_animated_diagram(mermaid_code, "distributed_algorithm.mp4")
