@@ -1,19 +1,26 @@
-flowchart TB
-  A("CO2 cycle") --> B("Photosynthesis")
-  B --> E("Organic carbon") & n3("Decay organism")
-  n1("Sunlight") --> B
-  n3 --> nb("Dead organisms and waste product")
-  nb --> n5("Root respiration") & ng("Fossil fuels")
-  n5 --> nl("Factory emission")
-  nl --> A
-  nn("Animal respiration") --> A
-  style A stroke:#000000,fill:#E1F0D4 
-  style B stroke:#000000,fill:#C3EFE0 
-  style E stroke:#000000,fill:#F6ACD8
-  style n3 stroke:#000000,fill:#C2C4B3 
-  style n1 stroke:#000000,fill:#F2F7D2 
-  style nb stroke:#000000,fill:#E9A3B2 
-  style n5 stroke:#000000,fill:#DBCDF8 
-  style ng stroke:#000000,fill:#BEF6AC 
-  style nl stroke:#000000,fill:#A3E9CC 
-  style nn stroke:#000000,fill:#D4EFF0
+flowchart TD
+  A(("You have decided to play a game tonight")) --> n8(["Great!!!"])
+  ny{{"Are you going to play alone?"}} -- Yes --> nq{{"Singleplayer games"}}
+  n8 --> np("Start your computer")
+  np --> ny
+  n7("Are your friends online?") -- Yes --> nw("Do they wanna play?")
+  nq --> nc{{"Time to pick the game"}}
+  n7 -- No --> nq
+  nw -- No --> nq
+  nw -- Yes --> n2("time to pick the game")
+  n2 --> n1("World of Warcraft") & n9("StarCraft") & nj("League of legends") & ns("DOTA 2") & nu("Minecraft")
+  nc --> ni{{"DOOM"}} & nk{{"Baldurs Gate 3"}} & nb{{"Fallout new vegas"}} & n0{{"Witcher"}} & nl{{"Sims"}}
+  nl --> nf[["Now that you have picked a game"]]
+  n0 --> nf
+  nb --> nf
+  nk --> nf
+  ni --> nf
+  n1 --> no[["Now that you have picked a game"]]
+  n9 --> no
+  nj --> no
+  ns --> no
+  nu --> no
+  nf --> nd{"Great have fun!"}
+  no --> nd
+  ny -- No --> n7
+  np --> n7
