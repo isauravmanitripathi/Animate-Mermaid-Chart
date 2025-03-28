@@ -1,480 +1,345 @@
 {
   "nodes": {
-    "India": {
-      "id": "India",
-      "label": "Indian Economy",
+    "A": {
+      "id": "A",
+      "label": "East India Company Establishment 1600",
       "type": "square",
-      "x": 345.7142857142857,
-      "y": 540.0,
+      "x": 960.0,
+      "y": 167.69230769230768,
       "width": 80,
       "height": 80,
       "rank": 0,
       "order": 0,
       "dummy": false
     },
-    "Pre91": {
-      "id": "Pre91",
-      "label": "Pre-1991",
-      "type": "square",
-      "x": 591.4285714285714,
-      "y": 477.14285714285717,
+    "B": {
+      "id": "B",
+      "label": "B",
+      "type": "default",
+      "x": 960.0,
+      "y": 235.3846153846154,
       "width": 80,
       "height": 80,
       "rank": 1,
       "order": 0,
       "dummy": false
     },
-    "Post91": {
-      "id": "Post91",
-      "label": "Post-1991",
-      "type": "square",
-      "x": 591.4285714285714,
-      "y": 602.8571428571429,
-      "width": 80,
-      "height": 80,
-      "rank": 1,
-      "order": 1,
-      "dummy": false
-    },
-    "Soviet": {
-      "id": "Soviet",
-      "label": "Soviet Model",
-      "type": "square",
-      "x": 837.1428571428571,
-      "y": 414.2857142857143,
+    "C": {
+      "id": "C",
+      "label": "C",
+      "type": "default",
+      "x": 960.0,
+      "y": 303.0769230769231,
       "width": 80,
       "height": 80,
       "rank": 2,
       "order": 0,
       "dummy": false
     },
-    "License": {
-      "id": "License",
-      "label": "License Raj",
-      "type": "square",
-      "x": 1082.857142857143,
-      "y": 414.2857142857143,
+    "D": {
+      "id": "D",
+      "label": "D",
+      "type": "default",
+      "x": 960.0,
+      "y": 370.7692307692308,
       "width": 80,
       "height": 80,
       "rank": 3,
       "order": 0,
       "dummy": false
     },
-    "StateControl": {
-      "id": "StateControl",
-      "label": "State Control",
-      "type": "square",
-      "x": 1082.857142857143,
-      "y": 540.0,
-      "width": 80,
-      "height": 80,
-      "rank": 3,
-      "order": 1,
-      "dummy": false
-    },
-    "Crisis": {
-      "id": "Crisis",
-      "label": "BOP Crisis",
-      "type": "square",
-      "x": 837.1428571428571,
-      "y": 540.0,
-      "width": 80,
-      "height": 80,
-      "rank": 2,
-      "order": 1,
-      "dummy": false
-    },
-    "Liberal": {
-      "id": "Liberal",
-      "label": "Liberalization",
-      "type": "square",
-      "x": 837.1428571428571,
-      "y": 665.7142857142857,
-      "width": 80,
-      "height": 80,
-      "rank": 2,
-      "order": 2,
-      "dummy": false
-    },
-    "Mixed": {
-      "id": "Mixed",
-      "label": "Mixed Economy",
-      "type": "square",
-      "x": 1082.857142857143,
-      "y": 665.7142857142857,
-      "width": 80,
-      "height": 80,
-      "rank": 3,
-      "order": 2,
-      "dummy": false
-    },
-    "Public": {
-      "id": "Public",
-      "label": "Public Sector",
-      "type": "square",
-      "x": 1328.5714285714287,
-      "y": 477.14285714285717,
+    "E": {
+      "id": "E",
+      "label": "E",
+      "type": "default",
+      "x": 960.0,
+      "y": 438.46153846153845,
       "width": 80,
       "height": 80,
       "rank": 4,
       "order": 0,
       "dummy": false
     },
-    "Private": {
-      "id": "Private",
-      "label": "Private Sector",
-      "type": "square",
-      "x": 1328.5714285714287,
-      "y": 602.8571428571429,
-      "width": 80,
-      "height": 80,
-      "rank": 4,
-      "order": 1,
-      "dummy": false
-    },
-    "Core": {
-      "id": "Core",
-      "label": "Strategic Sectors",
-      "type": "square",
-      "x": 1574.2857142857142,
-      "y": 540.0,
+    "F": {
+      "id": "F",
+      "label": "F",
+      "type": "default",
+      "x": 960.0,
+      "y": 506.1538461538462,
       "width": 80,
       "height": 80,
       "rank": 5,
       "order": 0,
       "dummy": false
     },
-    "Rail": {
-      "id": "Rail",
-      "label": "Railways",
-      "type": "square",
-      "x": 1780.0,
-      "y": 225.71428571428572,
+    "G": {
+      "id": "G",
+      "label": "G",
+      "type": "default",
+      "x": 960.0,
+      "y": 573.8461538461538,
       "width": 80,
       "height": 80,
       "rank": 6,
       "order": 0,
       "dummy": false
     },
-    "Highway": {
-      "id": "Highway",
-      "label": "Highways",
-      "type": "square",
-      "x": 1780.0,
-      "y": 351.42857142857144,
+    "H": {
+      "id": "H",
+      "label": "H",
+      "type": "default",
+      "x": 960.0,
+      "y": 641.5384615384615,
       "width": 80,
       "height": 80,
-      "rank": 6,
-      "order": 1,
+      "rank": 7,
+      "order": 0,
       "dummy": false
     },
-    "Bank": {
-      "id": "Bank",
-      "label": "Banking",
-      "type": "square",
-      "x": 1780.0,
-      "y": 477.1428571428571,
+    "I": {
+      "id": "I",
+      "label": "I",
+      "type": "default",
+      "x": 960.0,
+      "y": 709.2307692307693,
       "width": 80,
       "height": 80,
-      "rank": 6,
-      "order": 2,
+      "rank": 8,
+      "order": 0,
       "dummy": false
     },
-    "Defense": {
-      "id": "Defense",
-      "label": "Defense",
-      "type": "square",
-      "x": 1780.0,
-      "y": 602.8571428571429,
+    "J": {
+      "id": "J",
+      "label": "J",
+      "type": "default",
+      "x": 960.0,
+      "y": 776.9230769230769,
       "width": 80,
       "height": 80,
-      "rank": 6,
-      "order": 3,
+      "rank": 9,
+      "order": 0,
       "dummy": false
     },
-    "Digital": {
-      "id": "Digital",
-      "label": "Digital Infrastructure",
-      "type": "square",
-      "x": 1780.0,
-      "y": 728.5714285714286,
+    "K": {
+      "id": "K",
+      "label": "K",
+      "type": "default",
+      "x": 960.0,
+      "y": 844.6153846153846,
       "width": 80,
       "height": 80,
-      "rank": 6,
-      "order": 4,
+      "rank": 10,
+      "order": 0,
       "dummy": false
     },
-    "Energy": {
-      "id": "Energy",
-      "label": "Energy",
-      "type": "square",
-      "x": 1780.0,
-      "y": 854.2857142857142,
+    "L": {
+      "id": "L",
+      "label": "L",
+      "type": "default",
+      "x": 960.0,
+      "y": 912.3076923076924,
       "width": 80,
       "height": 80,
-      "rank": 6,
-      "order": 5,
+      "rank": 11,
+      "order": 0,
+      "dummy": false
+    },
+    "M": {
+      "id": "M",
+      "label": "Synthesis of British & Indian Traditions",
+      "type": "square",
+      "x": 960.0,
+      "y": 940.0,
+      "width": 80,
+      "height": 80,
+      "rank": 12,
+      "order": 0,
       "dummy": false
     }
   },
   "edges": [
     {
-      "from_id": "India",
-      "to_id": "Pre91",
+      "from_id": "A",
+      "to_id": "B",
       "label": "",
       "points": [
         [
-          345.7142857142857,
-          540.0
+          960.0,
+          167.69230769230768
         ],
         [
-          591.4285714285714,
-          477.14285714285717
+          960.0,
+          235.3846153846154
         ]
       ]
     },
     {
-      "from_id": "India",
-      "to_id": "Post91",
+      "from_id": "B",
+      "to_id": "C",
       "label": "",
       "points": [
         [
-          345.7142857142857,
-          540.0
+          960.0,
+          235.3846153846154
         ],
         [
-          591.4285714285714,
-          602.8571428571429
+          960.0,
+          303.0769230769231
         ]
       ]
     },
     {
-      "from_id": "Pre91",
-      "to_id": "Soviet",
-      "label": "",
+      "from_id": "C",
+      "to_id": "D",
+      "label": "Revenue & Administrative Control",
       "points": [
         [
-          591.4285714285714,
-          477.14285714285717
+          960.0,
+          303.0769230769231
         ],
         [
-          837.1428571428571,
-          414.2857142857143
+          960.0,
+          370.7692307692308
         ]
       ]
     },
     {
-      "from_id": "Soviet",
-      "to_id": "License",
+      "from_id": "D",
+      "to_id": "E",
       "label": "",
       "points": [
         [
-          837.1428571428571,
-          414.2857142857143
+          960.0,
+          370.7692307692308
         ],
         [
-          1082.857142857143,
-          414.2857142857143
+          960.0,
+          438.46153846153845
         ]
       ]
     },
     {
-      "from_id": "Soviet",
-      "to_id": "StateControl",
-      "label": "",
+      "from_id": "E",
+      "to_id": "F",
+      "label": "British Crown Intervention",
       "points": [
         [
-          837.1428571428571,
-          414.2857142857143
+          960.0,
+          438.46153846153845
         ],
         [
-          1082.857142857143,
-          540.0
+          960.0,
+          506.1538461538462
         ]
       ]
     },
     {
-      "from_id": "Post91",
-      "to_id": "Crisis",
+      "from_id": "F",
+      "to_id": "G",
       "label": "",
       "points": [
         [
-          591.4285714285714,
-          602.8571428571429
+          960.0,
+          506.1538461538462
         ],
         [
-          837.1428571428571,
-          540.0
+          960.0,
+          573.8461538461538
         ]
       ]
     },
     {
-      "from_id": "Post91",
-      "to_id": "Liberal",
+      "from_id": "G",
+      "to_id": "H",
       "label": "",
       "points": [
         [
-          591.4285714285714,
-          602.8571428571429
+          960.0,
+          573.8461538461538
         ],
         [
-          837.1428571428571,
-          665.7142857142857
+          960.0,
+          641.5384615384615
         ]
       ]
     },
     {
-      "from_id": "Liberal",
-      "to_id": "Mixed",
-      "label": "",
+      "from_id": "H",
+      "to_id": "I",
+      "label": "Increasing Pressure",
       "points": [
         [
-          837.1428571428571,
-          665.7142857142857
+          960.0,
+          641.5384615384615
         ],
         [
-          1082.857142857143,
-          665.7142857142857
+          960.0,
+          709.2307692307693
         ]
       ]
     },
     {
-      "from_id": "Mixed",
-      "to_id": "Public",
+      "from_id": "I",
+      "to_id": "J",
       "label": "",
       "points": [
         [
-          1082.857142857143,
-          665.7142857142857
+          960.0,
+          709.2307692307693
         ],
         [
-          1328.5714285714287,
-          477.14285714285717
+          960.0,
+          776.9230769230769
         ]
       ]
     },
     {
-      "from_id": "Mixed",
-      "to_id": "Private",
+      "from_id": "J",
+      "to_id": "K",
       "label": "",
       "points": [
         [
-          1082.857142857143,
-          665.7142857142857
+          960.0,
+          776.9230769230769
         ],
         [
-          1328.5714285714287,
-          602.8571428571429
+          960.0,
+          844.6153846153846
         ]
       ]
     },
     {
-      "from_id": "Public",
-      "to_id": "Core",
+      "from_id": "K",
+      "to_id": "L",
       "label": "",
       "points": [
         [
-          1328.5714285714287,
-          477.14285714285717
+          960.0,
+          844.6153846153846
         ],
         [
-          1574.2857142857142,
-          540.0
+          960.0,
+          912.3076923076924
         ]
       ]
     },
     {
-      "from_id": "Core",
-      "to_id": "Rail",
+      "from_id": "L",
+      "to_id": "M",
       "label": "",
       "points": [
         [
-          1574.2857142857142,
-          540.0
+          960.0,
+          912.3076923076924
         ],
         [
-          1780.0,
-          225.71428571428572
-        ]
-      ]
-    },
-    {
-      "from_id": "Core",
-      "to_id": "Highway",
-      "label": "",
-      "points": [
-        [
-          1574.2857142857142,
-          540.0
-        ],
-        [
-          1780.0,
-          351.42857142857144
-        ]
-      ]
-    },
-    {
-      "from_id": "Core",
-      "to_id": "Bank",
-      "label": "",
-      "points": [
-        [
-          1574.2857142857142,
-          540.0
-        ],
-        [
-          1780.0,
-          477.1428571428571
-        ]
-      ]
-    },
-    {
-      "from_id": "Core",
-      "to_id": "Defense",
-      "label": "",
-      "points": [
-        [
-          1574.2857142857142,
-          540.0
-        ],
-        [
-          1780.0,
-          602.8571428571429
-        ]
-      ]
-    },
-    {
-      "from_id": "Core",
-      "to_id": "Digital",
-      "label": "",
-      "points": [
-        [
-          1574.2857142857142,
-          540.0
-        ],
-        [
-          1780.0,
-          728.5714285714286
-        ]
-      ]
-    },
-    {
-      "from_id": "Core",
-      "to_id": "Energy",
-      "label": "",
-      "points": [
-        [
-          1574.2857142857142,
-          540.0
-        ],
-        [
-          1780.0,
-          854.2857142857142
+          960.0,
+          940.0
         ]
       ]
     }
   ],
   "width": 1920,
   "height": 1080,
-  "direction": "LR"
+  "direction": "TD"
 }
