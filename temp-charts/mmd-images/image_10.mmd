@@ -1,216 +1,111 @@
-classDiagram
-    class IndianEconomy {
-        +String type: "developing mixed economy"
-        +int globalRankByNominalGDP: 5
-        +int globalRankByPPP: 3
-        +int perCapitaRankByNominalGDP: 140
-        +int perCapitaRankByPPP: 119
-        +double domesticConsumptionPercentage: 70%
-        +int exportRank: 8
-        +int importRank: 10
-        +int easeOfDoingBusinessRank: 63
-        +int globalCompetitivenessRank: 40
-        +double socialWelfareSpendingPercent: 8.6%
-        +int laborForceInMillions: 586
-        +analyzeGrowthTrends()
-        +compareGlobalPositioning()
-    }
+flowchart TD
+    %% Main Process Flow
+    A[Requirements Gathering] --> A1[Requirements Analysis]
+    A1 --> A2[Requirements Specification]
+    A2 --> B[System Design]
+    B --> B1[Architecture Design]
+    B1 --> B2[Detailed Design]
+    B2 --> C[Implementation]
+    C --> C1[Coding]
+    C1 --> C2[Code Review]
+    C2 --> C3[Unit Testing]
+    C3 --> D[Testing]
+    D --> D1[Integration Testing]
+    D1 --> D2[System Testing]
+    D2 --> D3[User Acceptance Testing]
+    D3 --> E[Deployment]
+    E --> E1[Deployment Planning]
+    E1 --> E2[Release Management]
+    E2 --> E3[Production Deployment]
+    E3 --> F[Maintenance]
+    F --> F1[Bug Fixes]
+    F1 --> F2[Updates & Patches]
+    F2 --> F3[Performance Optimization]
     
-    class EconomicEras {
-        +Era preLiberation: "1947-1991"
-        +Era postLiberation: "1991-present"
-        +compareEconomicPolicies()
-        +analyzeLiberalizationImpact()
-    }
+    %% Feedback Loops
+    D1 -->|Integration Issues| C1
+    D2 -->|System Bugs| C
+    D3 -->|UAT Feedback| B2
+    E3 -->|Deployment Issues| D2
+    F1 -->|Critical Bugs| C1
+    F2 -->|New Features Needed| A
+    F3 -->|Architecture Limitations| B1
     
-    class PreLiberationEra {
-        +String economicModel: "Soviet model"
-        +String[] characteristics
-        +boolean protectionistPolicies: true
-        +boolean stateIntervention: true
-        +boolean demandSideEconomics: true
-        +String regulatoryFramework: "Licence Raj"
-        +analyzeSovietInfluence()
-        +evaluateProtectionistOutcomes()
-    }
+    %% Cross-connections
+    A1 -.->|Feasibility Check| B1
+    B2 -.->|Design Review| A2
+    C2 -.->|Standards Compliance| B2
+    E1 -.->|Infrastructure Requirements| B1
     
-    class PostLiberationEra {
-        +String trigger: "balance of payments crisis"
-        +String policy: "economic liberalization"
-        +String planningType: "indicative planning"
-        +boolean marketDriven: true
-        +Date liberalizationStart: "1991"
-        +trackFDIGrowth()
-        +analyzePrivatizationEffects()
-    }
+    %% Project Management Track
+    PM[Project Initiation] --> PM1[Project Planning]
+    PM1 --> PM2[Resource Allocation]
+    PM2 --> PM3[Schedule Management]
+    PM3 --> PM4[Risk Management]
+    PM4 --> PM5[Project Monitoring]
+    PM5 --> PM6[Project Closure]
     
-    class PublicSector {
-        +int approximateCompanies: 1900
-        +String[] fullyControlledSectors
-        +String[] majorControlSectors
-        +double contributionToGDP
-        +int employmentInMillions
-        +analyzePSUPerformance()
-        +trackPrivatizationProgress()
-    }
+    %% Connections to PM
+    PM1 -.-> A
+    PM2 -.-> B
+    PM3 -.-> C
+    PM4 -.-> D
+    PM5 -.-> E
+    PM6 -.-> F
     
-    class StateControlledSectors {
-        +String[] completelControlled: ["Railways", "Highways"]
-        +String[] majorControl: ["Banking", "Insurance", "Farming", "Fertilizers", "Chemicals", "Airports", "Utilities"]
-        +String[] partialControl: ["Digitalization", "Telecommunication", "Supercomputing", "Space", "Port", "Shipping"]
-        +evaluateEfficiency()
-        +compareWithPrivateSector()
-    }
+    %% Quality Assurance Track
+    QA[Quality Planning] --> QA1[Quality Standards]
+    QA1 --> QA2[Quality Assurance]
+    QA2 --> QA3[Quality Control]
+    QA3 --> QA4[Process Improvement]
     
-    class PrivateSector {
-        +String[] emergingCorporateSectors
-        +double contributionToGDP
-        +int employmentGenerated
-        +double profitabilityIndex
-        +int numberOfBillionaires
-        +trackGrowthMetrics()
-        +analyzeCorporatePerformance()
-    }
+    %% Connections to QA
+    QA1 -.-> A2
+    QA2 -.-> B2
+    QA3 -.-> C2
+    QA3 -.-> D
+    QA4 -.-> F
     
-    class EconomicDrivers {
-        +String primaryDriver: "domestic consumption"
-        +String[] secondaryDrivers: ["government spending", "investments", "exports"]
-        +double consumptionContribution: 70%
-        +double govtSpendingContribution
-        +double investmentContribution
-        +double exportsContribution
-        +analyzeDriverTrends()
-        +forecastGrowthPatterns()
-    }
+    %% Subgraphs
+    subgraph Planning
+    A
+    A1
+    A2
+    B
+    B1
+    B2
+    PM
+    PM1
+    PM2
+    QA
+    QA1
+    end
     
-    class InternationalTrade {
-        +String WTOMemberSince: "1995-01-01"
-        +String[] freeTradeAgreements: ["ASEAN", "SAFTA", "Mercosur", "South Korea", "Japan", "Australia", "UAE"]
-        +double FDIInBillionsUSD: 82
-        +String[] leadingFDISectors: ["Finance", "Banking", "Insurance", "R&D"]
-        +double exportsValueInBillionsUSD
-        +double importsValueInBillionsUSD
-        +analyzeTradeBalance()
-        +evaluateFTAEffectiveness()
-    }
+    subgraph Development
+    C
+    C1
+    C2
+    C3
+    D
+    D1
+    D2
+    D3
+    PM3
+    PM4
+    QA2
+    QA3
+    end
     
-    class EconomicChallenges {
-        +String[] structuralProblems: ["jobless growth", "low productivity", "income inequality"]
-        +String[] controversies: ["data manipulation allegations", "GDP growth rate disputes"]
-        +double incomeInequalityGiniIndex
-        +double unemploymentRate
-        +int workingHoursRank: "one of highest"
-        +int productivityRank: "one of lowest"
-        +identifyRootCauses()
-        +proposePolicyReforms()
-    }
-    
-    class LaborMarket {
-        +int workforceInMillions: 586
-        +String rank: "second largest globally"
-        +double formalSectorPercentage
-        +double informalSectorPercentage
-        +double agricultureEmploymentPercentage
-        +double servicesSectorEmploymentPercentage
-        +double manufacturingEmploymentPercentage
-        +analyzeProductivityChallenges()
-        +trackSectoralEmploymentShifts()
-    }
-    
-    class FinancialSystem {
-        +int publicSectorBanks
-        +int privateSectorBanks
-        +int foreignBanks
-        +double bankingAssetsToGDPRatio
-        +String regulatoryBody: "Reserve Bank of India"
-        +trackNPATrends()
-        +analyzeFinancialInclusion()
-    }
-    
-    class MajorIndustries {
-        +String[] keySectors: ["IT", "Pharmaceuticals", "Automobile", "Textiles", "Agriculture"]
-        +double ITContributionToGDP
-        +double pharmaContributionToGDP
-        +double autoContributionToGDP
-        +double agricultureContributionToGDP
-        +double manufacturingContributionToGDP
-        +analyzeCompetitiveness()
-        +trackGlobalMarketShare()
-    }
-    
-    class WelfareSystem {
-        +String constitutionalStatus: "Socialist state"
-        +double spendingPercentOfGDP: 8.6%
-        +String[] majorWelfareSchemes
-        +double healthcareSpendingPercentOfGDP
-        +double educationSpendingPercentOfGDP
-        +evaluateImplementationEfficiency()
-        +compareWithOECDCountries()
-    }
-    
-    class FiscalPolicy {
-        +double fiscalDeficitPercentOfGDP
-        +double taxToGDPRatio
-        +double directTaxContribution
-        +double indirectTaxContribution
-        +String taxStructure: "GST-based"
-        +analyzeDeficitTrends()
-        +evaluateGSTEffectiveness()
-    }
-    
-    class MonetaryPolicy {
-        +String authority: "Reserve Bank of India"
-        +double inflationTarget: 4% ± 2%
-        +double repoRate
-        +double forexReservesInBillionUSD
-        +evaluateInflationControl()
-        +analyzeInterestRateImpact()
-    }
-    
-    class EconomicCrises {
-        +Array greatRecessionResponse: ["stimulus measures", "Keynesian policy"]
-        +Array balanceOfPaymentsCrisis1991: ["IMF loan", "gold reserves pledge"]
-        +Array COVID19Impact: ["contraction", "stimulus package"]
-        +analyzeCrisisManagement()
-        +evaluateRecoverySustainability()
-    }
-    
-    IndianEconomy *-- EconomicEras
-    EconomicEras <|-- PreLiberationEra
-    EconomicEras <|-- PostLiberationEra
-    IndianEconomy *-- PublicSector
-    IndianEconomy *-- PrivateSector
-    IndianEconomy *-- EconomicDrivers
-    IndianEconomy *-- InternationalTrade
-    IndianEconomy *-- EconomicChallenges
-    IndianEconomy *-- LaborMarket
-    IndianEconomy *-- FinancialSystem
-    IndianEconomy *-- MajorIndustries
-    IndianEconomy *-- WelfareSystem
-    IndianEconomy *-- FiscalPolicy
-    IndianEconomy *-- MonetaryPolicy
-    IndianEconomy *-- EconomicCrises
-    PublicSector *-- StateControlledSectors
-    
-    PublicSector --> PrivateSector: privatization efforts
-    PreLiberationEra --> PostLiberationEra: 1991 reforms
-    EconomicDrivers --> EconomicChallenges: influence
-    LaborMarket --> EconomicChallenges: productivity issues
-    FiscalPolicy --> MonetaryPolicy: coordinates with
-    FinancialSystem --> InternationalTrade: facilitates
-    WelfareSystem --> FiscalPolicy: demands resources
-    EconomicCrises --> FiscalPolicy: triggers changes
-    EconomicCrises --> MonetaryPolicy: triggers changes
-    PublicSector --> EconomicChallenges: efficiency concerns
-    MajorIndustries --> InternationalTrade: exports
-    
-    note for IndianEconomy "Officially declared socialist state as per constitution"
-    note for PreLiberationEra "Dirigism, protectionist policies"
-    note for PostLiberationEra "Triggered by Cold War end & 1991 crisis"
-    note for PublicSector "Strategic sectors under state control"
-    note for StateControlledSectors "Complete to partial government control"
-    note for EconomicChallenges "High inequality despite welfare status"
-    note for LaborMarket "High working hours, low productivity"
-    note for FinancialSystem "Strong public sector presence"
-    note for WelfareSystem "Lower than OECD average spending"
-    note for FiscalPolicy "Implemented GST reform"
+    subgraph Operations
+    E
+    E1
+    E2
+    E3
+    F
+    F1
+    F2
+    F3
+    PM5
+    PM6
+    QA4
+    end

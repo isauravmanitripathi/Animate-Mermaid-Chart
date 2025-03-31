@@ -1,0 +1,45 @@
+flowchart TD
+A[Requirements Gathering] --> A1[Requirements Analysis]
+A1 --> A2[Requirements Specification]
+A2 --> B[System Design]
+B --> B1[Architecture Design]
+B1 --> B2[Detailed Design]
+B2 --> C[Implementation]
+C --> C1[Coding]
+C1 --> C2[Code Review]
+C2 --> C3[Unit Testing]
+C3 --> D[Testing]
+D --> D1[Integration Testing]
+D1 --> D2[System Testing]
+D2 --> D3[User Acceptance Testing]
+D3 --> E[Deployment]
+E --> E1[Deployment Planning]
+E1 --> E2[Release Management]
+E2 --> E3[Production Deployment]
+E3 --> F[Maintenance]
+F --> F1[Bug Fixes]
+F1 --> F2[Updates & Patches]
+F2 --> F3[Performance Optimization]
+D1 -->|Integration Issues| C1
+D2 -->|System Bugs| C
+D3 -->|UAT Feedback| B2
+E3 -->|Deployment Issues| D2
+F1 -->|Critical Bugs| C1
+F2 -->|New Features Needed| A
+F3 -->|Architecture Limitations| B1
+A1 -.->|Feasibility Check| B1
+B2 -.->|Design Review| A2
+C2 -.->|Standards Compliance| B2
+E1 -.->|Infrastructure Requirements| B1
+PM[Project Initiation] --> PM1[Project Planning]
+PM1 --> PM2[Resource Allocation]
+PM2 --> PM3[Schedule Management]
+PM3 --> PM4[Risk Management]
+PM4 --> PM5[Project Monitoring]
+PM5 --> PM6[Project Closure]
+PM1 -.-> A
+PM2 -.-> B
+PM3 -.-> C
+PM4 -.-> D
+PM5 -.-> E
+PM6 -.-> F
