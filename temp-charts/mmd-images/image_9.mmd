@@ -1,0 +1,46 @@
+erDiagram
+    INDIAN_ECONOMY {
+        string type "Mixed Economy"
+        int gdp_nominal_rank "5"
+        int gdp_ppp_rank "3"
+        float domestic_consumption "70%"
+    }
+    
+    ECONOMIC_SECTORS {
+    }
+    
+    PUBLIC_SECTOR {
+        int companies "1900"
+        string control_level "Complete/Major"
+    }
+    
+    PRIVATE_SECTOR {
+    }
+    
+    STATE_CONTROLLED_INDUSTRIES {
+        string industry_name
+        string control_level
+    }
+    
+    ECONOMIC_INDICATORS {
+        int exporter_rank "8"
+        int importer_rank "10"
+        int consumer_market_rank "4"
+        int ease_of_business_rank "63"
+        int competitiveness_rank "40"
+    }
+    
+    LABOR_MARKET {
+        int workforce_size "586000000"
+        int workforce_rank "2"
+        string productivity "Low"
+        string working_hours "Long"
+        string growth_pattern "Jobless Growth"
+    }
+    
+    INDIAN_ECONOMY ||--o{ ECONOMIC_SECTORS : comprises
+    ECONOMIC_SECTORS ||--|{ PUBLIC_SECTOR : includes
+    ECONOMIC_SECTORS ||--|{ PRIVATE_SECTOR : includes
+    PUBLIC_SECTOR ||--o{ STATE_CONTROLLED_INDUSTRIES : contains
+    INDIAN_ECONOMY ||--o{ ECONOMIC_INDICATORS : measured_by
+    INDIAN_ECONOMY ||--o{ LABOR_MARKET : has

@@ -1,0 +1,22 @@
+erDiagram
+    INDIAN_ECONOMY {
+        string type "Mixed Economy"
+        int gdp_nominal_rank "5"
+        int gdp_ppp_rank "3"
+        float domestic_consumption "70%"
+    }
+    
+    ECONOMIC_SECTORS {
+    }
+    
+    PUBLIC_SECTOR {
+        int companies "1900"
+        string control_level "Complete/Major"
+    }
+    
+    PRIVATE_SECTOR {
+    }
+    
+    INDIAN_ECONOMY ||--o{ ECONOMIC_SECTORS : comprises
+    ECONOMIC_SECTORS ||--|{ PUBLIC_SECTOR : includes
+    ECONOMIC_SECTORS ||--|{ PRIVATE_SECTOR : includes
