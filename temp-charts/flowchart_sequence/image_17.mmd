@@ -1,0 +1,38 @@
+flowchart TD
+    A1[Requirements Analysis]
+    A[Requirements]
+    B1[Architecture Design]
+    B[Design]
+    C1[Coding]
+    C[Implementation]
+    D1[Integration Testing]
+    D2[User Acceptance Testing]
+    D[Testing]
+    E1[Production Release]
+    E[Deployment]
+    F1[Support & Updates]
+    F[Maintenance]
+    PM[Project Management]
+    QA[Quality Assurance]
+    A1 --> B
+    subgraph Development
+        C
+        C1
+        D
+        D1
+        D2
+        QA
+    end
+    subgraph Operations
+        E
+        E1
+        F
+        F1
+    end
+    subgraph Planning
+        A
+        A1
+        B
+        B1
+        PM
+    end
