@@ -1,17 +1,36 @@
-erDiagram
-    INDIAN_ECONOMY {
-        string type "Mixed Economy"
-        int gdp_nominal_rank "5"
-        int gdp_ppp_rank "3"
-        float domestic_consumption "70%"
+classDiagram
+    class IndianEconomy {
+        +String type
+        +int globalRankings
+        +float GDP
+        +float GDPPerCapita
+        +getEconomicSectors()
+        +getGrowthDrivers()
     }
     
-    ECONOMIC_SECTORS {
+    class EconomicPhases {
+        +PreLiberalization 1947-1991
+        +PostLiberalization 1991-Present
+        +getSectoralChanges()
+        +getPolicyShifts()
     }
     
-    PUBLIC_SECTOR {
-        int companies "1900"
-        string control_level "Complete/Major"
+    class PolicyFramework {
+        +List regulations
+        +List incentives
+        +List taxStructure
+        +implementPolicy()
+        +evaluateOutcomes()
     }
     
-    INDIAN_ECONOMY ||--o{ ECONOMIC_SECTORS : comprises
+    class PublicSector {
+        +int numberOfCompanies
+        +List strategicIndustries
+        +float shareOfGDP
+        +getControlMechanisms()
+    }
+    
+    IndianEconomy "1" *-- "2" EconomicPhases
+    IndianEconomy "1" *-- "1" PolicyFramework
+    IndianEconomy "1" *-- "1" PublicSector
+    EconomicPhases --> PolicyFramework

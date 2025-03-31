@@ -1,10 +1,18 @@
-erDiagram
-    INDIAN_ECONOMY {
-        string type "Mixed Economy"
-        int gdp_nominal_rank "5"
-        int gdp_ppp_rank "3"
-        float domestic_consumption "70%"
+classDiagram
+    class IndianEconomy {
+        +String type
+        +int globalRankings
+        +float GDP
+        +float GDPPerCapita
+        +getEconomicSectors()
+        +getGrowthDrivers()
     }
     
-    ECONOMIC_SECTORS {
+    class EconomicPhases {
+        +PreLiberalization 1947-1991
+        +PostLiberalization 1991-Present
+        +getSectoralChanges()
+        +getPolicyShifts()
     }
+    
+    IndianEconomy "1" *-- "2" EconomicPhases
