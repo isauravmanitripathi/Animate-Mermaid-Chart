@@ -1,126 +1,201 @@
 import os
+import re
 import argparse
 
-def generate_mermaid_sequence(input_file, output_dir):
-    """
-    Generate a sequence of Mermaid diagrams by adding one line at a time.
-    Handles subgraphs as complete blocks.
-    Ignores comment lines starting with %%.
-    """
-    # Create output directory if it doesn't exist
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    else:
-        # Clear existing .mmd files to avoid confusion with previous runs
-        for file in os.listdir(output_dir):
-            if file.endswith('.mmd'):
-                os.remove(os.path.join(output_dir, file))
-    
-    # Read the input file
-    with open(input_file, 'r') as f:
-        lines = [line.rstrip() for line in f.readlines()]
-    
-    # Extract the first line (flowchart declaration)
-    declaration = lines[0]
-    remaining_lines = lines[1:]
-    
-    # Initialize with just the flowchart declaration
-    current_content = [declaration]
-    
-    # Sequence counter
-    seq_num = 1
-    
-    # Save the first step
-    with open(os.path.join(output_dir, f"image_{seq_num}.mmd"), 'w') as f:
-        f.write(declaration)
-    
-    # Process the remaining lines
-    i = 0
-    while i < len(remaining_lines):
-        line = remaining_lines[i].strip()
+class MermaidAnimator:
+    def __init__(self, input_file, output_dir="animation_output"):
+        self.input_file = input_file
+        self.output_dir = output_dir
+        self.lines = []
+        self.declaration = ""
+        self.subgraph_blocks = {}  # Dictionary to store subgraph definitions
+        self.node_to_subgraph = {}  # Maps node IDs to their subgraphs
+        self.visible_nodes = set()  # Nodes that have appeared so far
         
-        # Skip empty lines
-        if not line:
-            i += 1
-            continue
-            
-        # Skip comment lines
-        if line.startswith('%%'):
-            i += 1
-            continue
+    def load_file(self):
+        """Load the mermaid file and separate declaration from content"""
+        with open(self.input_file, 'r') as f:
+            content = f.read().strip()
         
-        # Handle subgraph blocks
-        if line.startswith('subgraph'):
-            subgraph_lines = [line]
-            subgraph_depth = 1
-            j = i + 1
+        lines = content.split('\n')
+        self.declaration = lines[0]  # First line is always the declaration
+        self.lines = [line for line in lines[1:] if line.strip() and not line.strip().startswith('%%')]
+        
+        print(f"Loaded {len(self.lines) + 1} lines from {self.input_file}")
+        
+    def find_subgraphs(self):
+        """Find all subgraphs and their nodes"""
+        # First, extract all subgraph blocks
+        i = 0
+        while i < len(self.lines):
+            line = self.lines[i].strip()
             
-            # Collect all lines in this subgraph block, handling nested subgraphs
-            while j < len(remaining_lines) and subgraph_depth > 0:
-                subline = remaining_lines[j].strip()
-                if subline.startswith('subgraph'):
-                    subgraph_depth += 1
-                elif subline == 'end':
-                    subgraph_depth -= 1
+            if line.startswith('subgraph'):
+                subgraph_name = line.replace('subgraph', '').strip()
+                subgraph_content = [line]
+                j = i + 1
                 
-                subgraph_lines.append(remaining_lines[j])
-                j += 1
-            
-            # Add the entire subgraph as one step
-            current_content.extend(subgraph_lines)
-            seq_num += 1
-            
-            with open(os.path.join(output_dir, f"image_{seq_num}.mmd"), 'w') as f:
-                f.write('\n'.join(current_content))
+                while j < len(self.lines) and not self.lines[j].strip() == 'end':
+                    subgraph_content.append(self.lines[j])
+                    j += 1
                 
-            i = j  # Move past the entire subgraph
+                if j < len(self.lines):  # Add the 'end' line
+                    subgraph_content.append(self.lines[j])
+                
+                # Store the complete subgraph block
+                self.subgraph_blocks[subgraph_name] = subgraph_content
+                
+                # Extract node IDs from this subgraph
+                nodes = []
+                for sline in subgraph_content[1:-1]:  # Skip the 'subgraph' and 'end' lines
+                    sline = sline.strip()
+                    if sline and not sline.startswith('subgraph') and not sline.startswith('end'):
+                        # This should be a node ID
+                        nodes.append(sline)
+                
+                # Map each node to this subgraph
+                for node in nodes:
+                    self.node_to_subgraph[node] = subgraph_name
+                
+                i = j + 1  # Skip past this subgraph
+            else:
+                i += 1
+        
+        print(f"Found {len(self.subgraph_blocks)} subgraphs")
+    
+    def extract_nodes(self, line):
+        """Extract node IDs from a line"""
+        # Simple pattern to match node IDs
+        node_pattern = re.compile(r'([A-Za-z0-9_]+)(?:\[|\(|{)')
+        return node_pattern.findall(line)
+    
+    def create_partial_subgraph(self, subgraph_name):
+        """Create a subgraph containing only the nodes seen so far"""
+        if subgraph_name not in self.subgraph_blocks:
+            return None
+        
+        subgraph_lines = self.subgraph_blocks[subgraph_name]
+        visible_nodes = []
+        
+        # Extract the nodes from this subgraph
+        for line in subgraph_lines[1:-1]:  # Skip subgraph and end lines
+            line = line.strip()
+            if line and not line.startswith('subgraph') and not line.startswith('end'):
+                # This is a node ID
+                if line in self.visible_nodes:
+                    visible_nodes.append(line)
+        
+        if not visible_nodes:
+            return None
             
+        # Create a partial subgraph with only visible nodes
+        result = [f"subgraph {subgraph_name}"]
+        result.extend(visible_nodes)
+        result.append("end")
+        
+        return "\n".join(result)
+    
+    def generate_animation(self):
+        """Generate the sequence of diagrams"""
+        self.load_file()
+        self.find_subgraphs()
+        
+        # Create output directory
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
         else:
-            # Add a regular line
-            current_content.append(line)
-            seq_num += 1
-            
-            with open(os.path.join(output_dir, f"image_{seq_num}.mmd"), 'w') as f:
-                f.write('\n'.join(current_content))
-                
-            i += 1
-    
-    # Generate README with all diagrams
-    create_readme(output_dir)
-    
-    return seq_num
-
-def create_readme(output_dir):
-    """Create a README.md with all generated diagrams"""
-    readme_path = os.path.join(output_dir, "README.md")
-    
-    with open(readme_path, 'w') as f:
-        f.write("# Mermaid Diagram Sequence\n\n")
-        f.write("This sequence of diagrams was automatically generated to show incremental building of the diagram.\n\n")
+            # Clear existing mmd files
+            for file in os.listdir(self.output_dir):
+                if file.endswith('.mmd'):
+                    os.remove(os.path.join(self.output_dir, file))
         
-        # Get all image files and sort them
-        image_files = sorted(
-            [file for file in os.listdir(output_dir) if file.startswith('image_') and file.endswith('.mmd')],
-            key=lambda x: int(x.split('_')[1].split('.')[0])
-        )
+        # Start with just the declaration
+        diagrams = [self.declaration]
+        content_lines = [self.declaration]
         
-        for image_file in image_files:
-            number = image_file.split('_')[1].split('.')[0]
-            f.write(f"## Diagram {number}\n\n")
-            f.write(f"```mermaid\n")
+        # Filter out subgraph lines
+        content_only_lines = []
+        i = 0
+        while i < len(self.lines):
+            line = self.lines[i].strip()
             
-            with open(os.path.join(output_dir, image_file), 'r') as d:
-                f.write(d.read())
-                
-            f.write(f"\n```\n\n")
+            if line.startswith('subgraph'):
+                # Skip this subgraph block
+                depth = 1
+                j = i + 1
+                while j < len(self.lines) and depth > 0:
+                    if self.lines[j].strip().startswith('subgraph'):
+                        depth += 1
+                    elif self.lines[j].strip() == 'end':
+                        depth -= 1
+                    j += 1
+                i = j
+            else:
+                content_only_lines.append(self.lines[i])
+                i += 1
+        
+        # Now process the content lines one by one
+        for i, line in enumerate(content_only_lines):
+            # Add this line to our content
+            content_lines.append(line)
+            
+            # Find any nodes in this line
+            nodes = self.extract_nodes(line)
+            for node in nodes:
+                self.visible_nodes.add(node)
+            
+            # Find which subgraphs these nodes belong to
+            related_subgraphs = set()
+            for node in nodes:
+                if node in self.node_to_subgraph:
+                    related_subgraphs.add(self.node_to_subgraph[node])
+            
+            # Build this diagram
+            current_diagram = content_lines.copy()
+            
+            # Add all subgraphs with visible nodes
+            for subgraph_name in self.subgraph_blocks:
+                partial = self.create_partial_subgraph(subgraph_name)
+                if partial:
+                    current_diagram.append("")  # Add a blank line for separation
+                    current_diagram.append(partial)
+            
+            # Save this diagram
+            diagrams.append("\n".join(current_diagram))
+        
+        # Write all diagrams to files
+        for i, diagram in enumerate(diagrams):
+            with open(os.path.join(self.output_dir, f"image_{i+1}.mmd"), 'w') as f:
+                f.write(diagram)
+        
+        # Create README
+        self.create_readme(diagrams)
+        
+        return len(diagrams)
+    
+    def create_readme(self, diagrams):
+        """Create a README.md with all diagrams"""
+        with open(os.path.join(self.output_dir, "README.md"), 'w') as f:
+            f.write("# Mermaid Diagram Animation\n\n")
+            f.write("This sequence of diagrams shows the step-by-step building of the flowchart.\n\n")
+            
+            for i, diagram in enumerate(diagrams):
+                f.write(f"## Diagram {i+1}\n\n")
+                f.write("```mermaid\n")
+                f.write(diagram)
+                f.write("\n```\n\n")
+        
+        print(f"Created README.md in {self.output_dir}")
+        
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Create a sequence of incremental Mermaid diagrams')
+    parser = argparse.ArgumentParser(description="Create an animated sequence of Mermaid diagrams")
     parser.add_argument('input_file', help='Input Mermaid diagram file (.mmd)')
-    parser.add_argument('--output-dir', '-o', default='sequence_output', help='Output directory for sequence files')
+    parser.add_argument('--output-dir', '-o', default='animation_output', help='Output directory')
     
     args = parser.parse_args()
     
-    num_steps = generate_mermaid_sequence(args.input_file, args.output_dir)
-    print(f"Generated {num_steps} diagrams in {args.output_dir}")
-    print(f"Created README with all diagrams: {os.path.join(args.output_dir, 'README.md')}")
+    animator = MermaidAnimator(args.input_file, args.output_dir)
+    count = animator.generate_animation()
+    
+    print(f"Generated {count} diagram steps in {args.output_dir}")
