@@ -1,0 +1,35 @@
+stateDiagram-v2
+    [*] --> IndependenceEra
+    
+    IndependenceEra --> SovietModel : 1947-1955
+    SovietModel --> HeavyIndustrialization : Mid-1950s
+    HeavyIndustrialization --> LicenceRaj : 1960s-1980s
+    LicenceRaj --> EconomicCrisis : 1991
+    
+    state EconomicCrisis {
+        [*] --> BalanceOfPaymentsCrisis
+        BalanceOfPaymentsCrisis --> IMFBailout
+        IMFBailout --> [*]
+    }
+    
+    EconomicCrisis --> Liberalization : 1991 Reforms
+    
+    state Liberalization {
+        [*] --> PrivateSectorGrowth
+        PrivateSectorGrowth --> ForeignInvestment
+        ForeignInvestment --> MarketDeregulation
+        MarketDeregulation --> [*]
+    }
+    
+    Liberalization --> MixedEconomy : Post-1991
+    
+    state MixedEconomy {
+        [*] --> PublicSectorControl
+        PublicSectorControl --> PrivateSectorExpansion
+        PrivateSectorExpansion --> WelfareState
+        WelfareState --> HighInequality
+        HighInequality --> [*]
+    }
+    
+    MixedEconomy --> JoblessGrowth : Current Challenge
+    JoblessGrowth --> [*]
