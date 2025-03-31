@@ -1,0 +1,125 @@
+flowchart TD
+    A[Requirements Gathering]
+    A1
+    A2
+    B
+    B1
+    B2
+    C
+    C1
+    C2
+    C3
+    D
+    D1
+    D2
+    D3
+    E
+    E1
+    E2
+    E3
+    F
+    F1
+    F2
+    F3
+    PM[Project Initiation]
+    PM1
+    PM2
+    PM3
+    PM4
+    PM5
+    PM6
+    QA[Quality Planning]
+    QA1
+    QA2
+    QA3
+    QA4
+    A1 --> A2
+    A2 --> B
+    B --> B1
+    B1 --> B2
+    B2 --> C
+    C --> C1
+    C1 --> C2
+    C2 --> C3
+    C3 --> D
+    D --> D1
+    D1 --> D2
+    D2 --> D3
+    D3 --> E
+    E --> E1
+    E1 --> E2
+    E2 --> E3
+    E3 --> F
+    F --> F1
+    F1 --> F2
+    F2 --> F3
+    D1 -->|Integration Issues| C1
+    D2 -->|System Bugs| C
+    D3 -->|UAT Feedback| B2
+    E3 -->|Deployment Issues| D2
+    F1 -->|Critical Bugs| C1
+    F2 -->|New Features Needed| A
+    F3 -->|Architecture Limitations| B1
+    A1 -.->|Feasibility Check| B1
+    B2 -.->|Design Review| A2
+    C2 -.->|Standards Compliance| B2
+    E1 -.->|Infrastructure Requirements| B1
+    PM1 --> PM2
+    PM2 --> PM3
+    PM3 --> PM4
+    PM4 --> PM5
+    PM5 --> PM6
+    PM1 -.-> A
+    PM2 -.-> B
+    PM3 -.-> C
+    PM4 -.-> D
+    PM5 -.-> E
+    PM6 -.-> F
+    QA1 --> QA2
+    QA2 --> QA3
+    QA3 --> QA4
+    QA1 -.-> A2
+    QA2 -.-> B2
+    QA3 -.-> C2
+    QA3 -.-> D
+    QA4 -.-> F
+    subgraph Planning
+        A
+        A1
+        A2
+        B
+        B1
+        B2
+        PM
+        PM1
+        PM2
+        QA
+        QA1
+    end
+    subgraph Development
+        C
+        C1
+        C2
+        C3
+        D
+        D1
+        D2
+        D3
+        PM3
+        PM4
+        QA2
+        QA3
+    end
+    subgraph Operations
+        E
+        E1
+        E2
+        E3
+        F
+        F1
+        F2
+        F3
+        PM5
+        PM6
+        QA4
+    end

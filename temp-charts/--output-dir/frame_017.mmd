@@ -1,0 +1,56 @@
+flowchart TD
+    A[Requirements Gathering]
+    A1
+    A2
+    B
+    B1
+    B2
+    C
+    C1
+    C2
+    C3
+    D
+    D1
+    D2
+    D3
+    E
+    E1
+    E2
+    A1 --> A2
+    A2 --> B
+    B --> B1
+    B1 --> B2
+    B2 --> C
+    C --> C1
+    C1 --> C2
+    C2 --> C3
+    C3 --> D
+    D --> D1
+    D1 --> D2
+    D2 --> D3
+    D3 --> E
+    E --> E1
+    E1 --> E2
+    subgraph Planning
+        A
+        A1
+        A2
+        B
+        B1
+        B2
+    end
+    subgraph Development
+        C
+        C1
+        C2
+        C3
+        D
+        D1
+        D2
+        D3
+    end
+    subgraph Operations
+        E
+        E1
+        E2
+    end

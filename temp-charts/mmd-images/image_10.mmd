@@ -1,5 +1,5 @@
 flowchart TD
-    %% Main Process Flow
+
     A[Requirements Gathering] --> A1[Requirements Analysis]
     A1 --> A2[Requirements Specification]
     A2 --> B[System Design]
@@ -22,7 +22,7 @@ flowchart TD
     F1 --> F2[Updates & Patches]
     F2 --> F3[Performance Optimization]
     
-    %% Feedback Loops
+
     D1 -->|Integration Issues| C1
     D2 -->|System Bugs| C
     D3 -->|UAT Feedback| B2
@@ -31,13 +31,13 @@ flowchart TD
     F2 -->|New Features Needed| A
     F3 -->|Architecture Limitations| B1
     
-    %% Cross-connections
+
     A1 -.->|Feasibility Check| B1
     B2 -.->|Design Review| A2
     C2 -.->|Standards Compliance| B2
     E1 -.->|Infrastructure Requirements| B1
     
-    %% Project Management Track
+
     PM[Project Initiation] --> PM1[Project Planning]
     PM1 --> PM2[Resource Allocation]
     PM2 --> PM3[Schedule Management]
@@ -45,7 +45,7 @@ flowchart TD
     PM4 --> PM5[Project Monitoring]
     PM5 --> PM6[Project Closure]
     
-    %% Connections to PM
+
     PM1 -.-> A
     PM2 -.-> B
     PM3 -.-> C
@@ -53,20 +53,20 @@ flowchart TD
     PM5 -.-> E
     PM6 -.-> F
     
-    %% Quality Assurance Track
+
     QA[Quality Planning] --> QA1[Quality Standards]
     QA1 --> QA2[Quality Assurance]
     QA2 --> QA3[Quality Control]
     QA3 --> QA4[Process Improvement]
     
-    %% Connections to QA
+
     QA1 -.-> A2
     QA2 -.-> B2
     QA3 -.-> C2
     QA3 -.-> D
     QA4 -.-> F
     
-    %% Subgraphs
+
     subgraph Planning
     A
     A1
