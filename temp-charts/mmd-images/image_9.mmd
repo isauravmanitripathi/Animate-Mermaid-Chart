@@ -1,77 +1,65 @@
 classDiagram
     class IndianEconomy {
-        +String type
-        +int globalRankings
-        +float GDP
-        +float GDPPerCapita
-        +getEconomicSectors()
-        +getGrowthDrivers()
+        +String type: "developing mixed economy"
+        +int globalRankByNominalGDP: 5
+        +int globalRankByPPP: 3
+        +int perCapitaRankByNominalGDP: 140
+        +int perCapitaRankByPPP: 119
+        +double domesticConsumptionPercentage: 70%
+        +int exportRank: 8
+        +int importRank: 10
+        +int easeOfDoingBusinessRank: 63
+        +int globalCompetitivenessRank: 40
+        +double socialWelfareSpendingPercent: 8.6%
+        +int laborForceInMillions: 586
     }
-    
-    class EconomicPhases {
-        +PreLiberalization 1947-1991
-        +PostLiberalization 1991-Present
-        +getSectoralChanges()
-        +getPolicyShifts()
+    note for IndianEconomy "Officially declared socialist state as per constitution"
+
+    class EconomicEras {
+        +Era preLiberation: "1947-1991"
+        +Era postLiberation: "1991-present"
     }
-    
-    class PolicyFramework {
-        +List regulations
-        +List incentives
-        +List taxStructure
-        +implementPolicy()
-        +evaluateOutcomes()
+
+    class PreLiberationEra {
+        +String economicModel: "Soviet model"
+        +String[] characteristics
     }
-    
+    note for PreLiberationEra "Protectionist policies, state intervention, Licence Raj"
+
+    class PostLiberationEra {
+        +String trigger: "balance of payments crisis"
+        +String policy: "economic liberalization"
+        +String planningType: "indicative planning"
+    }
+    note for PostLiberationEra "Triggered by end of Cold War and 1991 crisis"
+
     class PublicSector {
-        +int numberOfCompanies
-        +List strategicIndustries
-        +float shareOfGDP
-        +getControlMechanisms()
+        +int approximateCompanies: 1900
+        +String[] fullyControlledSectors
+        +String[] majorControlSectors
     }
-    
+    note for PublicSector "Complete control of railways and highways"
+
     class PrivateSector {
-        +int corporatePlayers
-        +float marketCapitalization
-        +float shareOfGDP
-        +getIndustryDistribution()
+        +String[] emergingCorporateSectors
     }
-    
-    class TradeProfile {
-        +float exportValue
-        +float importValue
-        +List tradePartners
-        +List tradeAgreements
-        +getTradeBalance()
+
+    class EconomicDrivers {
+        +String primaryDriver: "domestic consumption"
+        +String[] secondaryDrivers
     }
-    
-    class LaborMarket {
-        +int workforceSize
-        +float laborProductivity
-        +float unemploymentRate
-        +getChallenges()
+
+    class InternationalTrade {
+        +String WTOMemberSince: "1995-01-01"
+        +String[] freeTradeAgreements
+        +double FDIInBillionsUSD: 82
+        +String[] leadingFDISectors
     }
-    
-    class WelfareSystem {
-        +float spendingPercentage
-        +List programs
-        +int beneficiaries
-        +compareToGlobalStandards()
-    }
-    
-    class EconomicChallenges {
-        +List structuralIssues
-        +List inequalityFactors
-        +List growthConstraints
-        +proposeReforms()
-    }
-    
-    IndianEconomy "1" *-- "2" EconomicPhases
-    IndianEconomy "1" *-- "1" PolicyFramework
-    IndianEconomy "1" *-- "1" PublicSector
-    IndianEconomy "1" *-- "1" PrivateSector
-    IndianEconomy "1" *-- "1" TradeProfile
-    IndianEconomy "1" *-- "1" LaborMarket
-    IndianEconomy "1" *-- "1" WelfareSystem
-    IndianEconomy "1" *-- "many" EconomicChallenges
-    EconomicPhases --> PolicyFramework
+
+    IndianEconomy --> EconomicEras
+    EconomicEras --> PreLiberationEra
+    EconomicEras --> PostLiberationEra
+    IndianEconomy --> PublicSector
+    IndianEconomy --> PrivateSector
+    IndianEconomy --> EconomicDrivers
+    IndianEconomy --> InternationalTrade
