@@ -1,0 +1,183 @@
+classDiagram
+    class IndianEconomy {
+        +String type: "developing mixed economy"
+        +int globalRankByNominalGDP: 5
+        +int globalRankByPPP: 3
+        +int perCapitaRankByNominalGDP: 140
+        +int perCapitaRankByPPP: 119
+        +double domesticConsumptionPercentage: 70%
+        +int exportRank: 8
+        +int importRank: 10
+        +int easeOfDoingBusinessRank: 63
+        +int globalCompetitivenessRank: 40
+        +double socialWelfareSpendingPercent: 8.6%
+        +int laborForceInMillions: 586
+        +analyzeGrowthTrends()
+        +compareGlobalPositioning()
+    }
+    class EconomicEras {
+        +Era preLiberation: "1947-1991"
+        +Era postLiberation: "1991-present"
+        +compareEconomicPolicies()
+        +analyzeLiberalizationImpact()
+    }
+    class PreLiberationEra {
+        +String economicModel: "Soviet model"
+        +String[] characteristics
+        +boolean protectionistPolicies: true
+        +boolean stateIntervention: true
+        +boolean demandSideEconomics: true
+        +String regulatoryFramework: "Licence Raj"
+        +analyzeSovietInfluence()
+        +evaluateProtectionistOutcomes()
+    }
+    class PostLiberationEra {
+        +String trigger: "balance of payments crisis"
+        +String policy: "economic liberalization"
+        +String planningType: "indicative planning"
+        +boolean marketDriven: true
+        +Date liberalizationStart: "1991"
+        +trackFDIGrowth()
+        +analyzePrivatizationEffects()
+    }
+    class PublicSector {
+        +int approximateCompanies: 1900
+        +String[] fullyControlledSectors
+        +String[] majorControlSectors
+        +double contributionToGDP
+        +int employmentInMillions
+        +analyzePSUPerformance()
+        +trackPrivatizationProgress()
+    }
+    class StateControlledSectors {
+        +String[] completelControlled: ["Railways", "Highways"]
+        +String[] majorControl: ["Banking", "Insurance", "Farming", "Fertilizers", "Chemicals", "Airports", "Utilities"]
+        +String[] partialControl: ["Digitalization", "Telecommunication", "Supercomputing", "Space", "Port", "Shipping"]
+        +evaluateEfficiency()
+        +compareWithPrivateSector()
+    }
+    class PrivateSector {
+        +String[] emergingCorporateSectors
+        +double contributionToGDP
+        +int employmentGenerated
+        +double profitabilityIndex
+        +int numberOfBillionaires
+        +trackGrowthMetrics()
+        +analyzeCorporatePerformance()
+    }
+    class EconomicDrivers {
+        +String primaryDriver: "domestic consumption"
+        +String[] secondaryDrivers: ["government spending", "investments", "exports"]
+        +double consumptionContribution: 70%
+        +double govtSpendingContribution
+        +double investmentContribution
+        +double exportsContribution
+        +analyzeDriverTrends()
+        +forecastGrowthPatterns()
+    }
+    class InternationalTrade {
+        +String WTOMemberSince: "1995-01-01"
+        +String[] freeTradeAgreements: ["ASEAN", "SAFTA", "Mercosur", "South Korea", "Japan", "Australia", "UAE"]
+        +double FDIInBillionsUSD: 82
+        +String[] leadingFDISectors: ["Finance", "Banking", "Insurance", "R&D"]
+        +double exportsValueInBillionsUSD
+        +double importsValueInBillionsUSD
+        +analyzeTradeBalance()
+        +evaluateFTAEffectiveness()
+    }
+    class EconomicChallenges {
+        +String[] structuralProblems: ["jobless growth", "low productivity", "income inequality"]
+        +String[] controversies: ["data manipulation allegations", "GDP growth rate disputes"]
+        +double incomeInequalityGiniIndex
+        +double unemploymentRate
+        +int workingHoursRank: "one of highest"
+        +int productivityRank: "one of lowest"
+        +identifyRootCauses()
+        +proposePolicyReforms()
+    }
+    class LaborMarket {
+        +int workforceInMillions: 586
+        +String rank: "second largest globally"
+        +double formalSectorPercentage
+        +double informalSectorPercentage
+        +double agricultureEmploymentPercentage
+        +double servicesSectorEmploymentPercentage
+        +double manufacturingEmploymentPercentage
+        +analyzeProductivityChallenges()
+        +trackSectoralEmploymentShifts()
+    }
+    class FinancialSystem {
+        +int publicSectorBanks
+        +int privateSectorBanks
+        +int foreignBanks
+        +double bankingAssetsToGDPRatio
+        +String regulatoryBody: "Reserve Bank of India"
+        +trackNPATrends()
+        +analyzeFinancialInclusion()
+    }
+    class MajorIndustries {
+        +String[] keySectors: ["IT", "Pharmaceuticals", "Automobile", "Textiles", "Agriculture"]
+        +double ITContributionToGDP
+        +double pharmaContributionToGDP
+        +double autoContributionToGDP
+        +double agricultureContributionToGDP
+        +double manufacturingContributionToGDP
+        +analyzeCompetitiveness()
+        +trackGlobalMarketShare()
+    }
+    class WelfareSystem {
+        +String constitutionalStatus: "Socialist state"
+        +double spendingPercentOfGDP: 8.6%
+        +String[] majorWelfareSchemes
+        +double healthcareSpendingPercentOfGDP
+        +double educationSpendingPercentOfGDP
+        +evaluateImplementationEfficiency()
+        +compareWithOECDCountries()
+    }
+    class FiscalPolicy {
+        +double fiscalDeficitPercentOfGDP
+        +double taxToGDPRatio
+        +double directTaxContribution
+        +double indirectTaxContribution
+        +String taxStructure: "GST-based"
+        +analyzeDeficitTrends()
+        +evaluateGSTEffectiveness()
+    }
+    class MonetaryPolicy {
+        +String authority: "Reserve Bank of India"
+        +double inflationTarget: 4% ± 2%
+        +double repoRate
+        +double forexReservesInBillionUSD
+        +evaluateInflationControl()
+        +analyzeInterestRateImpact()
+    }
+    class EconomicCrises {
+        +Array greatRecessionResponse: ["stimulus measures", "Keynesian policy"]
+        +Array balanceOfPaymentsCrisis1991: ["IMF loan", "gold reserves pledge"]
+        +Array COVID19Impact: ["contraction", "stimulus package"]
+        +analyzeCrisisManagement()
+        +evaluateRecoverySustainability()
+    }
+    EconomicEras <|-- PreLiberationEra
+    EconomicEras <|-- PostLiberationEra
+    PublicSector --> PrivateSector: privatization efforts
+    PreLiberationEra --> PostLiberationEra: 1991 reforms
+    EconomicDrivers --> EconomicChallenges: influence
+    LaborMarket --> EconomicChallenges: productivity issues
+    FiscalPolicy --> MonetaryPolicy: coordinates with
+    FinancialSystem --> InternationalTrade: facilitates
+    WelfareSystem --> FiscalPolicy: demands resources
+    EconomicCrises --> FiscalPolicy: triggers changes
+    EconomicCrises --> MonetaryPolicy: triggers changes
+    PublicSector --> EconomicChallenges: efficiency concerns
+    MajorIndustries --> InternationalTrade: exports
+    note for IndianEconomy "Officially declared socialist state as per constitution"
+    note for PreLiberationEra "Dirigism, protectionist policies"
+    note for PostLiberationEra "Triggered by Cold War end & 1991 crisis"
+    note for PublicSector "Strategic sectors under state control"
+    note for StateControlledSectors "Complete to partial government control"
+    note for EconomicChallenges "High inequality despite welfare status"
+    note for LaborMarket "High working hours, low productivity"
+    note for FinancialSystem "Strong public sector presence"
+    note for WelfareSystem "Lower than OECD average spending"
+    note for FiscalPolicy "Implemented GST reform"
