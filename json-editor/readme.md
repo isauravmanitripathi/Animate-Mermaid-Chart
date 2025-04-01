@@ -44,6 +44,18 @@ The output json should look like this with proper nlp parsing:
 
 ```
 
+It works the name of file is `nltk_json_processor.py`. 
+
+It is ran as 
+
+```bash
+(.animate) ➜  json-editor git:(main) ✗ python3 nltk_json_processor.py /Users/sauravtripathi/Downloads/response-1.json
+Processing completed successfully!
+Output saved to: /Volumes/hard-drive/auto-mermaid-chart/json-editor/parsed-nltk-json/nltk_response-1.json
+(.animate) ➜  json-editor git:(main) ✗ 
+
+```
+
 
 # 2nd step
 
