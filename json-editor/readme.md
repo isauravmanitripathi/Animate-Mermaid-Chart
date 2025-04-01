@@ -49,6 +49,73 @@ The output json should look like this with proper nlp parsing:
 
 Second step: Create  a file which will talk to the api to generate mermaid code. 
 
+Now in this step we take newly json file we extract the entire text from the previous json file send it to the api and generate mermaid code. 
+
+With mermaid code added the new file should look like this
+
+```json 
+
+[
+  {
+    "chapter_name": "string",
+    "chapter_id": "integer",
+    "section_number": "string",
+    "section_name": "string",
+    "mermaid_test": [
+      {
+        "text_1": "string",
+        "mermaid_code_1": "Meramid code"
+      },
+      {
+        "text_2": "string",
+        "mermaid_code_2": "Mermaid Code"
+      }
+    ]
+  }
+]
+```
+
+So in this case we also send it a prompt which specifies that we need the mermaid code to be seuqnetial. 
+
+
+we can use this prompt:
+
+```text
+Create a sequential Mermaid diagram that builds line by line as you process the following text about [TOPIC]. For each paragraph or logical section of the text:
+
+Read and analyze a single paragraph/section
+Identify key concepts, entities, or events that should become nodes
+Determine relationships between the new nodes and any previously created nodes
+Add only the new nodes and connections to the growing Mermaid diagram
+Continue to the next paragraph/section
+
+Follow these specific rules:
+
+Use the 'graph TD' Mermaid syntax for a top-down directed graph
+Each new component should build upon the previous diagram
+Format node labels clearly with relevant information (<entity><br><detail>)
+Add connecting arrows to show relationships (-->, ---, <-->, etc.)
+Include comments (using %%) to label each new section addition
+Color-code different types of nodes using appropriate classDef definitions
+Add the style definitions only at the very end
+
+For example, if processing text about historical events:
+
+First paragraph → Add initial nodes
+Second paragraph → Add new nodes + connections to previous nodes
+Continue this pattern until the entire text is processed
+
+Show your work as you go, displaying:
+
+The paragraph/section being analyzed
+The new Mermaid code snippets being added
+A brief explanation of what elements you're adding and why
+
+At the end, include the complete Mermaid diagram code that shows the entirety of the [TOPIC] as described in the text.
+```
+
+After this is saved as a new json and saves the progress
+
 # 3rd step
 
 third step: Get mermaid code. save it, and run it with cli to generate an image file, if there is an error with mermaid syntax the program sends that snippet back to the api to fix it  
