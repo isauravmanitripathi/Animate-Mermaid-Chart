@@ -114,15 +114,94 @@ A brief explanation of what elements you're adding and why
 At the end, include the complete Mermaid diagram code that shows the entirety of the [TOPIC] as described in the text.
 ```
 
-After this is saved as a new json and saves the progress
+Here we also do one thing. We get the entire mermaid code, extract the mermaid and create a png file, so we can verify the entire process run, if there is an error generating the mermaid image, we send the code back along with prompt and the original json and also the error and ask it to rewrite the mermaid code so it works. 
 
 # 3rd step
 
-third step: Get mermaid code. save it, and run it with cli to generate an image file, if there is an error with mermaid syntax the program sends that snippet back to the api to fix it  
+third step: Get mermaid code. save it, and run it with cli to generate an image file, if there is an error with mermaid syntax the program sends that snippet back to the api to fix it . 
+
+Third steps ask the json file as input which is this
+
+```json 
+[
+  {
+    "chapter_name": "string",
+    "chapter_id": "integer",
+    "section_number": "string",
+    "section_name": "string",
+    "mermaid_test": [
+      {
+        "text_1": "string",
+        "mermaid_code_1":"Meramid code"
+      },
+      {
+        "text_2": "string",
+        "mermaid_code_2":"Mermaid Code"
+      }
+    ]
+  }
+]
+
+```
+
+In this step we get the mermaid code, generate an image for each of them save all of the mermaid images in one folder and update the path.
+
+```json
+[
+  {
+    "chapter_name": "string",
+    "chapter_id": "integer",
+    "section_number": "string",
+    "section_name": "string",
+    "mermaid_test": [
+      {
+        "text_1": "string",
+        "mermaid_code_1":"Meramid code",
+        "mermaid_image_path_1":"path to mermaid image"
+      },
+      {
+        "text_2": "string",
+        "mermaid_code_2":"Mermaid Code",
+        "mermaid_image_path_2":"path to mermaid image"
+      }
+    ]
+  }
+]
+
+```
 
 # 4th step
 
-fourth step: convert text to audio using tts  
+fourth step: convert text to audio using tts 
+
+Now in this step we get the text and convert the text to audio. Using Edgetts and other mechanism. After that audio is convert it is stored in a temporary folder. and it should update the path of mermaid json with the audio path so we can accesss it. 
+
+```json 
+
+[
+  {
+    "chapter_name": "string",
+    "chapter_id": "integer",
+    "section_number": "string",
+    "section_name": "string",
+    "mermaid_test": [
+      {
+        "text_1": "string",
+        "mermaid_code_1":"Meramid code",
+        "mermaid_image_path_1":"path to mermaid image",
+        "audio_path_sectionId":"path to audio"
+      },
+      {
+        "text_2": "string",
+        "mermaid_code_2":"Mermaid Code",
+        "mermaid_image_path_2":"path to mermaid image",
+        "audio_path_sectionId_2":"path to audio"
+      }
+    ]
+  }
+]
+
+```
 
 # 5th step
 
