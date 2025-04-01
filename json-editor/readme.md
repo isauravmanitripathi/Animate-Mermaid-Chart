@@ -211,9 +211,43 @@ In this code it also adds the audio length, detect the length of audio using ffp
 
 fifth: get the audio length and get the path of images from directory and process them by combining them together  and save the video 
 
+In this it gets the audio length and the mermaid code and the audio length then we create a video with mermaid by parsing it and using our method which is class diagram and graph and other, and then generate video using mermaid seuqnece animataor. and update the path in json file.
+
+```json 
+[
+  {
+    "chapter_name": "string",
+    "chapter_id": "integer",
+    "section_number": "string",
+    "section_name": "string",
+    "mermaid_test": [
+      {
+        "text_1": "string",
+        "mermaid_code_1":"Meramid code",
+        "mermaid_image_path_1":"path to mermaid image",
+        "audio_path_sectionId":"path to audio",
+        "mermaid_video_sectionid_1":"path to mermaid video"
+      },
+      {
+        "text_2": "string",
+        "mermaid_code_2":"Mermaid Code",
+        "mermaid_image_path_2":"path to mermaid image",
+        "audio_path_sectionId_2":"path to audio",
+        "mermaid_video_sectionid_2":"path to mermaid video"
+      }
+    ]
+  }
+]
+
+```
+
 
 
 
 # Final
 
 Generate the final video
+
+In this final part, it creates the video and save it. In json file it adds the final video path. and also combine each section together, all of video to form one single video. 
+
+and it combines chapter together all of video. 
