@@ -33,10 +33,10 @@ The output json should look like this with proper nlp parsing:
     "section_name": "string",
     "mermaid_test": [
       {
-        "text_1": "string"
+        "text_sectionid_1": "string"
       },
       {
-        "text_2": "string"
+        "text_sectionid_2": "string"
       }
     ]
   }
@@ -64,11 +64,11 @@ With mermaid code added the new file should look like this
     "mermaid_test": [
       {
         "text_1": "string",
-        "mermaid_code_1": "Meramid code"
+        "mermaid_code_sectionid_1": "Meramid code"
       },
       {
         "text_2": "string",
-        "mermaid_code_2": "Mermaid Code"
+        "mermaid_code_sectionid_2": "Mermaid Code"
       }
     ]
   }
@@ -132,11 +132,11 @@ Third steps ask the json file as input which is this
     "mermaid_test": [
       {
         "text_1": "string",
-        "mermaid_code_1":"Meramid code"
+        "mermaid_code_sectionid_1":"Meramid code"
       },
       {
         "text_2": "string",
-        "mermaid_code_2":"Mermaid Code"
+        "mermaid_code_sectionid_2":"Mermaid Code"
       }
     ]
   }
@@ -156,13 +156,13 @@ In this step we get the mermaid code, generate an image for each of them save al
     "mermaid_test": [
       {
         "text_1": "string",
-        "mermaid_code_1":"Meramid code",
-        "mermaid_image_path_1":"path to mermaid image"
+        "mermaid_code_sectionid_1":"Meramid code",
+        "mermaid_image_path_sectionid_1":"path to mermaid image"
       },
       {
         "text_2": "string",
-        "mermaid_code_2":"Mermaid Code",
-        "mermaid_image_path_2":"path to mermaid image"
+        "mermaid_code_sectionid_2":"Mermaid Code",
+        "mermaid_image_path_sectionid_2":"path to mermaid image"
       }
     ]
   }
@@ -189,17 +189,17 @@ In this code it also adds the audio length, detect the length of audio using ffp
     "mermaid_test": [
       {
         "text_1": "string",
-        "mermaid_code_1":"Meramid code",
-        "mermaid_image_path_1":"path to mermaid image",
-        "audio_path_sectionId":"path to audio",
-        "length_of_audio":"time"
+        "mermaid_code_sectionid_1":"Meramid code",
+        "mermaid_image_path_sectionid_1":"path to mermaid image",
+        "audio_path_sectionId_1":"path to audio",
+        "length_of_audio_sectionid_1":"time"
       },
       {
         "text_2": "string",
-        "mermaid_code_2":"Mermaid Code",
-        "mermaid_image_path_2":"path to mermaid image",
+        "mermaid_code_sectionid_2":"Mermaid Code",
+        "mermaid_image_path_sectionid_2":"path to mermaid image",
         "audio_path_sectionId_2":"path to audio",
-        "length_of_audio":"time"
+        "length_of_audiosectionid_2":"time"
       }
     ]
   }
@@ -223,16 +223,16 @@ In this it gets the audio length and the mermaid code and the audio length then 
     "mermaid_test": [
       {
         "text_1": "string",
-        "mermaid_code_1":"Meramid code",
-        "mermaid_image_path_1":"path to mermaid image",
-        "audio_path_sectionId":"path to audio",
+        "mermaid_code_sectionid_1":"Meramid code",
+        "mermaid_image_path_sectionid_1":"path to mermaid image",
+        "audio_path_sectionId_1":"path to audio",
         "mermaid_video_sectionid_1":"path to mermaid video"
       },
       {
         "text_2": "string",
-        "mermaid_code_2":"Mermaid Code",
-        "mermaid_image_path_2":"path to mermaid image",
-        "audio_path_sectionId_2":"path to audio",
+        "mermaid_code_sectionid_2":"Mermaid Code",
+        "mermaid_image_path_sectionid_2":"path to mermaid image",
+        "audio_path_sectionId_sectionid_2":"path to audio",
         "mermaid_video_sectionid_2":"path to mermaid video"
       }
     ]
