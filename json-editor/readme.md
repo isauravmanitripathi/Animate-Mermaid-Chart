@@ -174,7 +174,9 @@ In this step we get the mermaid code, generate an image for each of them save al
 
 fourth step: convert text to audio using tts 
 
-Now in this step we get the text and convert the text to audio. Using Edgetts and other mechanism. After that audio is convert it is stored in a temporary folder. and it should update the path of mermaid json with the audio path so we can accesss it. 
+Now in this step we get the text and convert the text to audio. Using Edgetts and other mechanism. After that audio is convert it is stored in a temporary folder. and it should update the path of mermaid json with the audio path so we can accesss it.  
+
+In this code it also adds the audio length, detect the length of audio using ffprobe and it adds the length.
 
 ```json 
 
@@ -189,13 +191,15 @@ Now in this step we get the text and convert the text to audio. Using Edgetts an
         "text_1": "string",
         "mermaid_code_1":"Meramid code",
         "mermaid_image_path_1":"path to mermaid image",
-        "audio_path_sectionId":"path to audio"
+        "audio_path_sectionId":"path to audio",
+        "length_of_audio":"time"
       },
       {
         "text_2": "string",
         "mermaid_code_2":"Mermaid Code",
         "mermaid_image_path_2":"path to mermaid image",
-        "audio_path_sectionId_2":"path to audio"
+        "audio_path_sectionId_2":"path to audio",
+        "length_of_audio":"time"
       }
     ]
   }
@@ -205,7 +209,9 @@ Now in this step we get the text and convert the text to audio. Using Edgetts an
 
 # 5th step
 
-fifth: get the audio length and get the path of images from directory and process them by combining them together  and save the video  
+fifth: get the audio length and get the path of images from directory and process them by combining them together  and save the video 
+
+
 
 
 # Final
