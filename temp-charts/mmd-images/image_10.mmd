@@ -1,59 +1,73 @@
 flowchart TD
-    %% Main Process Flow
-    A[Requirements] --> A1[Requirements Analysis]
-    A1 --> B[Design]
-    B --> B1[Architecture Design]
-    B1 --> C[Implementation]
-    C --> C1[Coding]
-    C1 --> D[Testing]
-    D --> D1[Integration Testing]
-    D1 --> D2[User Acceptance Testing]
-    D2 --> E[Deployment]
-    E --> E1[Production Release]
-    E1 --> F[Maintenance]
-    F --> F1[Support & Updates]
+    A[1600: East India Company Established] -->|Queen Elizabeth I Charter| B[Initial Commercial Phase]
+    B -->|Trading Posts and Commercial Activities| C[Expansion of Influence]
     
-    %% Feedback Loops
-    D -->|Bugs found| C
-    D2 -->|UAT Feedback| B
-    E1 -->|Deployment Issues| D
-    F1 -->|New Features| A
+    C -->|1765: Battle of Buxar| D[Acquisition of 'Diwani' Rights]
+    D -->|Revenue Collection & Civil Justice Powers| E[Transition from Trading Entity to Territorial Power]
     
-    %% Cross-connections
-    B -.->|Design Review| A1
-    C -.->|Technical Constraints| B
+    E -->|Dual Governance System| F[Company Rule]
+    F -->|Economic Exploitation & Heavy Taxation| G[Growing Discontent]
     
-    %% Project Management
-    PM[Project Management] -.-> A
-    PM -.-> C
-    PM -.-> E
+    G -->|1857| H[Sepoy Mutiny/First War of Independence]
+    H -->|Government of India Act, 1858| I[End of Company Rule]
     
-    %% Quality Assurance
-    QA[Quality Assurance] -.-> B
-    QA -.-> D
-    QA -.-> F
+    I -->|Transfer of Power| J[British Crown Rule/British Raj]
+    J -->|Governor-General replaced by Viceroy| K[Administrative Restructuring]
+    K -->|Indian Civil Service Expansion| L[British Administration in India]
     
-    %% Subgraphs
-    subgraph Planning
-    A
-    A1
-    B
-    B1
-    PM
+    L -->|Late 19th Century| M[Rise of Indian Nationalist Movement]
+    M -->|1885| N[Formation of Indian National Congress]
+    
+    N -->|Constitutional Reform Demands| O[Gradual British Concessions]
+    O -->|1919| P[Government of India Act, 1919]
+    P -->|Dyarchy System| Q[Limited Self-Governance]
+    
+    Q -->|1935| R[Government of India Act, 1935]
+    R -->|Provincial Autonomy| S[Expanded Indian Representation]
+    
+    S -->|Post WWII Weakening of British Power| T[Independence Movement Intensifies]
+    T -->|Gandhi's Leadership & Mass Movements| U[British Agreement to Independence]
+    
+    U -->|August 15, 1947| V[Indian Independence]
+    V -->|January 26, 1950| W[Indian Constitution Adopted]
+    
+    W -->|British Influence| X[Parliamentary System & Rule of Law]
+    W -->|Indian Adaptations| Y[Provisions for Social Justice & Cultural Diversity]
+    
+    X --> Z[Modern Indian Governance System]
+    Y --> Z
+    
+    subgraph "East India Company Phase (1600-1858)"
+        A
+        B
+        C
+        D
+        E
+        F
+        G
+        H
     end
     
-    subgraph Development
-    C
-    C1
-    D
-    D1
-    D2
-    QA
+    subgraph "British Raj Phase (1858-1947)"
+        I
+        J
+        K
+        L
+        M
+        N
+        O
+        P
+        Q
+        R
+        S
+        T
+        U
     end
     
-    subgraph Operations
-    E
-    E1
-    F
-    F1
+    subgraph "Independent India Phase (1947-1950+)"
+        V
+        W
+        X
+        Y
+        Z
     end
