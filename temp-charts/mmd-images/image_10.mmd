@@ -1,123 +1,92 @@
-stateDiagram-v2
-    classDef growth fill:#4CAF50,stroke:#388E3C,color:white
-    classDef recession fill:#F44336,stroke:#D32F2F,color:white
-    classDef neutral fill:#2196F3,stroke:#1976D2,color:white
-    classDef agriculture fill:#8BC34A,stroke:#689F38,color:white
-    classDef manufacturing fill:#FF9800,stroke:#F57C00,color:white
-    classDef services fill:#9C27B0,stroke:#7B1FA2,color:white
-    classDef policy fill:#00BCD4,stroke:#0097A7,color:white
-    classDef external fill:#607D8B,stroke:#455A64,color:white
-    classDef fiscal fill:#FFC107,stroke:#FFA000,color:black
-    classDef monetary fill:#3F51B5,stroke:#303F9F,color:white
-    
-    [*] --> NormalGrowth
-    
-    state "Economic Cycles" as EconCycles {
-        NormalGrowth --> HighGrowth: Strong Domestic Consumption/Investments
-        HighGrowth --> NormalGrowth: Supply Constraints/Stabilization Policies
-        NormalGrowth --> Slowdown: Global Headwinds/Structural Issues
-        Slowdown --> Recession: Credit Crunch/Market Collapse
-        Recession --> Recovery: Stimulus/Rate Cuts/Reforms
-        Recovery --> NormalGrowth: Confidence Restoration
-    }
-    
-    state "Agriculture (18% GDP)" as Agri {
-        AgriNormal --> AgriHighYield: Good Monsoon/MSP Increase
-        AgriHighYield --> AgriNormal: Seasonal Factors
-        AgriNormal --> AgriPoorYield: Drought/Floods/Pest Attack
-        AgriPoorYield --> AgriNormal: Govt Support/Normal Rainfall
-        AgriNormal --> AgriModernization: Tech Adoption/Irrigation
-        AgriModernization --> AgriHighYield: Productivity Gains
-    }
-    
-    state "Manufacturing (30% GDP)" as Manuf {
-        ManufNormal --> ManufExpansion: Infrastructure Push/PLI Schemes
-        ManufExpansion --> ManufExport: Global Competitiveness
-        ManufExport --> ManufHighGrowth: Value Chain Integration
-        ManufHighGrowth --> ManufNormal: Demand Normalization
-        ManufNormal --> ManufContraction: Input Cost Rise/Demand Drop
-        ManufContraction --> ManufNormal: Cost Rationalization
-    }
-    
-    state "Services (52% GDP)" as Serv {
-        ServNormal --> ServITBoom: Global Digitalization
-        ServITBoom --> ServHighGrowth: Value-Added Services
-        ServHighGrowth --> ServNormal: Market Maturity
-        ServNormal --> ServFinTech: Digital Payments/UPI Growth
-        ServFinTech --> ServHighGrowth: Financial Inclusion
-        ServNormal --> ServTourism: Visa Liberalization/Infrastructure
-        ServTourism --> ServNormal: Seasonal Factors
-    }
-    
-    state "Monetary Policy" as MonPolicy {
-        RepoRate --> RateHike: Inflation Above Target
-        RateHike --> RepoRate: Inflation Moderation
-        RepoRate --> RateCut: Growth Concerns
-        RateCut --> RepoRate: Economic Recovery
-        RepoRate --> Liquidity: Open Market Operations
-        Liquidity --> CreditGrowth: Banking Transmission
-    }
-    
-    state "Fiscal Policy" as FiscPolicy {
-        FiscalDeficit --> SubsidySpend: Welfare Programs
-        SubsidySpend --> FiscalDeficit: Budget Constraints
-        FiscalDeficit --> CapitalExpenditure: Infrastructure Push
-        CapitalExpenditure --> TaxRevenue: Growth Multiplier
-        TaxRevenue --> FiscalDeficit: Deficit Reduction
-        FiscalDeficit --> GST: Tax Rationalization
-    }
-    
-    state "External Sector" as ExtSector {
-        TradeBalance --> CAD: Oil Price Rise/Gold Imports
-        CAD --> ForexReserves: FDI/FPI Inflows
-        ForexReserves --> RupeeStability: RBI Intervention
-        RupeeStability --> Exports: Competitiveness
-        Exports --> TradeBalance: Deficit Reduction
-        CAD --> ExternalDebt: Foreign Borrowing
-    }
-    
-    state "Structural Elements" as StructElem {
-        Demographics --> LaborForce: Young Population
-        LaborForce --> Consumption: Income Growth
-        Consumption --> DomesticDemand: Middle Class Expansion
-        SkillGap --> JobMarket: Employability Challenge
-        Urbanization --> Infrastructure: Smart Cities
-        Infrastructure --> SupplyChain: Logistics Efficiency
-    }
-    
-    NormalGrowth --> EconCycles
-    EconCycles --> Agri
-    EconCycles --> Manuf
-    EconCycles --> Serv
-    
-    MonPolicy --> EconCycles: Demand Management
-    FiscPolicy --> EconCycles: Growth Stimulus
-    
-    HighGrowth --> Inflation: Demand-Pull
-    Inflation --> RateHike: Triggers
-    
-    Slowdown --> FiscalDeficit: Revenue Shortfall
-    FiscalDeficit --> CapitalExpenditure: Counter-Cyclical
+graph TD
+%% Primary Sectors of the Economy
+AG[Primary Sector: Agriculture & Allied<br>17% of GDP<br>~44% Employment]
+AG:::primarySector
 
-    ExtSector --> EconCycles: Global Linkages
-    StructElem --> EconCycles: Long-Term Drivers
-    
-    Agri --> FoodInflation: Supply Shocks
-    FoodInflation --> MonPolicy: Policy Response
-    
-    ManufExpansion --> JobCreation: Employment Generation
-    JobCreation --> Consumption: Income Effect
-    
-    ServHighGrowth --> FormalSector: Tax Base Expansion
-    FormalSector --> TaxRevenue: GST Collections
-    
-    class NormalGrowth,HighGrowth,Recovery growth
-    class Slowdown,Recession recession
-    class RepoRate,Liquidity,CreditGrowth monetary
-    class FiscalDeficit,TaxRevenue,CapitalExpenditure,SubsidySpend,GST fiscal
-    class AgriNormal,AgriHighYield,AgriPoorYield,AgriModernization agriculture
-    class ManufNormal,ManufExpansion,ManufContraction,ManufExport,ManufHighGrowth manufacturing
-    class ServNormal,ServITBoom,ServHighGrowth,ServFinTech,ServTourism services
-    class TradeBalance,CAD,ForexReserves,RupeeStability,Exports,ExternalDebt external
-    class Inflation neutral
-    class Demographics,LaborForce,Consumption,DomesticDemand,SkillGap,JobMarket,Urbanization,Infrastructure,SupplyChain,FoodInflation,JobCreation,FormalSector neutral
+%% Secondary Sectors of the Economy
+MFG[Secondary Sector: Manufacturing<br>15% of GDP<br>~14% Employment]
+MFG:::secondarySector
+AG --- MFG
+
+CON[Construction<br>7.5% of GDP<br>~12% Employment]
+CON:::secondarySector
+AG --> CON
+MFG --- CON
+
+%% Tertiary Sectors of the Economy
+SVC[Tertiary Sector: Services<br>54% of GDP<br>~31% Employment]
+SVC:::tertiarySector
+AG --> SVC
+MFG --> SVC
+CON --> SVC
+
+IT[Information Technology<br>$194 billion industry<br>~4.5 million jobs]
+IT:::tertiarySector
+SVC --- IT
+
+%% Government and Regulatory Bodies
+GOV[Government & Public Administration<br>Central, State & Local]
+GOV:::governmentSector
+AG <--> GOV
+MFG <--> GOV
+SVC <--> GOV
+IT --> GOV
+
+RBI[Reserve Bank of India<br>Central Bank]
+RBI:::governmentSector
+GOV --- RBI
+
+%% Financial Ecosystem
+FIN[Financial System<br>Banks, NBFCs, Capital Markets]
+FIN:::financialSector
+RBI --> FIN
+GOV <--> FIN
+
+%% Major Economic Connections
+MFG <--> FIN
+SVC <--> FIN
+IT <--> FIN
+AG <--> FIN
+
+%% International Trade
+EXP[Exports<br>$450+ billion annually]
+EXP:::tradeSector
+AG --> EXP
+MFG --> EXP
+IT --> EXP
+SVC --> EXP
+
+IMP[Imports<br>$650+ billion annually]
+IMP:::tradeSector
+EXP <--> IMP
+MFG <--> IMP
+CON <--> IMP
+
+%% Consumer Economy
+CON_MRKTS[Consumer Markets<br>1.4 billion population]
+CON_MRKTS:::consumerSector
+AG --> CON_MRKTS
+MFG --> CON_MRKTS
+SVC --> CON_MRKTS
+IT --> CON_MRKTS
+
+%% Infrastructure
+INF[Infrastructure<br>Transport, Energy, Digital]
+INF:::infrastructureSector
+GOV --> INF
+FIN --> INF
+INF --> AG
+INF --> MFG
+INF --> SVC
+INF --> IT
+INF <--> CON
+
+%% Style Definitions
+classDef primarySector fill:#97C2FC,stroke:#333,stroke-width:2px
+classDef secondarySector fill:#FFCC99,stroke:#333,stroke-width:2px
+classDef tertiarySector fill:#C2FABC,stroke:#333,stroke-width:2px
+classDef governmentSector fill:#FF9999,stroke:#333,stroke-width:2px
+classDef financialSector fill:#F0E68C,stroke:#333,stroke-width:2px
+classDef tradeSector fill:#DDA0DD,stroke:#333,stroke-width:2px
+classDef consumerSector fill:#ADD8E6,stroke:#333,stroke-width:2px
+classDef infrastructureSector fill:#D8BFD8,stroke:#333,stroke-width:2px
