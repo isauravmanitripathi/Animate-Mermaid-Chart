@@ -183,11 +183,12 @@ B <--> E
 
 Follow these specific rules:
 - Only generate new additions that start EXACTLY where the previous diagram left off
-- Your new code must be syntactically compatible with the existing diagram 
+- Your new code must be syntactically compatible with the existing diagram
+- the new generated code should be interconnected with previous nodes, or create subgraphs if needed. 
 - Format node labels clearly with relevant information (<entity><br><detail>)
-- Group related nodes with clear section comments using %% before each section
+- Group related nodes with clear section comments using %% before each section and also subgraphs
 - Use descriptive node labels with relevant data points
-- Use the same color-coding and class definitions as the previous diagram
+- Each time try to create a more interconnect graph so all of it is interconnected
 - Include bidirectional relationships where appropriate
 
 When adding new nodes and connections:
