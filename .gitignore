@@ -8,6 +8,8 @@ __pycache__/
 *mp4
 *.png
 
+.animate
+
 # Distribution / packaging
 .Python
 build/
