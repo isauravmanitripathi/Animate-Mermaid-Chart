@@ -1,80 +1,123 @@
-graph TD
-    %% Main nodes with dates
-    n1600[1600: East India Company Established]
-    n1765[1765: Acquisition of Diwani Rights]
-    n1857[1857: Sepoy Mutiny]
-    n1858[1858: Government of India Act]
-    n1885[1885: Indian National Congress Founded]
-    n1919[1919: Government of India Act]
-    n1935[1935: Government of India Act]
-    n1947[1947: Indian Independence]
-    n1950[1950: Constitution Adopted]
+stateDiagram-v2
+    classDef growth fill:#4CAF50,stroke:#388E3C,color:white
+    classDef recession fill:#F44336,stroke:#D32F2F,color:white
+    classDef neutral fill:#2196F3,stroke:#1976D2,color:white
+    classDef agriculture fill:#8BC34A,stroke:#689F38,color:white
+    classDef manufacturing fill:#FF9800,stroke:#F57C00,color:white
+    classDef services fill:#9C27B0,stroke:#7B1FA2,color:white
+    classDef policy fill:#00BCD4,stroke:#0097A7,color:white
+    classDef external fill:#607D8B,stroke:#455A64,color:white
+    classDef fiscal fill:#FFC107,stroke:#FFA000,color:black
+    classDef monetary fill:#3F51B5,stroke:#303F9F,color:white
     
-    %% Key transitions and systems
-    eic[East India Company Rule]
-    commercial[Commercial Trading Phase]
-    territorial[Territorial Power Phase]
-    dual[Dual Governance System]
-    exploitation[Economic Exploitation]
-    crown[British Crown Rule]
-    viceroy[Viceroy System]
-    ics[Indian Civil Service]
-    nationalism[Indian Nationalism]
-    reforms[Constitutional Reforms]
-    dyarchy[Dyarchy System]
-    autonomy[Provincial Autonomy]
-    freedom[Freedom Movement]
-    drafting[Constitutional Drafting]
-    democracy[Parliamentary Democracy]
-    federal[Federal Structure]
-    rights[Fundamental Rights]
+    [*] --> NormalGrowth
     
-    %% Connections between nodes
-    n1600 --> commercial
-    commercial --> n1765
-    n1765 --> territorial
-    territorial --> dual
-    dual --> exploitation
-    exploitation --> n1857
+    state "Economic Cycles" as EconCycles {
+        NormalGrowth --> HighGrowth: Strong Domestic Consumption/Investments
+        HighGrowth --> NormalGrowth: Supply Constraints/Stabilization Policies
+        NormalGrowth --> Slowdown: Global Headwinds/Structural Issues
+        Slowdown --> Recession: Credit Crunch/Market Collapse
+        Recession --> Recovery: Stimulus/Rate Cuts/Reforms
+        Recovery --> NormalGrowth: Confidence Restoration
+    }
     
-    n1857 --> n1858
-    n1858 --> crown
-    crown --> viceroy
-    crown --> ics
+    state "Agriculture (18% GDP)" as Agri {
+        AgriNormal --> AgriHighYield: Good Monsoon/MSP Increase
+        AgriHighYield --> AgriNormal: Seasonal Factors
+        AgriNormal --> AgriPoorYield: Drought/Floods/Pest Attack
+        AgriPoorYield --> AgriNormal: Govt Support/Normal Rainfall
+        AgriNormal --> AgriModernization: Tech Adoption/Irrigation
+        AgriModernization --> AgriHighYield: Productivity Gains
+    }
     
-    crown --> nationalism
-    nationalism --> n1885
-    n1885 --> reforms
-    reforms --> n1919
-    n1919 --> dyarchy
-    dyarchy --> n1935
-    n1935 --> autonomy
+    state "Manufacturing (30% GDP)" as Manuf {
+        ManufNormal --> ManufExpansion: Infrastructure Push/PLI Schemes
+        ManufExpansion --> ManufExport: Global Competitiveness
+        ManufExport --> ManufHighGrowth: Value Chain Integration
+        ManufHighGrowth --> ManufNormal: Demand Normalization
+        ManufNormal --> ManufContraction: Input Cost Rise/Demand Drop
+        ManufContraction --> ManufNormal: Cost Rationalization
+    }
     
-    autonomy --> freedom
-    freedom --> n1947
-    n1947 --> drafting
-    drafting --> n1950
+    state "Services (52% GDP)" as Serv {
+        ServNormal --> ServITBoom: Global Digitalization
+        ServITBoom --> ServHighGrowth: Value-Added Services
+        ServHighGrowth --> ServNormal: Market Maturity
+        ServNormal --> ServFinTech: Digital Payments/UPI Growth
+        ServFinTech --> ServHighGrowth: Financial Inclusion
+        ServNormal --> ServTourism: Visa Liberalization/Infrastructure
+        ServTourism --> ServNormal: Seasonal Factors
+    }
     
-    n1950 --> democracy
-    n1950 --> federal
-    n1950 --> rights
+    state "Monetary Policy" as MonPolicy {
+        RepoRate --> RateHike: Inflation Above Target
+        RateHike --> RepoRate: Inflation Moderation
+        RepoRate --> RateCut: Growth Concerns
+        RateCut --> RepoRate: Economic Recovery
+        RepoRate --> Liquidity: Open Market Operations
+        Liquidity --> CreditGrowth: Banking Transmission
+    }
     
-    %% Grouping nodes by phase
-    n1600 & commercial & n1765 & territorial & dual & exploitation & n1857 -.-> eic
-    n1858 & crown & viceroy & ics & nationalism & n1885 & reforms & n1919 & dyarchy & n1935 & autonomy & freedom & n1947 -.-> britishRule[British Rule Phase]
-    drafting & n1950 & democracy & federal & rights -.-> independent[Independent India]
+    state "Fiscal Policy" as FiscPolicy {
+        FiscalDeficit --> SubsidySpend: Welfare Programs
+        SubsidySpend --> FiscalDeficit: Budget Constraints
+        FiscalDeficit --> CapitalExpenditure: Infrastructure Push
+        CapitalExpenditure --> TaxRevenue: Growth Multiplier
+        TaxRevenue --> FiscalDeficit: Deficit Reduction
+        FiscalDeficit --> GST: Tax Rationalization
+    }
     
-    %% Styling
-    classDef timeNode fill:#f9f9f9,stroke:#333,stroke-width:2px,rx:5px,ry:5px
-    classDef eicNode fill:#ffdddd,stroke:#cc0000
-    classDef crownNode fill:#ddddff,stroke:#0000cc
-    classDef indiaNode fill:#ddffdd,stroke:#00cc00
-    classDef phaseNode fill:#efefef,stroke:#999999,stroke-width:1px,stroke-dasharray:5 5,rx:10px,ry:10px
+    state "External Sector" as ExtSector {
+        TradeBalance --> CAD: Oil Price Rise/Gold Imports
+        CAD --> ForexReserves: FDI/FPI Inflows
+        ForexReserves --> RupeeStability: RBI Intervention
+        RupeeStability --> Exports: Competitiveness
+        Exports --> TradeBalance: Deficit Reduction
+        CAD --> ExternalDebt: Foreign Borrowing
+    }
     
-    class n1600,n1765,n1857,n1858,n1885,n1919,n1935,n1947,n1950 timeNode
-    class eic,commercial,territorial,dual,exploitation phaseNode
-    class crown,viceroy,ics,nationalism,reforms,dyarchy,autonomy,freedom phaseNode
-    class drafting,democracy,federal,rights phaseNode
-    class commercial,territorial,dual,exploitation eicNode
-    class viceroy,ics,nationalism,reforms,dyarchy,autonomy,freedom crownNode
-    class drafting,democracy,federal,rights indiaNode
+    state "Structural Elements" as StructElem {
+        Demographics --> LaborForce: Young Population
+        LaborForce --> Consumption: Income Growth
+        Consumption --> DomesticDemand: Middle Class Expansion
+        SkillGap --> JobMarket: Employability Challenge
+        Urbanization --> Infrastructure: Smart Cities
+        Infrastructure --> SupplyChain: Logistics Efficiency
+    }
+    
+    NormalGrowth --> EconCycles
+    EconCycles --> Agri
+    EconCycles --> Manuf
+    EconCycles --> Serv
+    
+    MonPolicy --> EconCycles: Demand Management
+    FiscPolicy --> EconCycles: Growth Stimulus
+    
+    HighGrowth --> Inflation: Demand-Pull
+    Inflation --> RateHike: Triggers
+    
+    Slowdown --> FiscalDeficit: Revenue Shortfall
+    FiscalDeficit --> CapitalExpenditure: Counter-Cyclical
+
+    ExtSector --> EconCycles: Global Linkages
+    StructElem --> EconCycles: Long-Term Drivers
+    
+    Agri --> FoodInflation: Supply Shocks
+    FoodInflation --> MonPolicy: Policy Response
+    
+    ManufExpansion --> JobCreation: Employment Generation
+    JobCreation --> Consumption: Income Effect
+    
+    ServHighGrowth --> FormalSector: Tax Base Expansion
+    FormalSector --> TaxRevenue: GST Collections
+    
+    class NormalGrowth,HighGrowth,Recovery growth
+    class Slowdown,Recession recession
+    class RepoRate,Liquidity,CreditGrowth monetary
+    class FiscalDeficit,TaxRevenue,CapitalExpenditure,SubsidySpend,GST fiscal
+    class AgriNormal,AgriHighYield,AgriPoorYield,AgriModernization agriculture
+    class ManufNormal,ManufExpansion,ManufContraction,ManufExport,ManufHighGrowth manufacturing
+    class ServNormal,ServITBoom,ServHighGrowth,ServFinTech,ServTourism services
+    class TradeBalance,CAD,ForexReserves,RupeeStability,Exports,ExternalDebt external
+    class Inflation neutral
+    class Demographics,LaborForce,Consumption,DomesticDemand,SkillGap,JobMarket,Urbanization,Infrastructure,SupplyChain,FoodInflation,JobCreation,FormalSector neutral
