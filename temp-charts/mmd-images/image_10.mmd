@@ -1,92 +1,114 @@
 graph TD
-%% Primary Sectors of the Economy
-AG[Primary Sector: Agriculture & Allied<br>17% of GDP<br>~44% Employment]
-AG:::primarySector
-
-%% Secondary Sectors of the Economy
-MFG[Secondary Sector: Manufacturing<br>15% of GDP<br>~14% Employment]
-MFG:::secondarySector
-AG --- MFG
-
-CON[Construction<br>7.5% of GDP<br>~12% Employment]
-CON:::secondarySector
-AG --> CON
-MFG --- CON
-
-%% Tertiary Sectors of the Economy
-SVC[Tertiary Sector: Services<br>54% of GDP<br>~31% Employment]
-SVC:::tertiarySector
-AG --> SVC
-MFG --> SVC
-CON --> SVC
-
-IT[Information Technology<br>$194 billion industry<br>~4.5 million jobs]
-IT:::tertiarySector
-SVC --- IT
-
-%% Government and Regulatory Bodies
-GOV[Government & Public Administration<br>Central, State & Local]
-GOV:::governmentSector
-AG <--> GOV
-MFG <--> GOV
-SVC <--> GOV
-IT --> GOV
-
-RBI[Reserve Bank of India<br>Central Bank]
-RBI:::governmentSector
-GOV --- RBI
-
-%% Financial Ecosystem
-FIN[Financial System<br>Banks, NBFCs, Capital Markets]
-FIN:::financialSector
-RBI --> FIN
-GOV <--> FIN
-
-%% Major Economic Connections
-MFG <--> FIN
-SVC <--> FIN
-IT <--> FIN
-AG <--> FIN
-
-%% International Trade
-EXP[Exports<br>$450+ billion annually]
-EXP:::tradeSector
-AG --> EXP
-MFG --> EXP
-IT --> EXP
-SVC --> EXP
-
-IMP[Imports<br>$650+ billion annually]
-IMP:::tradeSector
-EXP <--> IMP
-MFG <--> IMP
-CON <--> IMP
-
-%% Consumer Economy
-CON_MRKTS[Consumer Markets<br>1.4 billion population]
-CON_MRKTS:::consumerSector
-AG --> CON_MRKTS
-MFG --> CON_MRKTS
-SVC --> CON_MRKTS
-IT --> CON_MRKTS
-
-%% Infrastructure
-INF[Infrastructure<br>Transport, Energy, Digital]
-INF:::infrastructureSector
-GOV --> INF
-FIN --> INF
-INF --> AG
-INF --> MFG
-INF --> SVC
-INF --> IT
-INF <--> CON
-
-%% Style Definitions
-classDef primarySector fill:#97C2FC,stroke:#333,stroke-width:2px
-classDef secondarySector fill:#FFCC99,stroke:#333,stroke-width:2px
-classDef tertiarySector fill:#C2FABC,stroke:#333,stroke-width:2px
-classDef governmentSector fill:#FF9999,stroke:#333,stroke-width:2px
-classDef financialSector fill:#F0E68C,stroke:#333,stroke-width:2px
-classDef tradeSector fill:#DDA0DD,stroke:#333,stroke-width:2px
-classDef consumerSector fill:#ADD8E6,stroke:#333,stroke-width:2px
-classDef infrastructureSector fill:#D8BFD8,stroke:#333,stroke-width:2px
+    %% First node - East India Company Establishment
+    EIC[East India Company<br>1600<br>Trading Rights & Monopoly]
+    EIC:::commercial
+    
+    %% Second node - Trading Posts
+    TRADE[Trading Posts<br>1600-1764<br>Commercial Activities]
+    EIC --> TRADE
+    TRADE:::commercial
+    
+    %% Third node - Diwani Rights
+    DIWANI[Diwani Rights<br>1765<br>Revenue Collection & Civil Justice]
+    EIC --> DIWANI
+    TRADE --> DIWANI
+    DIWANI:::administrative
+    
+    %% Fourth node - Dual Governance
+    DUAL[Dual Governance<br>1765-1857<br>Company Control & Nominal Local Authority]
+    EIC --> DUAL
+    DIWANI --> DUAL
+    DUAL:::administrative
+    
+    %% Fifth node - Economic Policies
+    ECON[Economic Exploitation<br>Heavy Taxation<br>Destruction of Local Industries]
+    DUAL --> ECON
+    ECON:::exploitation
+    
+    %% Sixth node - Sepoy Mutiny
+    MUTINY[Sepoy Mutiny / First War of Independence<br>1857<br>Watershed Moment]
+    DUAL --Resistance--> MUTINY
+    ECON --Triggered--> MUTINY
+    MUTINY:::resistance
+    
+    %% Seventh node - Government of India Act 1858
+    GOI1858[Government of India Act<br>1858<br>End of Company Rule]
+    MUTINY --> GOI1858
+    GOI1858:::legislation
+    
+    %% Eighth node - British Raj
+    RAJ[British Raj<br>1858-1947<br>Direct Crown Rule]
+    GOI1858 --> RAJ
+    RAJ:::administrative
+    
+    %% Ninth node - Administrative Changes
+    ADMIN[Administrative Reforms<br>Viceroy<br>Indian Civil Service]
+    RAJ --> ADMIN
+    ADMIN:::administrative
+    
+    %% Tenth node - Indian National Congress
+    INC[Indian National Congress<br>1885<br>Nationalist Movement]
+    RAJ --Opposition--> INC
+    ECON --Grievances--> INC
+    INC:::resistance
+    
+    %% Eleventh node - Government of India Act 1919
+    GOI1919[Government of India Act<br>1919<br>Dyarchy System]
+    INC --Pressure--> GOI1919
+    RAJ --Concession--> GOI1919
+    GOI1919:::legislation
+    
+    %% Twelfth node - Government of India Act 1935
+    GOI1935[Government of India Act<br>1935<br>Provincial Autonomy]
+    GOI1919 --> GOI1935
+    INC --Continued Pressure--> GOI1935
+    GOI1935:::legislation
+    
+    %% Thirteenth node - WWII
+    WWII[World War II<br>1939-1945<br>Weakened British Power]
+    GOI1935 --> WWII
+    WWII:::external
+    
+    %% Fourteenth node - Independence Movement
+    INDMOV[Mass Independence Movements<br>Led by Gandhi]
+    INC --> INDMOV
+    WWII --Opportunity--> INDMOV
+    INDMOV:::resistance
+    
+    %% Fifteenth node - Independence
+    IND[Indian Independence<br>August 15, 1947<br>End of British Rule]
+    INDMOV --> IND
+    WWII --Catalyst--> IND
+    RAJ --End--> IND
+    IND:::milestone
+    
+    %% Sixteenth node - Constitution
+    CONST[Indian Constitution<br>January 26, 1950<br>New Democratic Framework]
+    IND --> CONST
+    RAJ --Legacy Influence--> CONST
+    CONST:::milestone
+    
+    %% Perspectives on the Constitution
+    NATPER[Nationalist Perspective<br>Rejection of Colonial Rule<br>Assertion of Sovereignty]
+    CONST --> NATPER
+    NATPER:::perspective
+    
+    HISTPER[Historical Continuity Perspective<br>Synthesis of Western & Indian Traditions]
+    CONST --> HISTPER
+    RAJ --Institutional Legacy--> HISTPER
+    HISTPER:::perspective
+    
+    CRITPER[Critical/Marxist Perspective<br>Retention of Colonial Structures<br>Persistent Inequalities]
+    CONST --> CRITPER
+    ECON --Lingering Effects--> CRITPER
+    CRITPER:::perspective
+    
+    %% Style definitions
+    classDef commercial fill:#FFEB99,stroke:#333,stroke-width:1px
+    classDef administrative fill:#AED6F1,stroke:#333,stroke-width:1px
+    classDef exploitation fill:#F1948A,stroke:#333,stroke-width:1px
+    classDef resistance fill:#D7BDE2,stroke:#333,stroke-width:1px
+    classDef legislation fill:#A9DFBF,stroke:#333,stroke-width:1px
+    classDef external fill:#F5CBA7,stroke:#333,stroke-width:1px
+    classDef milestone fill:#FAD7A0,stroke:#333,stroke-width:2px
+    classDef perspective fill:#D6EAF8,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
