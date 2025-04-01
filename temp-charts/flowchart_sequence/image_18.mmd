@@ -1,0 +1,29 @@
+graph TD
+
+    %% Class Definitions
+    classDef timeNode fill:#f9f9f9,stroke:#333,stroke-width:2px,rx:5px,ry:5px
+    classDef eicNode fill:#ffdddd,stroke:#cc0000
+    classDef crownNode fill:#ddddff,stroke:#0000cc
+    classDef indiaNode fill:#ddffdd,stroke:#00cc00
+    classDef phaseNode fill:#efefef,stroke:#999999,stroke-width:1px,stroke-dasharray:5 5,rx:10px,ry:10px
+
+    %% Node Definitions
+    commercial[Commercial Trading Phase]:::eicNode
+    crown[British Crown Rule]:::phaseNode
+    dual[Dual Governance System]:::eicNode
+    exploitation[Economic Exploitation]:::eicNode
+    n1600[1600: East India Company Established]:::timeNode
+    n1765[1765: Acquisition of Diwani Rights]:::timeNode
+    n1857[1857: Sepoy Mutiny]:::timeNode
+    n1858[1858: Government of India Act]:::timeNode
+    territorial[Territorial Power Phase]:::eicNode
+
+    %% Connections
+    commercial --> n1765
+    dual --> exploitation
+    exploitation --> n1857
+    n1600 --> commercial
+    n1765 --> territorial
+    n1857 --> n1858
+    n1858 --> crown
+    territorial --> dual

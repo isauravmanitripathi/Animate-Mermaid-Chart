@@ -1,73 +1,80 @@
-flowchart TD
-    A[1600: East India Company Established] -->|Queen Elizabeth I Charter| B[Initial Commercial Phase]
-    B -->|Trading Posts and Commercial Activities| C[Expansion of Influence]
+graph TD
+    %% Main nodes with dates
+    n1600[1600: East India Company Established]
+    n1765[1765: Acquisition of Diwani Rights]
+    n1857[1857: Sepoy Mutiny]
+    n1858[1858: Government of India Act]
+    n1885[1885: Indian National Congress Founded]
+    n1919[1919: Government of India Act]
+    n1935[1935: Government of India Act]
+    n1947[1947: Indian Independence]
+    n1950[1950: Constitution Adopted]
     
-    C -->|1765: Battle of Buxar| D[Acquisition of 'Diwani' Rights]
-    D -->|Revenue Collection & Civil Justice Powers| E[Transition from Trading Entity to Territorial Power]
+    %% Key transitions and systems
+    eic[East India Company Rule]
+    commercial[Commercial Trading Phase]
+    territorial[Territorial Power Phase]
+    dual[Dual Governance System]
+    exploitation[Economic Exploitation]
+    crown[British Crown Rule]
+    viceroy[Viceroy System]
+    ics[Indian Civil Service]
+    nationalism[Indian Nationalism]
+    reforms[Constitutional Reforms]
+    dyarchy[Dyarchy System]
+    autonomy[Provincial Autonomy]
+    freedom[Freedom Movement]
+    drafting[Constitutional Drafting]
+    democracy[Parliamentary Democracy]
+    federal[Federal Structure]
+    rights[Fundamental Rights]
     
-    E -->|Dual Governance System| F[Company Rule]
-    F -->|Economic Exploitation & Heavy Taxation| G[Growing Discontent]
+    %% Connections between nodes
+    n1600 --> commercial
+    commercial --> n1765
+    n1765 --> territorial
+    territorial --> dual
+    dual --> exploitation
+    exploitation --> n1857
     
-    G -->|1857| H[Sepoy Mutiny/First War of Independence]
-    H -->|Government of India Act, 1858| I[End of Company Rule]
+    n1857 --> n1858
+    n1858 --> crown
+    crown --> viceroy
+    crown --> ics
     
-    I -->|Transfer of Power| J[British Crown Rule/British Raj]
-    J -->|Governor-General replaced by Viceroy| K[Administrative Restructuring]
-    K -->|Indian Civil Service Expansion| L[British Administration in India]
+    crown --> nationalism
+    nationalism --> n1885
+    n1885 --> reforms
+    reforms --> n1919
+    n1919 --> dyarchy
+    dyarchy --> n1935
+    n1935 --> autonomy
     
-    L -->|Late 19th Century| M[Rise of Indian Nationalist Movement]
-    M -->|1885| N[Formation of Indian National Congress]
+    autonomy --> freedom
+    freedom --> n1947
+    n1947 --> drafting
+    drafting --> n1950
     
-    N -->|Constitutional Reform Demands| O[Gradual British Concessions]
-    O -->|1919| P[Government of India Act, 1919]
-    P -->|Dyarchy System| Q[Limited Self-Governance]
+    n1950 --> democracy
+    n1950 --> federal
+    n1950 --> rights
     
-    Q -->|1935| R[Government of India Act, 1935]
-    R -->|Provincial Autonomy| S[Expanded Indian Representation]
+    %% Grouping nodes by phase
+    n1600 & commercial & n1765 & territorial & dual & exploitation & n1857 -.-> eic
+    n1858 & crown & viceroy & ics & nationalism & n1885 & reforms & n1919 & dyarchy & n1935 & autonomy & freedom & n1947 -.-> britishRule[British Rule Phase]
+    drafting & n1950 & democracy & federal & rights -.-> independent[Independent India]
     
-    S -->|Post WWII Weakening of British Power| T[Independence Movement Intensifies]
-    T -->|Gandhi's Leadership & Mass Movements| U[British Agreement to Independence]
+    %% Styling
+    classDef timeNode fill:#f9f9f9,stroke:#333,stroke-width:2px,rx:5px,ry:5px
+    classDef eicNode fill:#ffdddd,stroke:#cc0000
+    classDef crownNode fill:#ddddff,stroke:#0000cc
+    classDef indiaNode fill:#ddffdd,stroke:#00cc00
+    classDef phaseNode fill:#efefef,stroke:#999999,stroke-width:1px,stroke-dasharray:5 5,rx:10px,ry:10px
     
-    U -->|August 15, 1947| V[Indian Independence]
-    V -->|January 26, 1950| W[Indian Constitution Adopted]
-    
-    W -->|British Influence| X[Parliamentary System & Rule of Law]
-    W -->|Indian Adaptations| Y[Provisions for Social Justice & Cultural Diversity]
-    
-    X --> Z[Modern Indian Governance System]
-    Y --> Z
-    
-    subgraph "East India Company Phase (1600-1858)"
-        A
-        B
-        C
-        D
-        E
-        F
-        G
-        H
-    end
-    
-    subgraph "British Raj Phase (1858-1947)"
-        I
-        J
-        K
-        L
-        M
-        N
-        O
-        P
-        Q
-        R
-        S
-        T
-        U
-    end
-    
-    subgraph "Independent India Phase (1947-1950+)"
-        V
-        W
-        X
-        Y
-        Z
-    end
+    class n1600,n1765,n1857,n1858,n1885,n1919,n1935,n1947,n1950 timeNode
+    class eic,commercial,territorial,dual,exploitation phaseNode
+    class crown,viceroy,ics,nationalism,reforms,dyarchy,autonomy,freedom phaseNode
+    class drafting,democracy,federal,rights phaseNode
+    class commercial,territorial,dual,exploitation eicNode
+    class viceroy,ics,nationalism,reforms,dyarchy,autonomy,freedom crownNode
+    class drafting,democracy,federal,rights indiaNode
