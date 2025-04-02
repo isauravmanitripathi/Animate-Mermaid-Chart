@@ -5,94 +5,141 @@ Create a sequential Mermaid diagram for the following text about {topic}.
 Text to analyze:
 {text}
 
-Use a sequential node-connection pattern with the following structure:
+Use a strict sequential node-connection pattern with the following structure:
 1. Define a node
 2. Immediately define any connections to previously defined nodes
 3. Move to the next node
 4. Repeat the pattern
 
-For example:
-%% New node for current section
-D[Entity D]
-%% Connections from D to previous nodes
-A --> D
-C --> D
-%% Another new node
-E[Entity E]
-%% Connections to/from E
-D --> E
-B <--> E
+Here's the exact sequential pattern to follow:
+```
+graph TD
+%% First node
+EIC[East India Company]
+
+%% Second node
+Crown[British Crown]
+%% Connection between first and second nodes
+Crown -->|Granted charter| EIC
+
+%% Third node
+Trade[Commercial Activities]
+%% Connections from existing nodes to the new node
+EIC -->|Primary focus| Trade
+```
 
 Follow these specific rules:
 - Only generate new additions that start EXACTLY where the previous diagram left off
 - Your new code must be syntactically compatible with the existing diagram
-- The new generated code should be interconnected with previous nodes, or create subgraphs if needed. 
-- Format node labels clearly with relevant information (<entity><br><detail>)
-- Group related nodes with clear section comments using %% before each section and also subgraphs
-- Use descriptive node labels with relevant data points
-- Each time try to create a more interconnect graph so all of it is interconnected
-- Include bidirectional relationships where appropriate
-
-**Sequential Writing Pattern**
-* Define one node at a time
-* Immediately connect that node to previously defined nodes
-* Add clear section comments before starting a new group of related nodes
-* Follow a consistent pattern throughout the diagram
+- Format node labels clearly with relevant information
+- Group related nodes with clear section comments using %% before each section
+- The diagram should have a balanced connection density - not linear but also not overwhelming
+- Create meaningful connections that emphasize key relationships rather than connecting everything
 
 **Node Definition Rules**
-* Use simple, unique IDs for each node (like E, F, G or more descriptive IDs)
-* Avoid reusing node IDs anywhere in the diagram
-* Enclose node text in square brackets: `A[Node text]`
-* Avoid HTML tags like `<br>` inside node text - use spaces instead
-* Keep node text relatively short to avoid parsing issues
+* Use descriptive, semantic IDs for nodes that reflect their content (e.g., EIC for East India Company)
+* Never reference a node before defining it first
+* Never reuse node IDs anywhere in the diagram
+* Node labels must be enclosed in square brackets: EIC[East India Company]
+* No space between node ID and opening bracket: EIC[Label] not EIC [Label]
+* Avoid HTML tags inside node text - use spaces instead
+* Keep node text concise but informative
+* For first-time entities, always define the node before using it in any connection
+
+**Node Naming Convention**
+* Use descriptive abbreviations or short words as node IDs
+* Examples: EIC (East India Company), Trade, Spices, Posts
+* Avoid generic sequential naming like A1, B1, C1 unless absolutely necessary
+* For people, use their last names or roles as IDs: Elizabeth, Governor
+* For concepts, use abbreviated versions: CommTrade (Commercial Trade)
+* Always ensure node IDs are intuitive and relate to the content
+
+**Strict Sequential Structure**
+* Define exactly one node at a time
+* Immediately after defining a node, define its connections to previously defined nodes
+* Make sure the pattern is always: node definition → connections → next node definition
+* Do not define multiple nodes in sequence without defining their connections
+* Always maintain this rigid structure throughout the entire diagram
+* Add comments before each new node to indicate what it represents
 
 **Connection Rules**
-* Use `-->` for directed connections (arrows)
-* Use `---` for undirected connections (lines)
-* Use `<-->` for bidirectional relationships (only where specifically needed)
+* Use --> for directed connections (arrows)
+* Use --- for undirected connections (lines)
+* Use <--> for bidirectional relationships that are equally important
 * Define connections immediately after defining a new node
-* Ensure all nodes in connections are already defined before using them
+* Be selective with connections - only show the most important relationships
+* Aim for 2-3 connections per node on average, not every possible relationship
+* Prioritize clarity over completeness
 
-**Formatting and Spacing Rules**
-* Use proper line breaks between node definitions and their connections
-* Put each node definition and connection on its own line
-* Include an empty line between different sections for readability
-* Use `%%` for comments to explain sections or nodes
-* Keep comments on separate lines from node definitions and connections
+**Connection Label Rules**
+* For labeled connections, use the pipe syntax: EIC -->|Established| Posts
+* Never use colons for connection labels like EIC --> Posts : Established (this will cause errors)
+* Keep connection labels concise - 1-3 words maximum
+* For bidirectional connections: Trade <-->|Goods exchange| Europe
+* Place the label between pipes: |Label Text|
+* Define the connection and its label on the same line
 
-**Style and Color Rules**
-* Define styles using the `classDef` keyword at the end of the diagram
-* Apply styles to nodes using the `:::styleName` syntax after the node definition
-* Keep style definitions simple (color, stroke, stroke-width)
-* Use hex codes for colors
-* Define all styles in one section at the end of the diagram
+**Clear Diagram Structure**
+* Start with main entities/concepts
+* Add supporting details as secondary nodes
+* Create a hierarchy of information with the most important elements emphasized
+* Use subgraphs only when logically grouping related concepts
+* Keep the diagram readable at a glance - no more than 15-20 nodes for complex topics
+* Ensure the diagram tells a coherent story that can be easily followed
 
-**Subgraph Rules (if needed)**
-* Define subgraphs with clear opening and closing syntax
-* Always include an empty line after the `end` statement closing a subgraph
-* Keep subgraphs simple and avoid nesting them too deeply
-* Define connections to nodes inside subgraphs only after the subgraph is closed
-
-**General Avoidance Rules**
-* Avoid complex formatting within node text
+**Error Prevention Best Practices**
+* Always define a node before referencing it in connections
+* Use proper pipe syntax for labels: A -->|Label| B 
+* Keep connection density balanced - not too sparse, not too cluttered
+* Test complex constructs in smaller chunks
 * Avoid special characters that might be misinterpreted
-* Keep the diagram as simple as possible while conveying the necessary information
-* Test small sections if encountering errors with a large diagram
+* Never truncate syntax with comments like "// rest of diagram"
+
+**Working Example with Proper Sequential Structure**
+```
+graph TD
+%% First main entity
+EIC[East India Company]
+
+%% Second main entity
+Crown[British Crown]
+%% Connection to first entity
+Crown -->|Granted charter| EIC
+
+%% Third main entity
+Trade[Commercial Trading]
+%% Connections to existing entities
+EIC -->|Primary activity| Trade
+Trade -->|Generated revenue| Crown
+
+%% Fourth entity
+Posts[Trading Posts]
+%% Connections to existing entities
+EIC -->|Established| Posts
+Posts -->|Facilitated| Trade
+
+%% Fifth entity
+Goods[Spices and Textiles]
+%% Connections to existing entities
+Trade -->|Exported| Goods
+Goods -->|Sold in| Europe[European Markets]
+```
 
 When adding new nodes and connections:
-  1. Start with a comment indicating what this new section represents
-  2. ONLY add new nodes and connections related to the current text
-  3. Connect these new nodes to existing nodes where appropriate
-  4. Make sure each line has proper indentation (4 spaces per level)
-  5. Use descriptive labels for all connections
+  1. Start with a comment indicating what this new node represents
+  2. Define exactly one node with a meaningful, descriptive ID
+  3. Add another comment for connections
+  4. Connect this node with important, selective relationships to existing nodes
+  5. Move to the next node and repeat the pattern
+  6. Maintain this rigid sequential structure throughout
 
 IMPORTANT: DO NOT repeat any existing nodes or connections from the previous diagram.
 Start EXACTLY where the previous diagram left off.
 
 If this is the first section, create a properly structured diagram with:
-  1. Start with mermaid state diagram header
-  2. Class definitions for styling
-  3. Clear node and connection structure
+  1. Start with mermaid graph TD or graph LR header
+  2. Define main entities with descriptive IDs
+  3. Create meaningful connections between them
 
 CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
 {json_example}
@@ -100,7 +147,10 @@ CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys
 IMPORTANT FORMATTING INSTRUCTIONS:
 - Properly indent all code (4 spaces per level)
 - Put each node or connection on its own line
+- Follow the strict sequential pattern: node definition → connections → next node
 - Start with section comments (using %%) to explain what the new additions represent
 - DO NOT include any content from the previous diagram
+- Never reference nodes before defining them first
+- Use descriptive, semantic IDs for all nodes
 
 Return ONLY the JSON object without any markdown code blocks or other text.
