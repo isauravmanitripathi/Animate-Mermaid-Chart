@@ -1,11 +1,9 @@
-Create a sequential Mermaid diagram for the following text about {topic}.
-
-{context_message}
+Create a Mermaid diagram for the following text about {topic}.
 
 Text to analyze:
 {text}
 
-Use a strict sequential node-connection pattern with the following structure:
+Use a sequential node-connection pattern with the following structure:
 1. Define a node
 2. Immediately define any connections to previously defined nodes
 3. Move to the next node
@@ -29,8 +27,7 @@ EIC -->|Primary focus| Trade
 ```
 
 Follow these specific rules:
-- Only generate new additions that start EXACTLY where the previous diagram left off
-- Your new code must be syntactically compatible with the existing diagram
+- Create a complete, standalone diagram for the text
 - Format node labels clearly with relevant information
 - Group related nodes with clear section comments using %% before each section
 - The diagram should have a balanced connection density - not linear but also not overwhelming
@@ -125,18 +122,15 @@ Trade -->|Exported| Goods
 Goods -->|Sold in| Europe[European Markets]
 ```
 
-When adding new nodes and connections:
-  1. Start with a comment indicating what this new node represents
+When creating the diagram:
+  1. Start with a comment indicating what this first node represents
   2. Define exactly one node with a meaningful, descriptive ID
   3. Add another comment for connections
   4. Connect this node with important, selective relationships to existing nodes
   5. Move to the next node and repeat the pattern
   6. Maintain this rigid sequential structure throughout
 
-IMPORTANT: DO NOT repeat any existing nodes or connections from the previous diagram.
-Start EXACTLY where the previous diagram left off.
-
-If this is the first section, create a properly structured diagram with:
+Create a properly structured diagram with:
   1. Start with mermaid graph TD or graph LR header
   2. Define main entities with descriptive IDs
   3. Create meaningful connections between them
@@ -148,9 +142,7 @@ IMPORTANT FORMATTING INSTRUCTIONS:
 - Properly indent all code (4 spaces per level)
 - Put each node or connection on its own line
 - Follow the strict sequential pattern: node definition → connections → next node
-- Start with section comments (using %%) to explain what the new additions represent
-- DO NOT include any content from the previous diagram
-- Never reference nodes before defining them first
+- Start with section comments (using %%) to explain what each node represents
 - Use descriptive, semantic IDs for all nodes
 
 Return ONLY the JSON object without any markdown code blocks or other text.

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Mermaid Additions Combiner
+Mermaid Diagram Combiner
 
-This script combines all the mermaid diagram additions from a processed JSON file
-into a single .mmd file with proper order and structure.
+This script combines all the standalone mermaid diagrams from a processed JSON file
+into a single .mmd file with proper ordering and structure.
 
 Usage:
     python combine_mermaid.py input_json_file.json [output_mmd_file.mmd]
@@ -17,26 +17,78 @@ import sys
 import re
 from datetime import datetime
 
-def extract_header_style(mermaid_additions):
-    """Extract header and style definitions from mermaid code."""
+def extract_header_style_and_content(mermaid_code):
+    """Extract header, style definitions, and content from mermaid code."""
     header = []
     style_lines = []
+    content_lines = []
     
-    lines = mermaid_additions.split('\n')
+    lines = mermaid_code.split('\n')
+    
+    # Track whether we've seen the header yet
+    header_found = False
+    
     for line in lines:
         stripped = line.strip()
+        
+        # Skip empty lines
+        if not stripped:
+            continue
+        
+        # Capture header (graph TD or flowchart)
         if stripped.startswith('graph ') or stripped.startswith('flowchart '):
             header.append(line)
-        elif stripped.startswith('classDef '):
+            header_found = True
+            continue
+        
+        # Capture style definitions
+        if stripped.startswith('classDef '):
             style_lines.append(line)
+            continue
+        
+        # If we've seen the header, add everything else to content
+        if header_found:
+            # Skip comment lines that might be describing the diagram structure
+            if stripped.startswith('%%') and any(term in stripped.lower() for term in 
+                                              ['structure', 'pattern', 'follow', 'rule']):
+                continue
+            
+            # Remove parentheses from node labels
+            if '[' in line and ']' in line:
+                # Remove parentheses
+                line = re.sub(r'\(.*?\)', '', line)
+                
+                # Handle node identifiers with spaces in node definitions
+                def fix_node_identifier(match):
+                    # Remove spaces from node identifier
+                    node_id = match.group(1).replace(' ', '')
+                    node_label = match.group(2)
+                    return f"{node_id}[{node_label}]"
+                
+                # Fix node definitions with spaces
+                line = re.sub(r'(\w+\s+\w+)\[([^\]]+)\]', fix_node_identifier, line)
+            
+            # Handle node identifiers with spaces in connections
+            def fix_connection_identifier(match):
+                # Remove spaces from node identifier
+                node_id = match.group(1).replace(' ', '')
+                rest_of_line = match.group(2)
+                return f"{node_id}{rest_of_line}"
+            
+            # Fix connections with spaced identifiers
+            line = re.sub(r'(\w+\s+\w+)(\s*-->|\s*--o|\s*\.\.\.)(?=\s*)', fix_connection_identifier, line)
+            line = re.sub(r'(-->|--o|\.\.\.)\s*(\w+\s+\w+)(?=\s*\|)', 
+                          lambda m: f"{m.group(1)} {m.group(2).replace(' ', '')}", line)
+            
+            content_lines.append(line)
     
-    return header, style_lines
+    return header, style_lines, content_lines
 
-def combine_mermaid_additions(json_data):
-    """Combine all mermaid additions from the JSON data."""
-    all_header_lines = []
+def combine_mermaid_diagrams(json_data):
+    """Combine all mermaid diagrams from the JSON data."""
+    all_headers = []
     all_style_lines = []
-    all_content_lines = []
+    all_content_sections = []
     
     # Process each chapter
     for chapter in json_data:
@@ -47,83 +99,63 @@ def combine_mermaid_additions(json_data):
         chapter_comment = f"\n%% Chapter: {chapter_name}"
         if section_name:
             chapter_comment += f" - {section_name}"
-        all_content_lines.append(chapter_comment)
+        all_content_sections.append(chapter_comment)
         
-        # Process each section's mermaid additions
+        # Process each section's mermaid diagram
         for section in chapter.get("mermaid_test", []):
-            # Find the mermaid additions field (format: mermaid_additions_N)
-            additions_key = None
+            # Find the mermaid diagram field (format could be mermaid_diagram_N, complete_mermaid_N, or mermaid_code_N)
+            diagram_key = None
             for key in section:
-                if key.startswith("mermaid_additions_"):
-                    additions_key = key
+                if key.startswith("mermaid_diagram_") or key.startswith("complete_mermaid_") or key.startswith("mermaid_code_"):
+                    diagram_key = key
                     break
             
-            if not additions_key:
-                # If we can't find mermaid_additions, look for complete_mermaid or mermaid_code
+            # If still not found, try the legacy format with mermaid_additions
+            if not diagram_key:
                 for key in section:
-                    if key.startswith("complete_mermaid_") or key.startswith("mermaid_code_"):
-                        additions_key = key
+                    if key.startswith("mermaid_additions_"):
+                        diagram_key = key
                         break
             
-            if not additions_key:
+            if not diagram_key:
                 print(f"Warning: No mermaid code found in section")
                 continue
                 
-            mermaid_code = section[additions_key]
+            mermaid_code = section[diagram_key]
             
             # Skip if it's an error message
             if isinstance(mermaid_code, str) and mermaid_code.startswith("Error:"):
                 print(f"Warning: Skipping section with error: {mermaid_code}")
                 continue
                 
-            # Extract header and style if they exist in this section
-            header, styles = extract_header_style(mermaid_code)
+            # Extract header, style, and content
+            header, styles, content = extract_header_style_and_content(mermaid_code)
             
-            # Add any new header lines
-            for line in header:
-                if line not in all_header_lines:
-                    all_header_lines.append(line)
+            # Add any new header (only collect unique headers)
+            for h in header:
+                if h not in all_headers:
+                    all_headers.append(h)
             
-            # Add any new style lines
-            for line in styles:
-                if line not in all_style_lines:
-                    all_style_lines.append(line)
+            # Add any new style lines (only collect unique styles)
+            for s in styles:
+                if s not in all_style_lines:
+                    all_style_lines.append(s)
             
-            # Add content lines (excluding header and style)
-            content_lines = []
             # Add section number as a comment
-            section_num = additions_key.split("_")[-1]
-            content_lines.append(f"\n%% Section {section_num}")
+            section_num = diagram_key.split("_")[-1]
+            section_content = [f"\n%% Section {section_num}"]
+            section_content.extend(content)
             
-            # Process line by line to preserve <br> tags
-            for line in mermaid_code.split('\n'):
-                line_stripped = line.strip()
-                
-                # Skip header and style lines
-                if (line_stripped.startswith('graph ') or 
-                    line_stripped.startswith('flowchart ') or 
-                    line_stripped.startswith('classDef ')):
-                    continue
-                
-                # Remove parentheses if they appear on a single line
-                if '(' in line_stripped and ')' in line_stripped:
-                    line = line.replace('(', '').replace(')', '')
-                
-                # Add non-empty lines to content
-                if line_stripped:
-                    # Important: Do not process content within node brackets
-                    # This ensures <br> tags remain intact
-                    content_lines.append(line)
-            
-            all_content_lines.extend(content_lines)
+            all_content_sections.append("\n".join(section_content))
     
     # Combine everything in the right order
     combined_lines = []
     
     # Add header (only take the first one)
-    if all_header_lines:
-        combined_lines.append(all_header_lines[0])
+    if all_headers:
+        combined_lines.append(all_headers[0])
     else:
+        # Default header if none found
         combined_lines.append("graph TD")
     
     # Add all style definitions
@@ -132,8 +164,8 @@ def combine_mermaid_additions(json_data):
     # Add a spacer
     combined_lines.append("")
     
-    # Add all content
-    combined_lines.extend(all_content_lines)
+    # Add all content sections
+    combined_lines.append("\n".join(all_content_sections))
     
     return '\n'.join(combined_lines)
 
@@ -161,14 +193,15 @@ def main():
         with open(input_file, 'r') as f:
             data = json.load(f)
         
-        # Combine all mermaid additions
-        combined_mermaid = combine_mermaid_additions(data)
+        # Combine all mermaid diagrams
+        combined_mermaid = combine_mermaid_diagrams(data)
         
         # Write the combined mermaid to the output file
         with open(output_file, 'w') as f:
             f.write(combined_mermaid)
         
         print(f"Combined Mermaid diagram saved to: {output_file}")
+        print(f"You can visualize this file using Mermaid Live Editor or any Mermaid-compatible tool.")
         
     except Exception as e:
         print(f"Error: {e}")

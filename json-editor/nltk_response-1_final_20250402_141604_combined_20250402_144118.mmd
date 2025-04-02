@@ -1,0 +1,607 @@
+graph TD
+
+
+%% Chapter: Historical Background - Historical Background
+
+%% Section 1
+%% First node: East India Company
+EIC[East India Company]
+%% Second node: British Crown
+Crown[British Crown]
+%% Connection between first and second nodes
+Crown -->|Chartered| EIC
+%% Third node: Year of Establishment
+Year[1600]
+%% Connection between first and third nodes
+EIC -->|Established in| Year
+%% Fourth node: Trading Rights
+Rights[Exclusive Trading Rights]
+%% Connection between first and fourth nodes
+EIC -->|Granted| Rights
+%% Fifth node: Commercial Activities
+CommActivities[Commercial Activities]
+%% Connection between first and fifth nodes
+EIC -->|Engaged in| CommActivities
+%% Sixth node: Goods Traded
+Goods[Spices, Textiles, Indigo]
+%% Connection between fifth and sixth nodes
+CommActivities -->|Focused on| Goods
+%% Seventh node: European Markets
+Europe[European Markets]
+%% Connection between sixth and seventh nodes
+Goods -->|Exported to| Europe
+
+%% Section 2
+%% East India Company Node
+EIC[East India Company]
+LocalRulers[Local Rulers]
+EIC -->|Dealt with| LocalRulers
+%% Permits and Agreements Node
+PermitsAgreements[Permits & Agreements]
+%% Connection between EIC and Permits and Agreements
+EIC --o|Operated under| PermitsAgreements
+PermitsAgreements --o|Involved| LocalRulers
+%% Political Landscape Node
+PolLandscape[Complex Political Landscape]
+%% Connection between EIC and Political Landscape
+EIC --o|Navigated| PolLandscape
+%% Battle of Buxar Node
+BattleBuxar[Battle of Buxar ]
+%% Connection between EIC and Battle of Buxar
+EIC -->|Victory at| BattleBuxar
+%% Diwani of Bengal, Bihar, Orissa Node
+Diwani[Diwani of Bengal, Bihar, Orissa]
+%% Connection between Battle of Buxar and Diwani
+BattleBuxar -->|Led to acquisition of| Diwani
+%% Revenue Collection Rights Node
+RevenueCollection[Revenue Collection Rights]
+%% Connection between Diwani and Revenue Collection
+Diwani -->|Granted| RevenueCollection
+%% Civil Justice Administration Node
+CivilJustice[Civil Justice Administration]
+%% Connection between Diwani and Civil Justice
+Diwani -->|Granted| CivilJustice
+
+%% Section 3
+%% East India Company Node
+EIC[East India Company]
+%% Trading Entity Node
+Trading[Trading Entity]
+%% Connection to East India Company
+EIC -->|Initially| Trading
+%% Territorial Power Node
+Territorial[Territorial Power]
+%% Connection to East India Company
+EIC -->|Transformed into| Territorial
+%% Administrative Control Node
+AdminControl[Administrative Control]
+%% Connection to Territorial Power
+Territorial -->|Exercised| AdminControl
+%% Political Control Node
+PoliticalControl[Political Control]
+%% Connection to Territorial Power
+Territorial -->|Exercised| PoliticalControl
+%% Diwani Rights Node
+Diwani[Diwani Rights]
+%% Connection to East India Company
+EIC -->|Acquired| Diwani
+%% Revenue Source Node
+Revenue[Vast Revenue Source]
+%% Connection to Diwani Rights
+Diwani -->|Provided| Revenue
+%% Military Expansion Node
+Military[Military Expansion]
+%% Connection to Revenue Source
+Revenue -->|Financed| Military
+%% Power Consolidation Node
+Power[Consolidated Power]
+%% Connection to Military Expansion
+Military -->|Enabled| Power
+Local[Local Rulers' Authority]
+%% Connection to East India Company
+EIC -->|Eroded| Local
+%% Dominance Node
+Dominance[Increasing Dominance]
+%% Connection to East India Company
+EIC -->|Achieved| Dominance
+
+%% Section 4
+%% First node: East India Company
+EIC[East India Company]
+%% Second node: Diwani System
+Diwani[Diwani System]
+%% Connection between first and second nodes
+EIC -->|Established| Diwani
+AdminStructures[Legal & Admin Structures]
+%% Connections from existing nodes to the new node
+Diwani -->|Foundation for| AdminStructures
+EIC -->|Refined & Expanded| AdminStructures
+%% Fourth node: Dual System of Governance
+DualSystem[Dual System of Governance]
+%% Connections from existing nodes to the new node
+EIC -->|Characterized by| DualSystem
+AdminStructures -->|Led to| DualSystem
+%% Fifth node: Revenue Collection
+Revenue[Revenue Collection]
+%% Connections from existing nodes to the new node
+DualSystem -->|Controlled by EIC| Revenue
+%% Sixth node: Military Affairs
+Military[Military Affairs]
+%% Connections from existing nodes to the new node
+DualSystem -->|Controlled by EIC| Military
+%% Seventh node: Nawab
+Nawab[Nawab]
+%% Connections from existing nodes to the new node
+DualSystem -->|Nominal Authority| Nawab
+%% Eighth node: Inefficiency and Corruption
+Inefficiency[Inefficiency & Corruption]
+%% Connections from existing nodes to the new node
+DualSystem -->|Resulted in| Inefficiency
+%% Ninth node: Exploitation and Discontent
+Exploitation[Exploitation & Discontent]
+%% Connections from existing nodes to the new node
+Inefficiency -->|Led to| Exploitation
+
+%% Section 5
+%% East India Company Node
+EIC[East India Company]
+%% Indian Population Node
+IndPop[Indian Population]
+%% Connection between EIC and Indian Population
+EIC -->|Impacted| IndPop
+%% Economic Policies Node
+EcoPolicies[Economic Policies]
+%% Connections between existing nodes and Economic Policies
+EIC -->|Implemented| EcoPolicies
+EcoPolicies -->|Affected| IndPop
+%% Heavy Taxes Node
+HeavyTaxes[Heavy Taxes]
+%% Connections between existing nodes and Heavy Taxes
+EcoPolicies -->|Included| HeavyTaxes
+HeavyTaxes -->|Burdened| IndPop
+%% Local Industries Node
+LocalInd[Local Industries]
+%% Connections between existing nodes and Local Industries
+EcoPolicies -->|Destroyed| LocalInd
+LocalInd -->|Affected| IndPop
+%% Commercial Interests Node
+CommInterests[Commercial Interests]
+%% Connections between existing nodes and Commercial Interests
+EIC -->|Driven by| CommInterests
+CommInterests -->|Disregarded| Welfare[People's Welfare]
+%% Sepoy Mutiny Node
+SepoyMutiny[Sepoy Mutiny 1857]
+%% Connections between existing nodes and Sepoy Mutiny
+IndPop -->|Resulted in| SepoyMutiny
+EIC -->|Challenged by| SepoyMutiny
+BritRule[British Rule in India]
+SepoyMutiny -->|Watershed moment for| BritRule
+
+%% Section 6
+%% First node: Mutiny Event
+Mutiny[1857 Mutiny]
+%% Second node: Economic Factors
+EconFactors[Economic Factors]
+%% Connection between Mutiny and Economic Factors
+Mutiny -->|Fueled by| EconFactors
+%% Third node: Social Factors
+SocFactors[Social Factors]
+%% Connections between Social Factors and existing nodes
+Mutiny -->|Fueled by| SocFactors
+%% Fourth node: Political Factors
+PolFactors[Political Factors]
+%% Connections between Political Factors and existing nodes
+Mutiny -->|Fueled by| PolFactors
+CompRule[Company Rule]
+Mutiny -->|Against| CompRule
+EconFactors -->|Result of| CompRule
+SocFactors -->|Result of| CompRule
+PolFactors -->|Result of| CompRule
+%% Sixth node: Suppression
+Suppression[Mutiny Suppression]
+%% Connections between Suppression and existing nodes
+CompRule -->|Led to| Suppression
+%% Seventh node: British Administration
+BritAdmin[British Administration]
+%% Connections between British Administration and existing nodes
+Mutiny -->|Impacted| BritAdmin
+%% Eighth node: Government of India Act 1858
+GoIAct[Government of India Act, 1858]
+%% Connections between Government of India Act and existing nodes
+BritAdmin -->|Resulted in| GoIAct
+%% Ninth node: British Crown
+BritCrown[British Crown]
+%% Connections between British Crown and existing nodes
+GoIAct -->|Established direct rule by| BritCrown
+
+%% Section 7
+EICRuleEnd[End of Company Rule]
+%% Second node: Beginning of British Raj
+BritishRaj[Beginning of British Raj]
+%% Connection between first and second nodes
+BritishRaj -->|Transition| EICRuleEnd
+CrownRule[Direct British Crown Rule]
+%% Connections from existing nodes to the new node
+CrownRule -->|Replaced| EICRuleEnd
+CrownRule -->|Known as| BritishRaj
+%% Fourth node: Transfer of Power
+PowerTransfer[Transfer of Power]
+%% Connections from existing nodes to the new node
+PowerTransfer -->|Shift to| CrownRule
+%% Fifth node: Administrative Changes
+AdminChanges[Administrative Changes]
+%% Connections from existing nodes to the new node
+AdminChanges -->|Resulted from| PowerTransfer
+%% Sixth node: Governor-General
+GovGeneral[Governor-General]
+%% Connections from existing nodes to the new node
+AdminChanges -->|Affected| GovGeneral
+%% Seventh node: Viceroy
+Viceroy[Viceroy]
+%% Connections from existing nodes to the new node
+Viceroy -->|Replaced| GovGeneral
+%% Eighth node: British Monarch
+BritishMonarch[British Monarch]
+%% Connections from existing nodes to the new node
+Viceroy -->|Represented| BritishMonarch
+%% Ninth node: British Parliament
+BritishParliament[British Parliament]
+%% Connections from existing nodes to the new node
+Viceroy -->|Accountable to| BritishParliament
+
+%% Section 8
+%% First node: British Administration
+BritAdmin[British Administration in India]
+%% Second node: Indian Civil Service
+ICS[Indian Civil Service ]
+%% Connection to first node
+BritAdmin -->|Primary instrument| ICS
+%% Third node: Reorganization and Expansion
+ReorgExpand[Reorganized and Expanded]
+%% Connection to second node
+ICS -->|Underwent| ReorgExpand
+%% Fourth node: British Government
+BritGov[British Government]
+%% Connection to first node
+BritGov -->|Oversaw| BritAdmin
+%% Fifth node: Reforms
+Reforms[Series of Reforms]
+%% Connection to fourth node
+BritGov -->|Implemented| Reforms
+%% Sixth node: Governance Improvement
+GovImprove[Improving Governance]
+%% Connection to fifth node
+Reforms -->|Aimed at| GovImprove
+%% Seventh node: Grievances Addressed
+Grievances[Addressing Grievances]
+%% Connection to fifth node
+Reforms -->|Addressed| Grievances
+%% Eighth node: Mutiny Fuel
+MutinyFuel[Fueled the Mutiny]
+%% Connection to seventh node
+Grievances -->|Related to| MutinyFuel
+%% Ninth node: Education Promotion
+Education[Promote Education]
+%% Connection to fifth node
+Reforms -->|Included| Education
+Infrastructure[Improve Infrastructure]
+%% Connection to fifth node
+Reforms -->|Included| Infrastructure
+%% Eleventh node: Indian Representation
+IndianRep[Greater Indian Representation]
+%% Connection to fifth node
+Reforms -->|Included| IndianRep
+
+%% Section 9
+%% First node: British Raj
+Raj[British Raj]
+%% Second node: Authoritarian Regime
+AuthRegime[Authoritarian Regime]
+%% Connection between Raj and AuthRegime
+Raj -->|Characterized by| AuthRegime
+%% Third node: British Government
+BritGov[British Government]
+%% Connections to existing nodes
+AuthRegime -->|Ultimate power vested in| BritGov
+%% Fourth node: Indian Exclusion
+IndExclusion[Indian Exclusion]
+%% Connections to existing nodes
+Raj -->|Resulted in| IndExclusion
+IndExclusion -->|From| DecisionMaking[Decision-Making Processes]
+%% Fifth node: Civil Liberties Curtailed
+CivLib[Civil Liberties Curtailed]
+%% Connections to existing nodes
+Raj -->|Led to| CivLib
+%% Sixth node: Economic Policies
+EconPolicies[Economic Policies]
+%% Connections to existing nodes
+BritGov -->|Implemented| EconPolicies
+%% Seventh node: British Interests Favored
+BritInterests[British Interests Favored]
+%% Connections to existing nodes
+EconPolicies -->|Primarily favored| BritInterests
+%% Eighth node: Decline of Indian Industries
+IndDecline[Decline of Indian Industries]
+%% Connections to existing nodes
+EconPolicies -->|Resulted in| IndDecline
+%% Ninth node: Impoverishment of Indian Population
+IndImpoverishment[Impoverishment of Indian Population]
+%% Connections to existing nodes
+EconPolicies -->|Led to| IndImpoverishment
+
+%% Section 10
+%% First node: Indian Nationalist Movement
+INM[Indian Nationalist Movement]
+BritRule[British Rule]
+INM -->|Challenged| BritRule
+%% Third node: Self-Governance
+SelfGov[Self-Governance]
+%% Connection between INM and SelfGov
+INM -->|Demanded| SelfGov
+%% Fourth node: Indian National Congress
+INC[Indian National Congress]
+%% Connection between INM and INC
+INC -->|Leading force in| INM
+%% Fifth node: Public Opinion
+PubOpinion[Public Opinion]
+%% Connection between INC and PubOpinion
+INC -->|Mobilized| PubOpinion
+%% Sixth node: Constitutional Reforms
+ConstReforms[Constitutional Reforms]
+%% Connection between INC and ConstReforms
+INC -->|Advocated for| ConstReforms
+%% Seventh node: British Government Response
+BritResponse[British Government Response]
+BritRule -->|Responded with| BritResponse
+%% Eighth node: Concessions
+Concessions[Concessions]
+%% Connection between BritResponse and Concessions
+BritResponse -->|Included| Concessions
+%% Ninth node: Repression
+Repression[Repression]
+%% Connection between BritResponse and Repression
+BritResponse -->|Also Included| Repression
+%% Tenth node: Indian Representation
+IndRepresentation[Indian Representation]
+%% Connection between Concessions and IndRepresentation
+Concessions -->|Granted| IndRepresentation
+
+%% Section 11
+%% First node: Government of India Act, 1919
+GoI1919[Government of India Act, 1919]
+%% Second node: Dyarchy
+Dyarchy[Dyarchy System]
+%% Connection between first and second nodes
+GoI1919 -->|Introduced| Dyarchy
+%% Third node: Indian Ministers
+IndMin[Indian Ministers]
+%% Connections from existing nodes to the new node
+Dyarchy -->|Transferred some subjects to| IndMin
+%% Fourth node: British Control
+BritControl[British Control]
+%% Connections from existing nodes to the new node
+Dyarchy -->|Retained control over other subjects| BritControl
+%% Fifth node: Government of India Act, 1935
+GoI1935[Government of India Act, 1935]
+%% Connections from existing nodes to the new node
+GoI1919 -->|Preceded by| GoI1935
+%% Sixth node: Provincial Autonomy
+ProvAutonomy[Expanded Provincial Autonomy]
+%% Connections from existing nodes to the new node
+GoI1935 -->|Expanded| ProvAutonomy
+%% Seventh node: All-India Federation
+AllIndiaFed[Provided for All-India Federation]
+%% Connections from existing nodes to the new node
+GoI1935 -->|Provided for| AllIndiaFed
+%% Eighth node: Federation Not Materialized
+FedNotMat[Federation Never Fully Materialized]
+%% Connections from existing nodes to the new node
+AllIndiaFed -->|Resulted in| FedNotMat
+%% Ninth node: Second World War
+WWII[Second World War]
+%% Connections from existing nodes to the new node
+GoI1935 -->|Followed by| WWII
+%% Tenth node: Weakened British Power
+WeakBritPower[Weakened British Power]
+%% Connections from existing nodes to the new node
+WWII -->|Significantly| WeakBritPower
+%% Eleventh node: Accelerated Indian Independence
+AccIndInd[Accelerated Indian Independence]
+%% Connections from existing nodes to the new node
+WeakBritPower -->|Resulted in| AccIndInd
+
+%% Section 12
+%% First node: Indian Nationalist Movement
+INM[Indian Nationalist Movement]
+%% Second node: Mahatma Gandhi
+Gandhi[Mahatma Gandhi]
+%% Connection between INM and Gandhi
+INM -->|Led by| Gandhi
+%% Third node: Mass Movements
+MassMovements[Mass Movements]
+%% Connections to existing nodes
+Gandhi -->|Launched| MassMovements
+MassMovements -->|Demanding| Independence[Complete Independence]
+%% Fourth node: British Government
+BritGov[British Government]
+%% Connections to existing nodes
+MassMovements -->|Pressured| BritGov
+%% Fifth node: Domestic Pressure
+DomPressure[Domestic Pressure]
+%% Connections to existing nodes
+BritGov -->|Faced| DomPressure
+%% Sixth node: International Pressure
+IntPressure[International Pressure]
+%% Connections to existing nodes
+BritGov -->|Faced| IntPressure
+%% Seventh node: Indian Independence 1947
+IndIndependence[Indian Independence 1947]
+%% Connections to existing nodes
+BritGov -->|Agreed to grant| IndIndependence
+IndIndependence -->|Date| August15[August 15, 1947]
+EndOfBritishRule[End of British Rule]
+%% Connections to existing nodes
+IndIndependence -->|Marked| EndOfBritishRule
+%% Ninth node: New Era in Indian History
+NewEra[New Era in Indian History]
+%% Connections to existing nodes
+IndIndependence -->|Began| NewEra
+
+%% Section 13
+BritRule[British Rule]
+%% Second node: Indian Polity and Society
+IndPolSoc[Indian Polity and Society]
+%% Connection between first and second nodes
+BritRule -->|Shaped| IndPolSoc
+%% Third node: Indian Constitution
+IndConst[Indian Constitution ]
+%% Connections from existing nodes to the new node
+IndPolSoc -->|Influenced| IndConst
+%% Fourth node: Legal and Administrative Frameworks
+LegAdmFrame[Legal & Administrative Frameworks]
+%% Connections from existing nodes to the new node
+BritRule -->|Established| LegAdmFrame
+IndConst -->|Drew heavily on| LegAdmFrame
+%% Fifth node: Parliamentary System
+ParlSystem[Parliamentary System]
+%% Connections from existing nodes to the new node
+LegAdmFrame -->|Included| ParlSystem
+IndConst -->|Adopted| ParlSystem
+RuleLaw[Rule of Law]
+%% Connections from existing nodes to the new node
+LegAdmFrame -->|Included| RuleLaw
+IndConst -->|Embraced| RuleLaw
+%% Seventh node: Independent Judiciary
+IndJudiciary[Independent Judiciary]
+%% Connections from existing nodes to the new node
+LegAdmFrame -->|Included| Ind Judiciary
+IndConst -->|Guaranteed| Ind Judiciary
+
+%% Section 14
+%% Indian Constitution Node
+IndConst[Indian Constitution]
+%% Liberal Democracy Node
+LibDem[Liberal Democracy Principles]
+%% Connection to Indian Constitution
+IndConst -->|Incorporated| LibDem
+%% Indian Nationalist Movement Node
+NatMovement[Indian Nationalist Movement]
+%% Connection to Liberal Democracy
+LibDem -->|Championed by| NatMovement
+%% British Model Node
+BritModel[British Model]
+%% Connection to Indian Constitution
+IndConst --o|Not simply a copy of| BritModel
+%% Indian Realities Node
+IndRealities[Unique Social, Economic, Political Realities of India]
+%% Connection to Indian Constitution
+IndConst -->|Reflected| IndRealities
+
+%% Section 15
+%% First node: East India Company
+EIC[East India Company]
+%% Second node: British Colonial Influence
+ColonialInfluence[Colonial Influence]
+%% Connection between first and second nodes
+ColonialInfluence -->|Led to| EIC
+%% Third node: Nationalist Aspirations
+NationalistAspirations[Nationalist Aspirations]
+%% Fourth node: Indigenous Traditions
+IndigenousTraditions[Indigenous Traditions]
+%% Fifth node: Governance Evolution
+GovEvolution[Governance Evolution]
+%% Connections from existing nodes to the new node
+EIC -->|Part of| GovEvolution
+NationalistAspirations -->|Shaped| GovEvolution
+IndigenousTraditions -->|Influenced| GovEvolution
+%% Sixth node: Constitution Adoption
+ConstitutionAdoption[Constitution Adoption]
+%% Connection between existing nodes to the new node
+GovEvolution -->|Culminated in| ConstitutionAdoption
+%% Seventh node: Affirmative Action
+AffirmativeAction[Affirmative Action]
+%% Eighth node: Cultural Linguistic Identities
+CulturalLinguisticIdentities[Cultural & Linguistic Identities]
+%% Ninth node: Social Justice Economic Development
+SocialJusticeEconomicDevelopment[Social Justice & Economic Development]
+%% Tenth node: Constitution Provisions
+ConstitutionProvisions[Constitution Provisions]
+%% Connections from existing nodes to the new node
+ConstitutionAdoption -->|Included| ConstitutionProvisions
+ConstitutionProvisions -->|Addressed| AffirmativeAction
+ConstitutionProvisions -->|Recognized| CulturalLinguisticIdentities
+ConstitutionProvisions -->|Promoted| SocialJusticeEconomicDevelopment
+%% Eleventh node: Strengths and Limitations
+StrengthsLimitations[Strengths & Limitations]
+%% Twelfth node: Challenges Facing Indian Democracy
+ChallengesIndianDemocracy[Challenges Facing Indian Democracy]
+%% Thirteenth node: Understanding Historical Context
+UnderstandingHistoricalContext[Understanding Historical Context]
+%% Connections from existing nodes to the new node
+UnderstandingHistoricalContext -->|Essential for| StrengthsLimitations
+UnderstandingHistoricalContext -->|Essential for| ChallengesIndianDemocracy
+GovEvolution -->|Provides| UnderstandingHistoricalContext
+
+%% Section 16
+%% First node: Nationalist Perspective
+NatPersp[Nationalist Perspective]
+%% Second node: Constitution as Culmination
+ConstCulm[Constitution as Culmination]
+%% Connection between first and second nodes
+NatPersp -->|Views Constitution as| ConstCulm
+%% Third node: Independence Struggle
+IndepStruggle[Independence Struggle]
+%% Connections from existing nodes to the new node
+ConstCulm -->|Culmination of| IndepStruggle
+RejectColRule[Rejection of Colonial Rule]
+%% Connections from existing nodes to the new node
+ConstCulm -->|Represents| RejectColRule
+%% Fifth node: Assertion of Indian Sovereignty
+AssertSov[Assertion of Indian Sovereignty]
+%% Connections from existing nodes to the new node
+ConstCulm -->|Embodies| AssertSov
+%% Sixth node: Contributions of Indian Leaders
+IndianLeaders[Contributions of Indian Leaders]
+%% Connections from existing nodes to the new node
+NatPersp -->|Emphasizes| IndianLeaders
+%% Seventh node: Departure from British Model
+DepartBritModel[Departure from British Model]
+%% Connections from existing nodes to the new node
+NatPersp -->|Highlights| DepartBritModel
+%% Eighth node: Historical Continuity Perspective
+HistContPersp[Historical Continuity Perspective]
+%% Ninth node: Influence of British Institutions
+BritInstitutions[Influence of British Institutions]
+%% Connection between eighth and ninth nodes
+HistContPersp -->|Acknowledges| BritInstitutions
+%% Tenth node: Elements of Continuity and Adaptation
+ContAdapt[Elements of Continuity and Adaptation]
+%% Connections from existing nodes to the new node
+HistContPersp -->|Emphasizes| ContAdapt
+
+%% Section 17
+%% First node: Western Traditions
+Western[Western Traditions]
+%% Second node: Indian Traditions
+Indian[Indian Traditions]
+%% Third node: Indian Constitution
+Constitution[Indian Constitution]
+%% Connections to existing nodes
+Constitution -->|Synthesis of| Western
+Constitution -->|Synthesis of| Indian
+%% Fourth node: Critical/Marxist Perspective
+Marxist[Critical/Marxist Perspective]
+%% Fifth node: Progress
+Progress[Constitution as Progress]
+%% Connections to existing nodes
+Marxist -->|Acknowledges| Progress
+Constitution -->|Seen as| Progress
+Colonial[Colonial Era Structures & Biases]
+%% Connections to existing nodes
+Marxist -->|Retains| Colonial
+Constitution -->|Inherited from| Colonial
+%% Seventh node: Underlying Inequalities
+Inequalities[Underlying Inequalities & Injustices]
+%% Connections to existing nodes
+Marxist -->|Has not fully addressed| Inequalities
+Constitution -->|Attempts to address| Inequalities

@@ -198,53 +198,13 @@ def test_prompt_files():
     
     return all_valid
 
-def process_text_with_gemini(text, previous_mermaid="", topic="", prompt_template="", retry_count=3):
+def process_text_with_gemini(text, topic="", prompt_template="", retry_count=3):
     """
-    Send text to Gemini API to generate incremental mermaid code
-    If previous_mermaid is provided, it will be used as context
+    Send text to Gemini API to generate standalone mermaid code for each text section
     
     Returns:
-        tuple: (new_mermaid_additions, raw_response_dict)
+        tuple: (mermaid_code, raw_response_dict)
     """
-    # Extract header and styling from previous mermaid if exists
-    header_style = ""
-    node_definitions = ""
-    
-    if previous_mermaid:
-        # Extract the header (graph TD and class definitions)
-        lines = previous_mermaid.split('\n')
-        header_lines = []
-        style_lines = []
-        
-        # Process line by line to extract header and styles
-        in_classDef = False
-        
-        for line in lines:
-            stripped = line.strip()
-            if stripped.startswith('graph ') or stripped.startswith('flowchart '):
-                header_lines.append(stripped)
-            elif stripped.startswith('classDef ') or in_classDef:
-                in_classDef = True
-                style_lines.append(stripped)
-                if ';' in stripped:
-                    in_classDef = False
-        
-        header_style = '\n'.join(header_lines + style_lines)
-    
-    context_message = ""
-    if previous_mermaid:
-        context_message = """
-Here is the previous Mermaid diagram you created:
-
-```mermaid
-{}
-```
-
-IMPORTANT: To save tokens and be efficient, you should ONLY generate the NEW additions to the diagram.
-DO NOT regenerate the entire diagram. Your response should ONLY contain the new nodes and connections that relate to the text.
-The existing header, style definitions, nodes, and connections will be preserved - you just need to build on them.
-""".format(previous_mermaid)
-    
     # Initialize raw response tracking
     raw_response = {
         "timestamp": datetime.now().isoformat(),
@@ -253,12 +213,15 @@ The existing header, style definitions, nodes, and connections will be preserved
     # Default JSON example if not provided in template
     json_example = """
 {
-  "new_additions": "ONLY the new nodes and connections you've added (NOT including header and classDefs, and NOT including any existing nodes/connections)"
+  "new_additions": "A complete standalone mermaid diagram that represents the text"
 }
 """
 
     # If we have a prompt template, use it with placeholders replaced
     if prompt_template:
+        # Empty context_message since we don't want to use previous diagram
+        context_message = ""
+        
         prompt = prompt_template.format(
             topic=topic if topic else 'the topic',
             context_message=context_message,
@@ -347,21 +310,21 @@ The existing header, style definitions, nodes, and connections will be preserved
                 response_json = json.loads(fixed_json_str)
                 raw_response["parsed_json"] = response_json
                 
-                # Extract just the new additions
-                new_additions = response_json.get("new_additions", "")
+                # Extract the mermaid code
+                mermaid_code = response_json.get("new_additions", "")
                 
-                # Format the new additions with proper indentation
-                formatted_additions = format_mermaid_code(new_additions)
+                # Format the mermaid code with proper indentation
+                formatted_mermaid = format_mermaid_code(mermaid_code)
                 
-                # Count the number of lines to estimate how many elements were added
-                new_lines = formatted_additions.split('\n')
-                num_new_lines = len([line for line in new_lines if line.strip()])
-                print(f"    Added {num_new_lines} new elements to the diagram")
+                # Count the number of lines to estimate how many elements were created
+                mermaid_lines = formatted_mermaid.split('\n')
+                num_lines = len([line for line in mermaid_lines if line.strip()])
+                print(f"    Generated a diagram with {num_lines} lines")
                 
                 raw_response["extraction_method"] = "json_parsing"
                 raw_response["extraction_success"] = True
                 
-                return formatted_additions, raw_response
+                return formatted_mermaid, raw_response
                 
             except json.JSONDecodeError as e:
                 # If JSON parsing fails, log the error and try alternative extraction
@@ -382,20 +345,7 @@ The existing header, style definitions, nodes, and connections will be preserved
                     raw_response["extraction_method"] = "markdown_code_block"
                     raw_response["extraction_success"] = True
                     mermaid_code = mermaid_blocks[0].strip()
-                    
-                    # Since we couldn't get just the additions, try to extract only the new parts
-                    # by removing header, graph declaration, and classDef lines
-                    lines = mermaid_code.split('\n')
-                    filtered_lines = []
-                    for line in lines:
-                        stripped = line.strip()
-                        if (not stripped.startswith('graph ') and 
-                            not stripped.startswith('flowchart ') and 
-                            not stripped.startswith('classDef ')):
-                            filtered_lines.append(line)
-                            
-                    additions = '\n'.join(filtered_lines)
-                    return format_mermaid_code(additions), raw_response
+                    return format_mermaid_code(mermaid_code), raw_response
                 
                 # Last resort: return the cleaned text
                 print("    Using last resort text cleaning method")
@@ -423,77 +373,6 @@ The existing header, style definitions, nodes, and connections will be preserved
                 continue
             
             return f"Error generating mermaid code: {e}", raw_response
-
-def combine_mermaid_code(previous_code, new_additions):
-    """
-    Combine previous mermaid code with new additions
-    
-    Args:
-        previous_code (str): Existing mermaid code
-        new_additions (str): New mermaid additions
-        
-    Returns:
-        str: Combined mermaid code
-    """
-    if not previous_code:
-        return new_additions
-        
-    # Check if the new additions already have a graph declaration
-    if new_additions.strip().startswith('graph ') or new_additions.strip().startswith('flowchart '):
-        # In this case, the new additions already have a complete mermaid structure
-        return new_additions
-        
-    # Extract parts from the previous code
-    lines = previous_code.split('\n')
-    header_lines = []
-    style_lines = []
-    node_lines = []
-    
-    in_header = True
-    in_style = False
-    
-    for line in lines:
-        stripped = line.strip()
-        if in_header and (stripped.startswith('graph ') or stripped.startswith('flowchart ')):
-            header_lines.append(line)
-            in_header = False
-        elif not in_style and stripped.startswith('classDef '):
-            style_lines.append(line)
-            in_style = True
-        elif in_style and stripped.startswith('classDef '):
-            style_lines.append(line)
-        elif in_style and not stripped.startswith('classDef '):
-            in_style = False
-            node_lines.append(line)
-        else:
-            node_lines.append(line)
-    
-    # Combine the parts with the new additions
-    if header_lines and style_lines:
-        # If we have header and style, put new additions after nodes
-        combined = '\n'.join(header_lines + style_lines + node_lines)
-        
-        # Check if we need to add a new line
-        if combined.endswith('\n'):
-            combined += new_additions
-        else:
-            combined += '\n' + new_additions
-            
-        return combined
-    elif header_lines:
-        # If we only have header, put new additions after header
-        combined = '\n'.join(header_lines + node_lines)
-        
-        # Check if we need to add a new line
-        if combined.endswith('\n'):
-            combined += new_additions
-        else:
-            combined += '\n' + new_additions
-            
-        return combined
-    else:
-        # If we don't have structure yet, just use new additions
-        return new_additions
 
 def select_prompt():
     """
@@ -614,7 +493,6 @@ def main():
             
             # Process each text item in mermaid_test
             mermaid_test = chapter.get("mermaid_test", [])
-            previous_mermaid = ""
             processed_texts = []
             
             # Iterate over each text item in the mermaid_test array
@@ -630,12 +508,10 @@ def main():
                 
                 print(f"  Processing text {i+1}: {text_key}")
                 
-                # Generate mermaid code for this text, building on previous mermaid
+                # Generate a complete standalone mermaid diagram for this text
                 try:
-                    # Process and get just the NEW additions
-                    new_additions, raw_response = process_text_with_gemini(
-                        text_value, 
-                        previous_mermaid,
+                    mermaid_code, raw_response = process_text_with_gemini(
+                        text_value,
                         topic=f"{chapter_name} - {chapter.get('section_name', '')}",
                         prompt_template=prompt_template
                     )
@@ -652,9 +528,6 @@ def main():
                     
                     api_responses.append(api_log_entry)
                     
-                    # Combine previous mermaid code with new additions to get the full code
-                    complete_mermaid = combine_mermaid_code(previous_mermaid, new_additions)
-                    
                 except Exception as e:
                     print(f"    Error processing text: {str(e)}")
                     
@@ -669,23 +542,18 @@ def main():
                         "traceback": traceback.format_exc()
                     })
                     
-                    # Use error message for new additions to continue processing
-                    new_additions = f"Error: {str(e)}"
-                    complete_mermaid = combine_mermaid_code(previous_mermaid, new_additions)
+                    # Use error message for mermaid code to continue processing
+                    mermaid_code = f"Error: {str(e)}"
                 
                 # Update the API log file after each response
                 with open(api_log_file, 'w') as f:
                     json.dump(api_responses, f, indent=2)
                 
-                # Store both the new additions and the complete code
+                # Store the text and its complete mermaid diagram
                 processed_texts.append({
                     f"text_{i+1}": text_value,
-                    f"mermaid_additions_{i+1}": new_additions,
-                    f"complete_mermaid_{i+1}": complete_mermaid
+                    f"mermaid_diagram_{i+1}": mermaid_code
                 })
-                
-                # Update previous_mermaid for next iteration (use the complete code)
-                previous_mermaid = complete_mermaid
                 
                 # Update the incremental file after each section
                 chapter["mermaid_test"] = processed_texts
