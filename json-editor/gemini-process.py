@@ -211,7 +211,7 @@ IMPORTANT: DO NOT repeat any existing nodes or connections from the previous dia
 Start EXACTLY where the previous diagram left off.
 
 If this is the first section, create a properly structured diagram with:
-  1. Header (graph TD)
+  1. Start with mermaid state diagram header
   2. Class definitions for styling
   3. Clear node and connection structure
 
