@@ -1,0 +1,29 @@
+Create a Mermaid state diagram for the following text about {topic}.
+
+{context_message}
+
+Text to analyze:
+{text}
+
+Use a state diagram structure with the following guidelines:
+1. Use stateDiagram-v2 syntax
+2. Define states for key activities, conditions, and decision points
+3. Connect states with transitions showing the flow between them
+4. Use notes to add important context where needed
+
+Follow these specific rules:
+- Only generate new additions that start EXACTLY where the previous diagram left off
+- Your new code must be syntactically compatible with the existing diagram
+- Format state labels clearly with descriptive names
+- Add transition descriptions that explain the conditions for state changes
+- Group related states into composite states when appropriate
+- Include choice points for conditional branching of flows
+
+When adding new states and transitions:
+  1. Start with a comment indicating what this new section represents
+  2. ONLY add new states and transitions related to the current text
+  3. Connect these new states to existing states where appropriate
+  4. Make sure each line has proper indentation (4 spaces per level)
+
+CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
+{json_example}

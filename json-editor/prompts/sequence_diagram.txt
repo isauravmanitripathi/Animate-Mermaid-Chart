@@ -1,0 +1,23 @@
+Create a Mermaid sequence diagram for the following text about {topic}.
+
+{context_message}
+
+Text to analyze:
+{text}
+
+Use a sequence diagram structure with the following guidelines:
+1. Define actors/participants for all entities involved in the interactions
+2. Show chronological message flows between participants
+3. Include activations where appropriate to show processing time
+4. Add notes to clarify complex interactions
+
+Follow these specific rules:
+- Only generate new additions that start EXACTLY where the previous diagram left off
+- Your new code must be syntactically compatible with the existing diagram
+- Use descriptive labels for all messages showing what data or actions are occurring
+- Include return messages where appropriate
+- Show parallel actions with par blocks if needed
+- Use alt/opt/loop blocks to represent conditional logic flows
+
+CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
+{json_example}

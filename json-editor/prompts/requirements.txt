@@ -1,0 +1,23 @@
+Create a Mermaid diagram that represents the requirements in the following text about {topic}.
+
+{context_message}
+
+Requirements text to analyze:
+{text}
+
+Use a graph structure with the following features:
+1. Identify all requirements as distinct nodes
+2. Categorize requirements (functional, non-functional, etc.)
+3. Show dependencies and relationships between requirements
+4. Highlight priority levels with different styling
+
+Follow these specific rules:
+- Only generate new additions that start EXACTLY where the previous diagram left off
+- Your new code must be syntactically compatible with the existing diagram
+- Use rectangular nodes for requirements with clear IDs (REQ-01, etc.)
+- Use different node styles for different requirement types
+- Show dependencies with appropriate arrows
+- Include traceability to other artifacts where mentioned
+
+CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
+{json_example}

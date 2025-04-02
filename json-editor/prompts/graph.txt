@@ -1,0 +1,39 @@
+Create a sequential Mermaid diagram for the following text about {topic}.
+
+{context_message}
+
+Text to analyze:
+{text}
+
+Use a sequential node-connection pattern with the following structure:
+1. Define a node
+2. Immediately define any connections to previously defined nodes
+3. Move to the next node
+4. Repeat the pattern
+
+For example:
+```
+%% New node for current section
+D[Entity D]
+%% Connections from D to previous nodes
+A --> D
+C --> D
+%% Another new node
+E[Entity E]
+%% Connections to/from E
+D --> E
+B <--> E
+```
+
+Follow these specific rules:
+- Only generate new additions that start EXACTLY where the previous diagram left off
+- Your new code must be syntactically compatible with the existing diagram
+- The new generated code should be interconnected with previous nodes, or create subgraphs if needed. 
+- Format node labels clearly with relevant information (<entity><br><detail>)
+- Group related nodes with clear section comments using %% before each section and also subgraphs
+- Use descriptive node labels with relevant data points
+- Each time try to create a more interconnect graph so all of it is interconnected
+- Include bidirectional relationships where appropriate
+
+CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
+{json_example}

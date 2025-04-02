@@ -7,6 +7,7 @@ import re
 import traceback
 from datetime import datetime
 import time
+import glob
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,6 +20,9 @@ if not api_key:
     sys.exit(1)
 
 genai.configure(api_key=api_key)
+
+# Define paths
+PROMPTS_DIR = "./prompts"  # Directory containing prompt templates
 
 def fix_json_string(json_str):
     """
@@ -103,7 +107,98 @@ def format_mermaid_code(mermaid_code):
     
     return '\n'.join(formatted_lines)
 
-def process_text_with_gemini(text, previous_mermaid="", topic="", retry_count=3):
+def get_available_prompts():
+    """
+    Scan the prompts directory and return a list of available prompt files.
+    
+    Returns:
+        list: List of prompt files found
+    """
+    if not os.path.exists(PROMPTS_DIR):
+        print(f"Prompts directory '{PROMPTS_DIR}' not found.")
+        return []
+    
+    # Get all .txt files in the prompts directory
+    prompt_files = glob.glob(os.path.join(PROMPTS_DIR, "*.txt"))
+    return [os.path.basename(file) for file in prompt_files]
+
+def read_prompt_file(filename):
+    """
+    Read a prompt file from the prompts directory.
+    
+    Args:
+        filename (str): Name of the prompt file
+        
+    Returns:
+        str: Content of the prompt file or None if file not found
+    """
+    file_path = os.path.join(PROMPTS_DIR, filename)
+    if not os.path.exists(file_path):
+        print(f"Prompt file '{filename}' not found.")
+        return None
+    
+    try:
+        with open(file_path, 'r') as f:
+            return f.read()
+    except Exception as e:
+        print(f"Error reading prompt file '{filename}': {e}")
+        return None
+
+def validate_prompt(prompt_content):
+    """
+    Validate prompt file content to ensure it has the required placeholders.
+    
+    Args:
+        prompt_content (str): Content of the prompt file
+        
+    Returns:
+        tuple: (is_valid, message)
+    """
+    # Check for required placeholders
+    required_placeholders = ["{topic}", "{text}"]
+    optional_placeholders = ["{context_message}", "{json_example}"]
+    
+    missing_required = [p for p in required_placeholders if p not in prompt_content]
+    
+    if missing_required:
+        return False, f"Missing required placeholders: {', '.join(missing_required)}"
+    
+    # Check for JSON example
+    if "{json_example}" not in prompt_content:
+        return True, "Warning: No JSON example placeholder found, which might affect output formatting."
+    
+    return True, "Prompt is valid."
+
+def test_prompt_files():
+    """
+    Test all prompt files in the prompts directory.
+    
+    Returns:
+        bool: True if all prompts are valid, False otherwise
+    """
+    prompts = get_available_prompts()
+    if not prompts:
+        print("No prompt files found in the prompts directory.")
+        return False
+    
+    all_valid = True
+    print("\nTesting prompt files...")
+    for prompt_file in prompts:
+        content = read_prompt_file(prompt_file)
+        if content is None:
+            all_valid = False
+            continue
+        
+        is_valid, message = validate_prompt(content)
+        status = "✅ Valid" if is_valid else "❌ Invalid"
+        print(f"{prompt_file}: {status} - {message}")
+        
+        if not is_valid:
+            all_valid = False
+    
+    return all_valid
+
+def process_text_with_gemini(text, previous_mermaid="", topic="", prompt_template="", retry_count=3):
     """
     Send text to Gemini API to generate incremental mermaid code
     If previous_mermaid is provided, it will be used as context
@@ -155,77 +250,26 @@ The existing header, style definitions, nodes, and connections will be preserved
         "timestamp": datetime.now().isoformat(),
     }
 
-    # Use format() for complex nested JSON examples to avoid f-string issues
+    # Default JSON example if not provided in template
     json_example = """
 {
   "new_additions": "ONLY the new nodes and connections you've added (NOT including header and classDefs, and NOT including any existing nodes/connections)"
 }
 """
 
-    # Fixed prompt using format() instead of f-strings with nested braces
-    prompt = """Create a sequential Mermaid diagram for the following text about {}.
-
-{}
-
-Text to analyze:
-{}
-
-Use a sequential node-connection pattern with the following structure:
-1. Define a node
-2. Immediately define any connections to previously defined nodes
-3. Move to the next node
-4. Repeat the pattern
-
-For example:
-```
-%% New node for current section
-D[Entity D]
-%% Connections from D to previous nodes
-A --> D
-C --> D
-%% Another new node
-E[Entity E]
-%% Connections to/from E
-D --> E
-B <--> E
-```
-
-Follow these specific rules:
-- Only generate new additions that start EXACTLY where the previous diagram left off
-- Your new code must be syntactically compatible with the existing diagram
-- The new generated code should be interconnected with previous nodes, or create subgraphs if needed. 
-- Format node labels clearly with relevant information (<entity><br><detail>)
-- Group related nodes with clear section comments using %% before each section and also subgraphs
-- Use descriptive node labels with relevant data points
-- Each time try to create a more interconnect graph so all of it is interconnected
-- Include bidirectional relationships where appropriate
-
-When adding new nodes and connections:
-  1. Start with a comment indicating what this new section represents
-  2. ONLY add new nodes and connections related to the current text
-  3. Connect these new nodes to existing nodes where appropriate
-  4. Make sure each line has proper indentation (4 spaces per level)
-  5. Use descriptive labels for all connections
-
-IMPORTANT: DO NOT repeat any existing nodes or connections from the previous diagram.
-Start EXACTLY where the previous diagram left off.
-
-If this is the first section, create a properly structured diagram with:
-  1. Start with mermaid state diagram header
-  2. Class definitions for styling
-  3. Clear node and connection structure
-
-CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
-{}
-
-IMPORTANT FORMATTING INSTRUCTIONS:
-- Properly indent all code (4 spaces per level)
-- Put each node or connection on its own line
-- Start with section comments (using %%) to explain what the new additions represent
-- DO NOT include any content from the previous diagram
-
-Return ONLY the JSON object without any markdown code blocks or other text.
-""".format(topic if topic else 'the topic', context_message, text, json_example)
+    # If we have a prompt template, use it with placeholders replaced
+    if prompt_template:
+        prompt = prompt_template.format(
+            topic=topic if topic else 'the topic',
+            context_message=context_message,
+            text=text,
+            json_example=json_example
+        )
+    else:
+        # This shouldn't happen if validation is in place
+        print("Error: No prompt template provided.")
+        raw_response["error"] = "No prompt template provided"
+        return f"Error: No prompt template provided", raw_response
 
     # Store prompt in raw response
     raw_response["prompt"] = prompt
@@ -451,9 +495,82 @@ def combine_mermaid_code(previous_code, new_additions):
         # If we don't have structure yet, just use new additions
         return new_additions
 
+def select_prompt():
+    """
+    Display available prompts and let the user select one.
+    
+    Returns:
+        tuple: (prompt_filename, prompt_content) or (None, None) if no selection made
+    """
+    prompts = get_available_prompts()
+    if not prompts:
+        print("No prompts found in the prompts directory.")
+        return None, None
+    
+    print("\nAvailable prompts:")
+    for i, prompt_file in enumerate(prompts, 1):
+        print(f"{i}. {prompt_file}")
+    
+    try:
+        selection = input("\nSelect a prompt by number (or 'q' to quit): ")
+        if selection.lower() == 'q':
+            return None, None
+        
+        selection_idx = int(selection) - 1
+        if selection_idx < 0 or selection_idx >= len(prompts):
+            print("Invalid selection.")
+            return None, None
+        
+        selected_prompt = prompts[selection_idx]
+        prompt_content = read_prompt_file(selected_prompt)
+        if prompt_content is None:
+            return None, None
+        
+        # Validate the selected prompt
+        is_valid, message = validate_prompt(prompt_content)
+        if not is_valid:
+            print(f"Selected prompt is invalid: {message}")
+            return None, None
+        
+        return selected_prompt, prompt_content
+    
+    except ValueError:
+        print("Please enter a valid number.")
+        return None, None
+
 def main():
+    # Check if prompts directory exists
+    if not os.path.exists(PROMPTS_DIR):
+        print(f"Error: Prompts directory '{PROMPTS_DIR}' not found.")
+        print(f"Please create a '{PROMPTS_DIR}' directory with prompt templates.")
+        sys.exit(1)
+    
+    # Get available prompts
+    prompts = get_available_prompts()
+    if not prompts:
+        print(f"Error: No prompt files found in '{PROMPTS_DIR}'.")
+        print("Please add prompt template files (*.txt) to the prompts directory.")
+        sys.exit(1)
+    
+    # Check if we're in test mode
+    if len(sys.argv) > 1 and sys.argv[1] == "--test":
+        test_result = test_prompt_files()
+        if test_result:
+            print("\nAll prompt files are valid.")
+        else:
+            print("\nSome prompt files have issues. Please fix them before proceeding.")
+        sys.exit(0 if test_result else 1)
+    
+    # Select a prompt
+    selected_prompt_file, prompt_template = select_prompt()
+    if not selected_prompt_file or not prompt_template:
+        print("No prompt selected. Exiting.")
+        sys.exit(1)
+    
+    print(f"Using prompt template: {selected_prompt_file}")
+    
     # Check if input is provided
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and sys.argv[1] != "--test":
         input_file = sys.argv[1]
     else:
         input_file = input("Enter the path to your JSON file: ")
@@ -519,7 +636,8 @@ def main():
                     new_additions, raw_response = process_text_with_gemini(
                         text_value, 
                         previous_mermaid,
-                        topic=f"{chapter_name} - {chapter.get('section_name', '')}"
+                        topic=f"{chapter_name} - {chapter.get('section_name', '')}",
+                        prompt_template=prompt_template
                     )
                     
                     # Store the API response in the log
@@ -610,5 +728,5 @@ if __name__ == "__main__":
         print("The 'google-generativeai' package is required but not installed.")
         print("Please install it using: pip install google-generativeai")
         sys.exit(1)
-        
+    
     main()
