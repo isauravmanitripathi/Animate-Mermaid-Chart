@@ -95,13 +95,25 @@ def combine_mermaid_additions(json_data):
             section_num = additions_key.split("_")[-1]
             content_lines.append(f"\n%% Section {section_num}")
             
+            # Process line by line to preserve <br> tags
             for line in mermaid_code.split('\n'):
-                stripped = line.strip()
-                if (not stripped.startswith('graph ') and 
-                    not stripped.startswith('flowchart ') and 
-                    not stripped.startswith('classDef ')):
-                    if stripped:  # Only add non-empty lines
-                        content_lines.append(line)
+                line_stripped = line.strip()
+                
+                # Skip header and style lines
+                if (line_stripped.startswith('graph ') or 
+                    line_stripped.startswith('flowchart ') or 
+                    line_stripped.startswith('classDef ')):
+                    continue
+                
+                # Remove parentheses if they appear on a single line
+                if '(' in line_stripped and ')' in line_stripped:
+                    line = line.replace('(', '').replace(')', '')
+                
+                # Add non-empty lines to content
+                if line_stripped:
+                    # Important: Do not process content within node brackets
+                    # This ensures <br> tags remain intact
+                    content_lines.append(line)
             
             all_content_lines.extend(content_lines)
     

@@ -1,0 +1,408 @@
+graph TD
+
+
+%% Chapter: Historical Background - Historical Background
+
+%% Section 1
+%% East India Company Expansion and Focus
+subgraph East India Company
+    E[East India<br>Company]
+    A --> E
+    E -- Chartered by Queen Elizabeth I --> A
+    F[Trade Monopoly<br>with the East]
+    E -- Granted --> F
+    G[Trading Posts<br>Established]
+    F --> G
+    H[Commercial Activities<br>Spices, Textiles, Indigo]
+    G --> H
+    I[Export to Europe<br>Goods Procurement]
+    H --> I
+    I --> F
+    E <--> G
+end
+
+%% Section 2
+%% Permits and Agreements with Local Rulers
+subgraph Political Landscape
+    J[Permits &<br>Agreements]
+    %% Connections from J to previous nodes
+    E --> J
+    K[Local Rulers<br>Negotiations]
+    J <--> K
+end
+%% Turning Point: Acquisition of Diwani
+subgraph Acquisition of Diwani
+    L[Battle of Buxar<br>1765]
+    J --> L
+    M[Acquisition of<br>Diwani Bengal, Bihar, Orissa]
+    L --> M
+    N[Rights to Collect<br>Revenue]
+    M --> N
+    O[Administer Civil<br>Justice]
+    M --> O
+    N <--> O
+end
+
+%% Section 3
+%% Shift in Company Role
+subgraph Company Transformation
+    P[Trading Entity]
+    O --> P
+    Q[Territorial Power<br>Admin & Political Control]
+    P --> Q
+    R[Vast Revenue Source<br>Finance Military Expansion]
+    Q --> R
+    S[Consolidate Power]
+    R --> S
+end
+%% Erosion of Local Authority
+subgraph Local Authority Decline
+    T[Gradual Erosion of<br>Local Rulers' Authority]
+    Q --> T
+    U[Increasing Dominance of<br>East India Company]
+    T --> U
+    S --> U
+end
+
+%% Section 4
+%% Diwani System and Governance
+subgraph Dual System of Governance
+    V[Diwani System<br>Foundation for Legal & Admin Structures]
+    S --> V
+    W[Company Control<br>Revenue Collection & Military Affairs]
+    V --> W
+    X[Nawab Retains<br>Nominal Admin Authority]
+    V --> X
+    W --> X
+end
+%% Inefficiency and Corruption
+subgraph Systemic Issues
+    Y[Inefficient & Prone to Corruption]
+    W --> Y
+    X --> Y
+    Z[Widespread Exploitation<br>and Discontent]
+    Y --> Z
+end
+
+%% Section 5
+%% Economic Policies and Exploitation
+subgraph Company Policies
+    A[Heavy Taxes & Destruction<br>of Local Industries]
+    Z --> A
+    B[Commercial Interests<br>Disregard for Welfare]
+    A --> B
+end
+%% Sepoy Mutiny of 1857
+C[Sepoy Mutiny of 1857<br>First War of Independence]
+B --> C
+%% Impact of the Mutiny
+subgraph Impact of Mutiny
+    D[Watershed Moment<br>in British Rule]
+    C --> D
+    E[Increased Indian<br>Nationalism]
+    D --> E
+    F[Reassessment of<br>Company Policies]
+    D --> F
+end
+
+%% Section 6
+%% Complex interplay of factors
+subgraph Complex Factors
+    G[Economic Factors]
+    H[Social Factors]
+    I[Political Factors]
+end
+%% Connections to Mutiny
+G --> C
+H --> C
+I --> C
+%% Impact on British Administration
+J[Deep-seated Resentment<br>Against Company Rule]
+C --> J
+K[Profound Impact<br>on British Admin]
+C --> K
+%% Government of India Act, 1858
+L[British Crown Assumes<br>Direct Responsibility]
+K --> L
+M[Government of India Act, 1858]
+L --> M
+F --> M
+
+%% Section 7
+%% End of Company Rule and Beginning of British Raj
+N[End of Company Rule<br>Beginning of British Raj]
+M --> N
+%% Transfer of Power and Administrative Changes
+O[Transfer of Power to Crown<br>Significant Admin Changes]
+N --> O
+%% Replacement of Governor-General with Viceroy
+P[Governor-General Replaced<br>by Viceroy]
+O --> P
+%% Viceroy's Role and Accountability
+Q[Viceroy Represents Monarch<br>Accountable to British Parliament]
+P --> Q
+%% Interconnection for a more complete graph
+J --> O
+Q --> M
+
+%% Section 8
+%% Reorganization and Expansion of the Indian Civil Service ICS
+S[ICS Reorganized<br>Expanded Role in British Admin]
+%% Connections from S to previous nodes
+Q --> S
+%% Implementation of Reforms
+T[Reforms Implemented<br>Improve Governance & Address Grievances]
+%% Connections to/from T
+S --> T
+%% Specific Reform Measures
+U[Promote Education<br>Improve Infrastructure]
+%% Connections to/from U
+T --> U
+%% Greater Indian Representation
+V[Greater Indian<br>Representation in Admin]
+%% Connections to/from V
+T --> V
+U --> V
+%% Interconnection for a more complete graph
+V --> S
+
+%% Section 9
+%% Authoritarian Regime
+Z[Authoritarian Regime<br>Power vested in British Govt]
+%% Connections from Z to previous nodes
+V --> Z
+%% Exclusion of Indians
+A[Exclusion of Indians<br>From Decision-Making]
+%% Connections to/from A
+Z --> A
+%% Curtailment of Civil Liberties
+B[Curtailment of<br>Civil Liberties]
+%% Connections to/from B
+Z --> B
+A --> B
+%% Economic Policies Favoring British Interests
+C[Economic Policies<br>Favoring British Interests]
+%% Connections to/from C
+Z --> C
+%% Decline of Indian Industries
+D[Decline of Indian<br>Industries]
+%% Connections to/from D
+C --> D
+%% Impoverishment of Indian Population
+E[Impoverishment of<br>Indian Population]
+%% Connections to/from E
+C --> E
+D --> E
+B --> E
+
+%% Section 10
+%% Rise of Indian Nationalism
+F[Rise of Indian<br>Nationalist Movement]
+%% Connections from F to previous nodes
+E --> F
+%% Challenge to British Rule
+G[Challenge to<br>British Rule Legitimacy]
+%% Connections to/from G
+F --> G
+%% Demand for Self-Governance
+H[Demand for Greater<br>Self-Governance]
+%% Connections to/from H
+G --> H
+%% Indian National Congress
+I[Indian National<br>Congress Founded 1885]
+%% Connections to/from I
+H --> I
+%% Mobilizing Public Opinion
+J[Mobilizing Public<br>Opinion]
+%% Connections to/from J
+I --> J
+%% Advocating for Constitutional Reforms
+K[Advocating for<br>Constitutional Reforms]
+%% Connections to/from K
+I --> K
+%% British Response
+L[British Government<br>Response Concessions & Repression]
+%% Connections to/from L
+Z --> L
+K --> L
+%% Greater Representation in Legislative Councils
+M[Greater Representation<br>in Legislative Councils]
+%% Connections to/from M
+L --> M
+%% Greater Representation in Local Bodies
+N[Greater Representation<br>in Local Bodies]
+%% Connections to/from N
+L --> N
+M --> N
+
+%% Section 11
+%% Government of India Act, 1919
+O[Government of India Act, 1919]
+%% Connections to/from O
+N --> O
+%% Dyarchy System
+P[Dyarchy System<br>Transferred & Reserved Subjects]
+%% Connections to/from P
+O --> P
+%% Government of India Act, 1935
+Q[Government of India Act, 1935]
+%% Connections to/from Q
+P --> Q
+%% Provincial Autonomy Expanded
+R[Provincial Autonomy<br>Expanded]
+%% Connections to/from R
+Q --> R
+%% All-India Federation Unrealized
+S[All-India Federation<br>Never Fully Materialized]
+%% Connections to/from S
+Q --> S
+R --> S
+%% Second World War
+T[Second World War<br>Weakened British Power]
+%% Connections to/from T
+S --> T
+%% Accelerated Indian Independence
+U[Accelerated Indian<br>Independence Process]
+%% Connections to/from U
+T --> U
+
+%% Section 12
+%% Indian Nationalist Movement
+VV[Indian Nationalist<br>Movement Gandhi]
+%% Connections to/from VV
+U --> VV
+%% Mass Movements for Independence
+WW[Mass Movements for<br>Complete Independence]
+%% Connections to/from WW
+VV --> WW
+%% British Government Pressure
+XX[British Government<br>Facing Increasing Pressure]
+%% Connections to/from XX
+WW --> XX
+%% Independence Granted
+YY[Independence Granted<br>August 15, 1947]
+%% Connections to/from YY
+XX --> YY
+%% End of British Rule
+ZZ[End of British Rule<br>New Era in Indian History]
+%% Connections to/from ZZ
+YY --> ZZ
+
+%% Section 13
+%% Legacy of British Rule
+AA[Legacy of British Rule<br>Shaped Indian Polity & Society]
+%% Connections to/from AA
+ZZ --> AA
+%% Indian Constitution
+BB[Indian Constitution<br>Effective Jan 26, 1950]
+%% Connections to/from BB
+AA --> BB
+%% Legal & Administrative Frameworks
+CC[Legal & Administrative<br>Frameworks Established by British]
+%% Connections to/from CC
+BB --> CC
+%% Parliamentary System
+DD[Parliamentary System<br>Inherited from British]
+%% Connections to/from DD
+BB --> DD
+%% Rule of Law
+EE[Rule of Law<br>Inherited from British]
+%% Connections to/from EE
+BB --> EE
+%% Independent Judiciary
+FF[Independent Judiciary<br>Inherited from British]
+%% Connections to/from FF
+BB --> FF
+%% Interconnections
+CC --> DD
+CC --> EE
+CC --> FF
+DD --> EE
+DD --> FF
+EE --> FF
+
+%% Section 14
+%% Influence of Nationalist Movement
+GG[Nationalist Movement<br>Championed Liberal Democracy]
+%% Connections to/from GG
+BB --> GG
+%% Unique Indian Realities
+HH[Unique Indian Realities<br>Social, Economic, Political]
+%% Connections to/from HH
+BB --> HH
+%% Constitution's Reflection
+II[Constitution's Reflection<br>Not Just a British Copy]
+%% Connections to/from II
+GG --> II
+HH --> II
+BB --> II
+%% Interconnections
+II --> CC
+II --> DD
+II --> EE
+II --> FF
+
+%% Section 15
+%% Affirmative Action & Social Justice
+JJ[Affirmative Action<br>Address Historical Inequalities]
+%% Connections to/from JJ
+II --> JJ
+KK[Cultural & Linguistic<br>Diversity Recognized]
+%% Connections to/from KK
+II --> KK
+LL[Social Justice & Economic<br>Development Promoted]
+%% Connections to/from LL
+II --> LL
+%% Historical Evolution of Governance
+MM[East India Company<br>Ascendancy]
+%% Connections to/from MM
+BB --> MM
+NN[Colonial Influence<br>Nationalist Aspirations]
+%% Connections to/from NN
+MM --> NN
+OO[Indigenous Traditions<br>Complex Interplay]
+%% Connections to/from OO
+NN --> OO
+%% Understanding the Constitution
+PP[Strengths & Limitations<br>of the Constitution]
+%% Connections to/from PP
+OO --> PP
+JJ --> PP
+KK --> PP
+LL --> PP
+QQ[Challenges Facing<br>Indian Democracy]
+%% Connections to/from QQ
+PP --> QQ
+
+%% Section 16
+%% Nationalist Perspective
+RR[Nationalist Perspective<br>Independence Struggle Culmination]
+%% Connections to/from RR
+QQ --> RR
+SS[Rejection of Colonial Rule<br>Assertion of Sovereignty]
+%% Connections to/from SS
+RR --> SS
+TT[Indian Leaders' Contributions<br>Shaping the Constitution]
+%% Connections to/from TT
+SS --> TT
+%% Historical Continuity Perspective
+UU[Historical Continuity<br>British Influence Acknowledged]
+%% Connections to/from UU
+TT --> UU
+VV[Continuity & Adaptation<br>of Legal Frameworks]
+%% Connections to/from VV
+UU --> VV
+PP --> VV
+
+%% Section 17
+%% Synthesis Perspective
+XX[Synthesis Perspective<br>Western & Indian Traditions]
+%% Connections to/from XX
+VV --> XX
+%% Critical/Marxist Perspective
+YY[Critical/Marxist Perspective<br>Colonial Era Structures & Biases]
+%% Connections to/from YY
+XX --> YY
+ZZ[Unaddressed Inequalities<br>Persisting Injustices]
+%% Connections to/from ZZ
+YY --> ZZ

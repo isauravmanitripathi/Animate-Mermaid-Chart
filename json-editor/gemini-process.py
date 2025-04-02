@@ -138,29 +138,37 @@ def process_text_with_gemini(text, previous_mermaid="", topic="", retry_count=3)
     
     context_message = ""
     if previous_mermaid:
-        context_message = f"""
+        context_message = """
 Here is the previous Mermaid diagram you created:
 
 ```mermaid
-{previous_mermaid}
+{}
 ```
 
 IMPORTANT: To save tokens and be efficient, you should ONLY generate the NEW additions to the diagram.
 DO NOT regenerate the entire diagram. Your response should ONLY contain the new nodes and connections that relate to the text.
 The existing header, style definitions, nodes, and connections will be preserved - you just need to build on them.
-"""
+""".format(previous_mermaid)
     
     # Initialize raw response tracking
     raw_response = {
         "timestamp": datetime.now().isoformat(),
     }
 
-    prompt = f"""Create a sequential Mermaid diagram for the following text about {topic if topic else 'the topic'}.
+    # Use format() for complex nested JSON examples to avoid f-string issues
+    json_example = """
+{
+  "new_additions": "ONLY the new nodes and connections you've added (NOT including header and classDefs, and NOT including any existing nodes/connections)"
+}
+"""
 
-{context_message}
+    # Fixed prompt using format() instead of f-strings with nested braces
+    prompt = """Create a sequential Mermaid diagram for the following text about {}.
+
+{}
 
 Text to analyze:
-{text}
+{}
 
 Use a sequential node-connection pattern with the following structure:
 1. Define a node
@@ -208,9 +216,7 @@ If this is the first section, create a properly structured diagram with:
   3. Clear node and connection structure
 
 CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
-{
-  "new_additions": "ONLY the new nodes and connections you've added (NOT including header and classDefs, and NOT including any existing nodes/connections)"
-}
+{}
 
 IMPORTANT FORMATTING INSTRUCTIONS:
 - Properly indent all code (4 spaces per level)
@@ -219,7 +225,7 @@ IMPORTANT FORMATTING INSTRUCTIONS:
 - DO NOT include any content from the previous diagram
 
 Return ONLY the JSON object without any markdown code blocks or other text.
-"""
+""".format(topic if topic else 'the topic', context_message, text, json_example)
 
     # Store prompt in raw response
     raw_response["prompt"] = prompt
