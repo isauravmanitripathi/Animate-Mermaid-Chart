@@ -12,7 +12,6 @@ Use a sequential node-connection pattern with the following structure:
 4. Repeat the pattern
 
 For example:
-```
 %% New node for current section
 D[Entity D]
 %% Connections from D to previous nodes
@@ -23,7 +22,6 @@ E[Entity E]
 %% Connections to/from E
 D --> E
 B <--> E
-```
 
 Follow these specific rules:
 - Only generate new additions that start EXACTLY where the previous diagram left off
@@ -35,5 +33,74 @@ Follow these specific rules:
 - Each time try to create a more interconnect graph so all of it is interconnected
 - Include bidirectional relationships where appropriate
 
+**Sequential Writing Pattern**
+* Define one node at a time
+* Immediately connect that node to previously defined nodes
+* Add clear section comments before starting a new group of related nodes
+* Follow a consistent pattern throughout the diagram
+
+**Node Definition Rules**
+* Use simple, unique IDs for each node (like E, F, G or more descriptive IDs)
+* Avoid reusing node IDs anywhere in the diagram
+* Enclose node text in square brackets: `A[Node text]`
+* Avoid HTML tags like `<br>` inside node text - use spaces instead
+* Keep node text relatively short to avoid parsing issues
+
+**Connection Rules**
+* Use `-->` for directed connections (arrows)
+* Use `---` for undirected connections (lines)
+* Use `<-->` for bidirectional relationships (only where specifically needed)
+* Define connections immediately after defining a new node
+* Ensure all nodes in connections are already defined before using them
+
+**Formatting and Spacing Rules**
+* Use proper line breaks between node definitions and their connections
+* Put each node definition and connection on its own line
+* Include an empty line between different sections for readability
+* Use `%%` for comments to explain sections or nodes
+* Keep comments on separate lines from node definitions and connections
+
+**Style and Color Rules**
+* Define styles using the `classDef` keyword at the end of the diagram
+* Apply styles to nodes using the `:::styleName` syntax after the node definition
+* Keep style definitions simple (color, stroke, stroke-width)
+* Use hex codes for colors
+* Define all styles in one section at the end of the diagram
+
+**Subgraph Rules (if needed)**
+* Define subgraphs with clear opening and closing syntax
+* Always include an empty line after the `end` statement closing a subgraph
+* Keep subgraphs simple and avoid nesting them too deeply
+* Define connections to nodes inside subgraphs only after the subgraph is closed
+
+**General Avoidance Rules**
+* Avoid complex formatting within node text
+* Avoid special characters that might be misinterpreted
+* Keep the diagram as simple as possible while conveying the necessary information
+* Test small sections if encountering errors with a large diagram
+
+When adding new nodes and connections:
+  1. Start with a comment indicating what this new section represents
+  2. ONLY add new nodes and connections related to the current text
+  3. Connect these new nodes to existing nodes where appropriate
+  4. Make sure each line has proper indentation (4 spaces per level)
+  5. Use descriptive labels for all connections
+
+IMPORTANT: DO NOT repeat any existing nodes or connections from the previous diagram.
+Start EXACTLY where the previous diagram left off.
+
+If this is the first section, create a properly structured diagram with:
+  1. Start with mermaid state diagram header
+  2. Class definitions for styling
+  3. Clear node and connection structure
+
 CRITICAL: Your response MUST be ONLY a valid JSON object with EXACTLY these keys:
 {json_example}
+
+IMPORTANT FORMATTING INSTRUCTIONS:
+- Properly indent all code (4 spaces per level)
+- Put each node or connection on its own line
+- Start with section comments (using %%) to explain what the new additions represent
+- DO NOT include any content from the previous diagram
+
+Return ONLY the JSON object without any markdown code blocks or other text.
